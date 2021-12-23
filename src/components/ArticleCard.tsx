@@ -1,4 +1,5 @@
-import { Article } from "../utils/types/global"
+import { Article } from "../utils/types/global";
+import { api } from '../services/api';
 
 const ArticleCard = ({ data }: { data: Article }) => {
   const { title, subtitle, image } = data
@@ -9,7 +10,7 @@ const ArticleCard = ({ data }: { data: Article }) => {
     <article className="grid cursor-pointer">
       {image?.url && (
         <div className="">
-          <img src={`http://localhost:1337${image.url}`} alt="cover image" className="object-cover w-full h-48 rounded-lg" />
+          <img src={`${api}${image.url}`} alt="cover image" className="object-cover w-full h-48 rounded-lg" />
         </div>
       )}
       <div className="mt-2.5 mx-2.5">

@@ -1,10 +1,12 @@
+import { api } from '../services/api';
+
 const HeroImage = ({ data }: { data: any }) => {
 
   const { image, title, subtitle } = data
 
   return (
     <div className="relative">
-      <img src={`http://localhost:1337${image.url}`} alt="hero image" className="heroImage" />
+      <img src={`${api}${image.url}`} alt="hero image" className="heroImage" />
       <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full">
         <div className="absolute w-full h-full hero-image-overlay"></div>
         <header className="z-10 text-center text-white md:text-gray-200">
