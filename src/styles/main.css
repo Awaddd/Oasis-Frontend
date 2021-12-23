@@ -1,0 +1,135 @@
+@tailwind base;
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../../public/assets/fonts/Inter-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../../public/assets/fonts/Inter-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../../public/assets/fonts/Inter-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../../public/assets/fonts/Inter-Bold.ttf");
+}
+
+@tailwind components;
+
+@tailwind utilities;
+
+.nav-padding {
+  @apply px-md md:px-lg lg:px-2xl;
+}
+
+.global-padding {
+  @apply px-lg md:px-lg lg:px-2xl;
+}
+
+.reverse-global-padding {
+  @apply -mx-lg md:-mx-lg lg:-mx-2xl;
+}
+
+.global-page-padding {
+  @apply py-xs sm:py-sm;
+}
+
+.reverse-top-global-page-padding {
+  @apply -mt-xs sm:-mt-sm;
+}
+
+.footer {
+  @apply self-end w-full;
+}
+
+.articles {
+  @apply grid 2xl:gap-[45px] gap-y-lg md:gap-y-xl gap-x-lg md:grid-cols-2 lg:grid-cols-3;
+}
+
+.featured-button {
+  @apply inline-block cursor-pointer transition-all duration-300 ease-in-out delay-75 hover:bg-gray-900 hover:-translate-y-1 hover:scale-105 lg:mt-[45px] md:mt-lg lg:text-lg md:py-[11px] md:px-[45px] md:text-base text-sm font-semibold text-gray-200 rounded-[3px] py-sm mt-md bg-primary px-lg;
+}
+
+.hero-image-overlay {
+  background: #100a42;
+  opacity: 0.25;
+}
+
+.overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(7, 7, 7, 0) 60%,
+    rgba(31, 31, 31, 0.705)
+  );
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-bold;
+}
+
+h1 {
+  @apply text-3xl;
+  line-height: 1.1;
+}
+
+h2 {
+  @apply text-2xl;
+}
+
+h3 {
+  @apply text-xl;
+}
+
+.brand {
+  font-family: "Courier Prime", monospace;
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.burger {
+  width: 100%;
+}
+
+.burger button {
+  position: absolute;
+  bottom: -4px;
+  right: 0;
+}
+
+.heroImage {
+  @apply object-cover w-full h-52 sm:h-60 lg:h-80;
+}
+
+/* .content h1,
+.content h2,
+.content h3,
+.content h4 {
+  @apply mt-4 mb-[-14px];
+}
+
+.content p {
+  @apply mt-md;
+} */
