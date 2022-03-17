@@ -2,6 +2,7 @@ import { api } from '../services/api';
 
 const HeroImage = ({ data }: { data: any }) => {
 
+  if (!data) return null;
   const { image, title, subtitle } = data
 
   return (

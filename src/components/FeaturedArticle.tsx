@@ -3,6 +3,7 @@ import { api } from '../services/api';
 
 const FeaturedArticle = ({ data }: { data: any }) => {
 
+  if (!data) return null;
   const { title, slug, image } = data
 
   return (

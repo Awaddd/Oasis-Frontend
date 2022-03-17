@@ -5,7 +5,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 module.exports = withBundleAnalyzer({
   images: {
-    domains: ["localhost", "64.227.33.20", "64.227.33.20:1337"],
+    domains: ["localhost", "oasis-backend-o9zvx.ondigitalocean.app"],
   },
   poweredByHeader: false,
   trailingSlash: true,

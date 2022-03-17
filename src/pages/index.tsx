@@ -53,9 +53,9 @@ export async function getStaticProps({ }) {
 
   return {
     props: {
-      articles: data?.articles,
-      hero: heroData?.heroImage,
-      featuredArticle: featuredArticleData?.featuredArticle?.article
+      articles: data?.articles || [],
+      hero: heroData?.heroImage || null,
+      featuredArticle: featuredArticleData?.featuredArticle?.article || null
     }
   }
 }
