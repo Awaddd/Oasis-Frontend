@@ -20,7 +20,7 @@ const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
       {meta}
 
       <div className="flex justify-between 2xl:w-9/12 2xl:mx-auto">
-        <a href="/" className="brand justify-self-start cursor-pointer">
+        <a href="/" className="cursor-pointer brand justify-self-start">
           Omar Dini<span className="text-primary">.</span>
         </a>
 
