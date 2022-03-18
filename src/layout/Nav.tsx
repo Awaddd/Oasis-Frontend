@@ -3,6 +3,7 @@ import { useRecoilState } from 'recoil';
 import { sidebarIsOpenState } from '../state/state';
 import BurgerMenu from 'hamburger-react';
 import Navigation from '../components/Navigation';
+import Link from 'next/link';
 
 const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
   const [sidebarIsOpen, setSidebarIsOpen] = useRecoilState(sidebarIsOpenState);
@@ -18,9 +19,9 @@ const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
       {meta}
 
       <div className="flex justify-between 2xl:w-9/12 2xl:mx-auto">
-        <a href="/" className="self-center cursor-pointer brand justify-self-start">
-          Omar Dini<span className="text-primary">.</span>
-        </a>
+        <Link href="/">
+          <a className="self-center cursor-pointer brand justify-self-start">Omar Dini<span className="text-primary">.</span></a>
+        </Link>
 
         <div className="z-40 md:hidden" onClick={handleClick}>
           <BurgerMenu toggled={sidebarIsOpen} size={25} color={sidebarIsOpen ? '#fff' : '#1a202c'} label="Show menu" />
