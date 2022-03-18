@@ -1,19 +1,19 @@
 import { Key, ReactNode, MouseEvent } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { gql } from 'graphql-request';
+import { getCategories } from '../services/global';
 import { useQuery } from 'react-query';
-import { client } from '../services/api';
 import { useRecoilState } from 'recoil';
 import { sidebarIsOpenState } from '../state/state';
 import BurgerMenu from 'hamburger-react';
+import { Category } from '../utils/types/global';
 
 const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
 
-  const router = useRouter()
-  const category = router.query.category
+  const router = useRouter();
+  const category = router.query.category;
 
-  const { error, isLoading, data } = useQuery('categories', async () => await client.request(CATEGORIES));
+  const { error, isLoading, data } = useQuery('categories', getCategories);
 
   const [sidebarIsOpen, setSidebarIsOpen] = useRecoilState(sidebarIsOpenState);
 
@@ -34,7 +34,7 @@ const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
           Omar Dini<span className="text-primary">.</span>
         </a>
 
-        {!isLoading && !error && data && (
+        {!isLoading && data && (
           <>
             <div className="z-40 md:hidden" onClick={handleClick}>
               <BurgerMenu toggled={sidebarIsOpen} size={25} color={sidebarIsOpen ? '#fff' : '#1a202c'} label="Show menu" />
@@ -57,21 +57,5 @@ const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
     </nav>
   );
 }
-
-type Category = {
-  id: number;
-  name: string;
-  pluralName: string;
-}
-
-const CATEGORIES = gql`
-  query GetCategories {
-    categories {
-      name,
-      pluralName,
-      id
-    }
-  }
-`
 
 export default Nav;

@@ -27,3 +27,9 @@ export type CategoryParams = {
     category: string;
   };
 };
+
+export type Category = {
+  id: number;
+  name: string;
+  pluralName: string;
+};
