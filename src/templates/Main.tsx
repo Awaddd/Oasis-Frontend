@@ -20,7 +20,7 @@ const Main = ({ meta, color, classes, footerProps, footer, children }: IMainProp
 
   return (
     <>
-      <div className={`md:hidden ease-in-out duration-300 fixed top-0 right-0 z-30 flex flex-col gap-1 w-3/4 h-full px-4 pt-12 text-2xl text-center text-white bg-gray-900 ${sidebarIsOpen ? 'translate-x-0' : `translate-x-full`}`}>
+      <div className={`md:hidden ease-in-out duration-300 fixed top-0 right-0 z-30 flex flex-col gap-2 w-3/4 h-full px-4 pt-16 text-2xl text-center text-white bg-black ${sidebarIsOpen ? 'translate-x-0' : `translate-x-full`}`}>
         <Navigation />
       </div>
       <div className="flex flex-col w-full h-full antialiased font-inter" onClick={() => setSidebarIsOpen(false)}>
