@@ -68,6 +68,10 @@
   @apply inline-block cursor-pointer transition-all duration-300 ease-in-out delay-75 hover:bg-gray-900 hover:-translate-y-1 hover:scale-105 lg:mt-[45px] md:mt-lg lg:text-lg md:py-[11px] md:px-[45px] md:text-base text-sm font-semibold text-gray-200 rounded-[3px] py-sm mt-md bg-primary px-lg;
 }
 
+.heroImage {
+  @apply object-cover w-full h-52 sm:h-60 lg:h-80;
+}
+
 .hero-image-overlay {
   background: #100a42;
   opacity: 0.25;
@@ -108,28 +112,3 @@ h3 {
   letter-spacing: 1px;
   line-height: 1;
 }
-
-.burger {
-  width: 100%;
-}
-
-.burger button {
-  position: absolute;
-  bottom: -4px;
-  right: 0;
-}
-
-.heroImage {
-  @apply object-cover w-full h-52 sm:h-60 lg:h-80;
-}
-
-/* .content h1,
-.content h2,
-.content h3,
-.content h4 {
-  @apply mt-4 mb-[-14px];
-}
-
-.content p {
-  @apply mt-md;
-} */
