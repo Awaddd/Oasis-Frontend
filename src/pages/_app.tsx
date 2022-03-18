@@ -7,7 +7,7 @@ import { sidebarIsOpenState } from '../state/state';
 
 import '../styles/main.css';
 
-const App = ({ component }: { component: any }) => {
+const App = ({ component }: { component: JSX.Element }) => {
   const [, setSidebarIsOpen] = useRecoilState(sidebarIsOpenState);
 
   const router = useRouter();
