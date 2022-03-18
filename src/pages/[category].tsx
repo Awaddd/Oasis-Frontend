@@ -49,8 +49,8 @@ export async function getStaticProps({ params }: CategoryParams) {
 
   return {
     props: {
-      category: params.category || '',
-      articles: (data?.categories[0].articles) || [],
+      category: params?.category || '',
+      articles: (data?.categories[0]?.articles) || [],
     }
   }
 }
