@@ -46,7 +46,7 @@ const Index = ({ hero, featuredArticle, articles }: { hero: any, featuredArticle
   );
 };
 
-export async function getStaticProps({ }) {
+export async function getServerSideProps({ }) {
   const data = await getArticles(true);
   const heroData = await getHero();
   const featuredArticleData = await getFeaturedArticle();

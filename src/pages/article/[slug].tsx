@@ -1,7 +1,7 @@
 import { Meta } from '../../layout/Meta';
 import { Main } from '../../templates/Main';
 import parse from 'html-react-parser';
-import { getArticle, getArticles } from '../../services/articles';
+import { getArticle } from '../../services/articles';
 import { SSGParams } from '../../utils/types/global';
 import Image from 'next/image';
 import { api } from '../../services/api';
@@ -75,7 +75,7 @@ const Article = ({ article, imageProps }: { article: Article, imageProps: ImageT
   );
 };
 
-export async function getStaticProps({ params }: SSGParams) {
+export async function getServerSideProps({ params }: SSGParams) {
   const data = await getArticle(params.slug);
 
   const path = data?.articles[0]?.image?.url;
@@ -95,16 +95,6 @@ export async function getStaticProps({ params }: SSGParams) {
         blurDataURL: base64,
       },
     }
-  }
-}
-
-export async function getStaticPaths() {
-  const data = await getArticles();
-  const articles = data.articles;
-
-  return {
-    paths: articles?.map((article: any) => `/article/${article?.slug}`) || [],
-    fallback: true,
   }
 }
 
