@@ -33,11 +33,11 @@ const Article = ({ article, imageProps }: { article: Article, imageProps: ImageT
   const { title, subtitle, content, image } = article
 
   const META = <Meta title={`Omar Dini | ${title}`} description={subtitle} images={[{
-    url: image.url,
-    alt: image.alternativeText,
-    width: image.width,
-    height: image.height,
-    type: image.mime,
+    url: image?.url,
+    alt: image?.alternativeText,
+    width: image?.width,
+    height: image?.height,
+    type: image?.mime,
   }]} />
 
   return (
@@ -47,7 +47,7 @@ const Article = ({ article, imageProps }: { article: Article, imageProps: ImageT
 
         {image?.url && (
           <div className="relative h-52 sm:h-60 lg:h-80 2xl:h-96 mt-md">
-            <Image layout="fill" {...imageProps} placeholder="blur" priority alt={title} className="absolute top-0 z-10 text-center text-gray-200 bg-gray-900 rounded-lg heroImage" />
+            {imageProps && (<Image layout="fill" {...imageProps} placeholder="blur" priority alt={title} className="absolute top-0 z-10 text-center text-gray-200 bg-gray-900 rounded-lg heroImage" />)}
             <div className="absolute top-0 left-0 grid w-full h-full">
               <div className="absolute z-10 w-full h-full rounded-lg hero-image-overlay"></div>
               <div className="z-10 flex flex-col w-full h-full text-center text-white px-md py-sm">
@@ -77,8 +77,12 @@ const Article = ({ article, imageProps }: { article: Article, imageProps: ImageT
 
 export async function getStaticProps({ params }: SSGParams) {
   const data = await getArticle(params.slug);
+
+  const path = data?.articles[0]?.image?.url;
+  if (!path) return { props: { article: data?.articles[0] } }
+
   const { base64, img } = await getPlaceholder(
-    `${api}${data?.articles[0].image.url}`,
+    `${api}${path}`,
     { size: 10 }
   );
 
@@ -86,8 +90,8 @@ export async function getStaticProps({ params }: SSGParams) {
     props: {
       article: data?.articles[0],
       imageProps: {
-        src: img.src,
-        type: img.type,
+        src: img?.src,
+        type: img?.type,
         blurDataURL: base64,
       },
     }
@@ -99,7 +103,7 @@ export async function getStaticPaths() {
   const articles = data.articles;
 
   return {
-    paths: articles?.map((article: any) => `/article/${article.slug}`) || [],
+    paths: articles?.map((article: any) => `/article/${article?.slug}`) || [],
     fallback: true,
   }
 }
