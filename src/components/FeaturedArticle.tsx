@@ -27,7 +27,7 @@ const FeaturedArticle = ({ data }: { data: any }) => {
           <p className="justify-self-start text-primary">Featured</p>
           <p className="justify-self-end lg:hidden">Nov. 11</p>
         </div>
-        <img src={`${api}${image.url}`} alt="cover image" className="object-cover w-full h-48 rounded-lg sm:rounded-md sm:h-52 md:h-64 lg:h-80" />
+        <img src={`${api}${image?.url}`} alt="cover image" className="object-cover w-full h-48 rounded-lg sm:rounded-md sm:h-52 md:h-64 lg:h-80" />
       </div>
     </div>
   )
