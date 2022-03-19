@@ -1,13 +1,21 @@
 import { api } from '../services/api';
 
-const HeroImage = ({ data }: { data: any }) => {
+type Data = {
+  image?: {
+    url: string;
+  };
+  title?: string;
+  subtitle?: string;
+};
+
+const HeroImage = ({ data }: { data: Data }) => {
 
   if (!data) return null;
-  const { image, title, subtitle } = data
+  const { image, title, subtitle } = data;
 
   return (
     <div className="relative">
-      <img src={`${api}${image.url}`} alt="hero image" className="heroImage" />
+      {image && (<img src={`${api}${image?.url}`} alt="hero image" className="heroImage" />)}
       <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full">
         <div className="absolute w-full h-full hero-image-overlay"></div>
         <header className="z-10 text-center text-white md:text-gray-200">
