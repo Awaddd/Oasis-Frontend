@@ -105,7 +105,7 @@ export async function getStaticPaths() {
 
   return {
     paths: articles?.map((article: any) => `/article/${article?.slug}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }
 
