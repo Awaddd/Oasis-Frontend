@@ -104,17 +104,29 @@ export const CATEGORIES = gql`
   }
 `;
 
-export const AUTHOR = gql`
-  query GetAuthor {
+export const AUTHOR_PROFILE = gql`
+  query GetAuthorProfile {
+    author {
+      profile
+    }
+  }
+`;
+
+export const AUTHOR_NAME = gql`
+  query GetAuthorName {
+    author {
+      firstName
+      lastName
+    }
+  }
+`;
+
+export const AUTHOR_BIO = gql`
+  query GetAuthorName {
     author {
       firstName
       lastName
       bio
-      profile
-      picture {
-        url
-        alternativeText
-      }
     }
   }
 `;

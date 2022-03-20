@@ -40,3 +40,9 @@ export type Category = {
   name: string;
   pluralName: string;
 };
+
+export type AuthorBio = {
+  firstName: string;
+  lastName: string;
+  bio: string;
+};

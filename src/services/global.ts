@@ -1,5 +1,5 @@
 import { client } from "./api";
-import { CATEGORIES, HERO, AUTHOR } from "./queries";
+import { CATEGORIES, HERO, AUTHOR_PROFILE, AUTHOR_BIO } from "./queries";
 
 export async function getHero() {
   const data = (await client.request(HERO)) || null;
@@ -12,6 +12,11 @@ export async function getCategories() {
 }
 
 export async function getAuthor() {
-  const data = (await client.request(AUTHOR)) || null;
+  const data = (await client.request(AUTHOR_PROFILE)) || null;
+  return data;
+}
+
+export async function getAuthorBio() {
+  const data = (await client.request(AUTHOR_BIO)) || null;
   return data;
 }
