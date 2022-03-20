@@ -103,3 +103,18 @@ export const CATEGORIES = gql`
     }
   }
 `;
+
+export const AUTHOR = gql`
+  query GetAuthor {
+    author {
+      firstName
+      lastName
+      bio
+      profile
+      picture {
+        url
+        alternativeText
+      }
+    }
+  }
+`;

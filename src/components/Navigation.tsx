@@ -19,6 +19,10 @@ const Navigation = () => {
         <a className={`${router.pathname === '/' && 'text-primary'}`}>Home</a>
       </Link>
 
+      <Link href="/author">
+        <a className={`${router.pathname === '/author' && 'text-primary'}`}>Author</a>
+      </Link>
+
       {!isLoading && data && data?.categories.map(({ pluralName }: Category, key: Key | null | undefined) => (
         <Link href={`/${pluralName.toLowerCase()}`} key={key}>
           <a className={`${category === pluralName.toLowerCase() && 'text-primary'}`}>{pluralName}</a>
