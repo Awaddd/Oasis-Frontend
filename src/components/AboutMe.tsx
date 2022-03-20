@@ -8,7 +8,7 @@ type Props = {
 
 const AboutMe: FC<Props> = ({ data }) => {
   if (!data) return null;
-  const { firstName, lastName, bio, picture, socialLinks } = data;
+  const { firstName, lastName, bio, socialLinks } = data;
 
   return (
     <main className="bg-gray-900 global-padding py-lg md:py-xl">
