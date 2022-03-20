@@ -4,6 +4,7 @@ import { Article } from '../utils/types/global';
 import ArticleCardWithLink from '../components/ArticleCardWithLink';
 import { CategoryParams } from '../utils/types/global';
 import { getArticlesByCategory } from '../services/articles';
+import { getCategories } from '../services/global';
 import { capitaliseFirstLetter } from '../utils/helpers';
 import EmptySVG from '../../public/assets/images/empty.svg';
 import Image from 'next/image';
@@ -43,7 +44,7 @@ const Index = ({ category, articles }: { category: string, articles: any }) => {
   );
 };
 
-export async function getServerSideProps({ params }: CategoryParams) {
+export async function getStaticProps({ params }: CategoryParams) {
   const data = await getArticlesByCategory(capitaliseFirstLetter(params.category));
 
   return {
@@ -51,6 +52,16 @@ export async function getServerSideProps({ params }: CategoryParams) {
       category: params?.category || '',
       articles: (data?.categories[0]?.articles) || [],
     }
+  }
+}
+
+export async function getStaticPaths() {
+  const data = await getCategories();
+  const categories = data.categories;
+
+  return {
+    paths: categories?.map((category: any) => `/${category.pluralName.toLowerCase()}`) || [],
+    fallback: true,
   }
 }
 
