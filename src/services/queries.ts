@@ -122,11 +122,31 @@ export const AUTHOR_NAME = gql`
 `;
 
 export const AUTHOR_BIO = gql`
-  query GetAuthorName {
+  query GetAuthorBio {
     author {
       firstName
       lastName
       bio
+      picture {
+        url
+      }
+      socialLinks {
+        brand
+        link
+      }
+    }
+  }
+`;
+
+export const ARTICLE_AUTHOR = gql`
+  query GetArticleAuthor {
+    author {
+      firstName
+      lastName
+      socialLinks {
+        brand
+        link
+      }
     }
   }
 `;

@@ -2,7 +2,8 @@ import { Meta } from '../../layout/Meta';
 import { Main } from '../../templates/Main';
 import parse from 'html-react-parser';
 import { getArticle, getArticles } from '../../services/articles';
-import { SSGParams } from '../../utils/types/global';
+import { getArticleAuthor } from '../../services/global';
+import { SocialLink, SSGParams } from '../../utils/types/global';
 import Image from 'next/image';
 import { api } from '../../services/api';
 import { getPlaiceholder as getPlaceholder } from "plaiceholder";
@@ -27,9 +28,15 @@ type ImageType = {
   blurDataURL: string;
 }
 
-const Article = ({ article, imageProps }: { article: Article, imageProps: ImageType }) => {
+type ArticleAuthor = {
+  firstName: string;
+  lastName: string;
+  socialLinks: SocialLink[];
+}
 
-  if (!article) return <p>Sorry, could not load the article. Please try again later</p>
+const Article = ({ article, imageProps, author }: { article: Article; imageProps: ImageType; author: ArticleAuthor }) => {
+
+  if (!article) return <p>Sorry, this article could not be loaded. Please try again later</p>
   const { title, subtitle, content, image } = article
 
   const META = <Meta title={`Omar Dini | ${title}`} description={subtitle} images={[{
@@ -41,7 +48,7 @@ const Article = ({ article, imageProps }: { article: Article, imageProps: ImageT
   }]} />
 
   return (
-    <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" />} >
+    <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} />} >
 
       <div className="lg:w-3/5 md:mx-auto my-lg mb-[45px] 2xl:w-2/4">
 
@@ -57,7 +64,7 @@ const Article = ({ article, imageProps }: { article: Article, imageProps: ImageT
                 <footer className="flex items-end w-full">
                   <div className="flex justify-between w-full">
                     <div className="relative flex items-center">
-                      <span className="text-sm font-normal mt-md 2xl:text-normal">Omar Dini</span>
+                      <span className="text-sm font-normal mt-md 2xl:text-normal">{author?.firstName} {author?.lastName}</span>
                     </div>
                     <span className="text-sm mt-md 2xl:text-normal">November 11th, 2020</span>
                   </div>
@@ -77,6 +84,7 @@ const Article = ({ article, imageProps }: { article: Article, imageProps: ImageT
 
 export async function getStaticProps({ params }: SSGParams) {
   const data = await getArticle(params.slug);
+  const authorData = await getArticleAuthor();
 
   const path = data?.articles[0]?.image?.url;
   if (!path) return { props: { article: data?.articles[0] } }
@@ -89,6 +97,7 @@ export async function getStaticProps({ params }: SSGParams) {
   return {
     props: {
       article: data?.articles[0],
+      author: authorData?.author || null,
       imageProps: {
         src: img?.src,
         type: img?.type,

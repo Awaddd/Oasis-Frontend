@@ -41,8 +41,17 @@ export type Category = {
   pluralName: string;
 };
 
+export type SocialLink = {
+  brand: string;
+  link: string;
+};
+
 export type AuthorBio = {
   firstName: string;
   lastName: string;
   bio: string;
+  picture?: {
+    url: string;
+  };
+  socialLinks?: SocialLink[];
 };
