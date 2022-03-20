@@ -41,7 +41,7 @@ const Article = ({ article, imageProps }: { article: Article, imageProps: ImageT
   }]} />
 
   return (
-    <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter />} >
+    <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" />} >
 
       <div className="lg:w-3/5 md:mx-auto my-lg mb-[45px] 2xl:w-2/4">
 
