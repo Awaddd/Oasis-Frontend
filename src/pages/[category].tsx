@@ -51,7 +51,8 @@ export async function getStaticProps({ params }: CategoryParams) {
     props: {
       category: params?.category || '',
       articles: (data?.categories[0]?.articles) || [],
-    }
+    },
+    revalidate: 60
   }
 }
 

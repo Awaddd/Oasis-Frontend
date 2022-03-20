@@ -56,7 +56,8 @@ export async function getStaticProps({ }) {
       articles: data?.articles || [],
       hero: heroData?.heroImage || null,
       featuredArticle: featuredArticleData?.featuredArticle?.article || null
-    }
+    },
+    revalidate: 60
   }
 }
 
