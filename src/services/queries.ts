@@ -3,10 +3,10 @@ import { gql } from "graphql-request";
 export const ARTICLE = gql`
   query GetArticleBySlug($slug: String!) {
     articles(where: { slug: $slug }) {
-      title
       id
       title
       subtitle
+      updated_at
       image {
         url
         width
@@ -67,6 +67,7 @@ export const FEATURED_ARTICLE = gql`
         title
         subtitle
         slug
+        updated_at
         image {
           url
         }

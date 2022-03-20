@@ -8,11 +8,15 @@ import Image from 'next/image';
 import { api } from '../../services/api';
 import { getPlaiceholder as getPlaceholder } from "plaiceholder";
 import ArticleFooter from '../../components/ArticleFooter';
+import dayjs from 'dayjs';
+import advancedFormat from "dayjs/plugin/advancedFormat";
+dayjs.extend(advancedFormat);
 
 type Article = {
   title: string;
   subtitle?: string;
   content: string;
+  updated_at?: string;
   image: {
     url: string;
     alternativeText: string;
@@ -35,9 +39,10 @@ type ArticleAuthor = {
 }
 
 const Article = ({ article, imageProps, author }: { article: Article; imageProps: ImageType; author: ArticleAuthor }) => {
-
   if (!article) return <p>Sorry, this article could not be loaded. Please try again later</p>
-  const { title, subtitle, content, image } = article
+
+  const { title, subtitle, updated_at, content, image } = article;
+  const updatedAt = dayjs(updated_at);
 
   const META = <Meta title={`Omar Dini | ${title}`} description={subtitle} images={[{
     url: image?.url,
@@ -66,7 +71,7 @@ const Article = ({ article, imageProps, author }: { article: Article; imageProps
                     <div className="relative flex items-center">
                       <span className="text-sm font-normal mt-md 2xl:text-normal">{author?.firstName} {author?.lastName}</span>
                     </div>
-                    <span className="text-sm mt-md 2xl:text-normal">November 11th, 2020</span>
+                    <span className="text-sm mt-md 2xl:text-normal">{updatedAt.format('MMMM Do, YYYY')}</span>
                   </div>
                 </footer>
               </div>
