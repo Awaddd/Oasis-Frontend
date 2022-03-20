@@ -108,6 +108,10 @@ export const AUTHOR_PROFILE = gql`
   query GetAuthorProfile {
     author {
       profile
+      socialLinks {
+        brand
+        link
+      }
     }
   }
 `;
