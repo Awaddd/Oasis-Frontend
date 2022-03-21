@@ -18,9 +18,9 @@ const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
 
       {meta}
 
-      <div className="flex justify-between 2xl:w-9/12 2xl:mx-auto">
+      <div className="flex justify-between transition-all duration-200 ease-in-out 2xl:w-9/12 2xl:mx-auto">
         <Link href="/">
-          <a className="self-center cursor-pointer brand justify-self-start">Omar Dini<span className="text-primary">.</span></a>
+          <a className="self-center outline-none cursor-pointer brand justify-self-start md:transition md:hover:text-primary">Omar Dini<span className="text-primary hover:text-black">.</span></a>
         </Link>
 
         <div className="z-40 md:hidden" onClick={handleClick}>
