@@ -109,6 +109,7 @@ export const AUTHOR_PROFILE = gql`
   query GetAuthorProfile {
     author {
       profile
+      email
       socialLinks {
         brand
         link
@@ -132,6 +133,7 @@ export const AUTHOR_BIO = gql`
       firstName
       lastName
       bio
+      email
       picture {
         url
       }
@@ -148,6 +150,7 @@ export const ARTICLE_AUTHOR = gql`
     author {
       firstName
       lastName
+      email
       socialLinks {
         brand
         link

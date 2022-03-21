@@ -4,15 +4,16 @@ import SocialIconBar from './SocialIconBar';
 
 type Props = {
   socialLinks?: SocialLink[];
+  email?: string;
   color?: string;
 }
 
-const ArticleFooter: FC<Props> = ({ socialLinks, color }) => (
-  <footer className={`flex flex-col text-center footer py-[24px] md:py-lg md:pb-[45px] px-lg ${color}`}>
+const ArticleFooter: FC<Props> = ({ socialLinks, email, color }) => (
+  <footer className={`flex flex-col text-center footer mt-[-24px] pb-md px-lg ${color}`}>
     <h4 className="font-bold text-gray-900">Thanks for reading</h4>
     <p className="text-sm">Make sure to check back for weekly updates!</p>
-    <div className="flex self-center items-center mt-[16px">
-      <SocialIconBar links={socialLinks} dark={true} />
+    <div className="flex items-center self-center mt-sm">
+      <SocialIconBar links={socialLinks} email={email} dark={true} />
     </div>
   </footer>
 )

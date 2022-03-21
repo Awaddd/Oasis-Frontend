@@ -36,6 +36,7 @@ type ArticleAuthor = {
   firstName: string;
   lastName: string;
   socialLinks: SocialLink[];
+  email?: string;
 }
 
 const Article = ({ article, imageProps, author }: { article: Article; imageProps: ImageType; author: ArticleAuthor }) => {
@@ -53,7 +54,7 @@ const Article = ({ article, imageProps, author }: { article: Article; imageProps
   }]} />
 
   return (
-    <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} />} >
+    <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />} >
 
       <div className="lg:w-3/5 md:mx-auto my-lg mb-[45px] 2xl:w-2/4">
 

@@ -15,7 +15,7 @@ const Author = ({ author }: { author: any }) => {
   if (!author) return null;
 
   return (
-    <Main meta={META} classes="pb-lg" footer={<ArticleFooter socialLinks={author?.socialLinks} />} >
+    <Main meta={META} classes="pb-lg" footer={<ArticleFooter socialLinks={author?.socialLinks} email={author?.email} />} >
 
       <div className="lg:w-3/5 md:mx-auto my-lg mb-[45px] 2xl:w-2/4 h-full">
         <article className="!max-w-full prose-sm md:prose sm:prose 2xl:prose-xl mt-8">

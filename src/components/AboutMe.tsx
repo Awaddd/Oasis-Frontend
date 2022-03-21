@@ -8,7 +8,7 @@ type Props = {
 
 const AboutMe: FC<Props> = ({ data }) => {
   if (!data) return null;
-  const { firstName, lastName, bio, socialLinks } = data;
+  const { firstName, lastName, bio, email, socialLinks } = data;
 
   return (
     <main className="bg-gray-900 global-padding py-lg md:py-xl">
@@ -20,7 +20,7 @@ const AboutMe: FC<Props> = ({ data }) => {
             {bio && (<p className="text-gray-400 lg:max-w-md">{bio}</p>)}
 
             <div className="flex items-center mt-6 -mx-2">
-              <SocialIconBar links={socialLinks} />
+              <SocialIconBar links={socialLinks} email={email} />
             </div>
           </article>
 

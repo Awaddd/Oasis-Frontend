@@ -50,6 +50,7 @@ export type AuthorBio = {
   firstName: string;
   lastName: string;
   bio: string;
+  email?: string;
   picture?: {
     url: string;
   };
