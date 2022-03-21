@@ -9,7 +9,7 @@ const SocialIconBar = ({ links, email, dark }: { links?: SocialLink[]; email?: s
   return (
     <>
       {links.map((link, key) => (
-        <a className="mx-2" href={link?.link} aria-label={link?.brand} target="_blank" rel="noopener noreferrer" key={key}>
+        <a className="mx-2 outline-none" href={link?.link} aria-label={link?.brand} target="_blank" rel="noopener noreferrer" key={key}>
           {link?.brand.toLowerCase() === 'linkedin' && (
             <svg className={`${classes} ${variant}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path d="M417.2 64H96.8C79.3 64 64 76.6 64 93.9V415c0 17.4 15.3 32.9 32.8 32.9h320.3c17.6 0 30.8-15.6 30.8-32.9V93.9C448 76.6 434.7 64 417.2 64zM183 384h-55V213h55v171zm-25.6-197h-.4c-17.6 0-29-13.1-29-29.5 0-16.7 11.7-29.5 29.7-29.5s29 12.7 29.4 29.5c0 16.4-11.4 29.5-29.7 29.5zM384 384h-55v-93.5c0-22.4-8-37.7-27.9-37.7-15.2 0-24.2 10.3-28.2 20.3-1.5 3.6-1.9 8.5-1.9 13.5V384h-55V213h55v23.8c8-11.4 20.5-27.8 49.6-27.8 36.1 0 63.4 23.8 63.4 75.1V384z" />
@@ -31,7 +31,7 @@ const SocialIconBar = ({ links, email, dark }: { links?: SocialLink[]; email?: s
       ))}
 
       {email && (
-        <a className="mt-[2.5px] ml-[-2px]" href={`mailto:${email}`} aria-label="Email">
+        <a className="mt-[2.5px] ml-[-2px] outline-none" href={`mailto:${email}`} aria-label="Email">
           <svg className={`fill-current h-[2.6rem] w-[2.6rem] ${variant}`} version="1.1" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <path d="m204.4 173.6c-12.41 0-22.398 9.9922-22.398 22.398v168c0 12.41 9.9922 22.398 22.398 22.398h291.2c12.41 0 22.398-9.9922 22.398-22.398v-168c0-12.41-9.9922-22.398-22.398-22.398zm32.898 44.625c1.793-0.35937 3.543 0.59766 4.5508 1.5742l93.977 88.551c6.9258 6.5312 21.23 6.5273 28.176 0l94.148-88.551c2.1523-2.0156 5.9453-1.8906 7.9648 0.26172 2.0156 2.1523 1.8906 5.9492-0.26172 7.9648l-53.551 50.398 53.727 53.727c2.0625 2.1094 2.0195 5.9023-0.089844 7.9648-2.1055 2.0625-5.9023 2.0195-7.9609-0.089844l-53.898-53.898-32.551 30.449c-11.859 11.148-31.551 11.168-43.398 0l-32.199-30.449-53.898 53.898c-2.0625 2.1055-5.8555 2.1484-7.9609 0.089844-2.1094-2.0625-2.1484-5.8555-0.089843-7.9648l53.727-53.727-53.551-50.398c-3.2812-2.8555-1.1836-9.3906 3.1484-9.8008z" />
           </svg>
