@@ -35,7 +35,7 @@ export const ARTICLES = gql`
 
 export const FIRST_THREE_ARTICLES = gql`
   query GetArticles {
-    articles(limit: 3) {
+    articles(limit: 3, sort: "updated_at:desc") {
       id
       title
       subtitle
