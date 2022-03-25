@@ -10,6 +10,7 @@ import { getPlaiceholder as getPlaceholder } from "plaiceholder";
 import ArticleFooter from '../../components/ArticleFooter';
 import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import Link from 'next/link';
 dayjs.extend(advancedFormat);
 
 type Article = {
@@ -26,6 +27,7 @@ type Article = {
   }
   category: {
     name: string;
+    pluralName: string;
   }
 }
 
@@ -83,7 +85,11 @@ const Article = ({ article, imageProps, author }: { article: Article; imageProps
           </div>
         )}
 
-        {category?.name && (<span className="block px-4 py-1 text-sm bg-gray-900 text-white rounded-[4px] mt-[1rem] mb-[-0.5rem] md:mb-0 w-min">{category.name}</span>)}
+        {category && (
+          <Link href={`/${category?.pluralName}`} passHref>
+            <span className="cursor-pointer block px-4 py-1 text-sm bg-gray-900 text-white rounded-[4px] mt-[1rem] mb-[-0.5rem] md:mb-0 w-min">{category.name}</span>
+          </Link>
+        )}
 
         <article className="!max-w-full prose-sm md:prose sm:prose 2xl:prose-xl mt-8">
           {parse(content)}

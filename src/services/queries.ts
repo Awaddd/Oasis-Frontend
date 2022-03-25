@@ -17,6 +17,7 @@ export const ARTICLE = gql`
       content
       category {
         name
+        pluralName
       }
     }
   }
