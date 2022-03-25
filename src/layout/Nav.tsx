@@ -26,7 +26,7 @@ const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
         <div className="z-40 md:hidden" onClick={handleClick}>
           <BurgerMenu toggled={sidebarIsOpen} size={25} color={sidebarIsOpen ? '#fff' : '#1a202c'} label="Show menu" />
         </div>
-        <div className="justify-end hidden gap-6 justify-self-end md:flex">
+        <div className="justify-end hidden gap-6 justify-self-end md:flex md:items-center">
           <Navigation />
         </div>
       </div>
