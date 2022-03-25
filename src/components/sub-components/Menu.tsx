@@ -53,7 +53,7 @@ const BasicMenu: FC<Props> = ({ label, data }) => {
               {data.map(({ name, link }, key) => (
                 <Menu.Item key={key}>
                   {({ active }) => (
-                    <MyLink href={link} className={`block px-4 py-2 text-sm hover:bg-primary hover:text-gray-100 ${category === name.toLowerCase() && 'text-primary'} ${active && 'bg-primary text-gray-100'}`}>{name}</MyLink>
+                    <MyLink href={link} className={`block px-4 py-2 text-sm hover:bg-primary hover:text-gray-100 ${category === name.toLowerCase() && !active && 'text-primary'} ${active && 'bg-primary text-gray-100'}`}>{name}</MyLink>
                   )}
                 </Menu.Item>
               ))}
