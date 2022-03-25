@@ -24,6 +24,9 @@ type Article = {
     height: number;
     mime: string;
   }
+  category: {
+    name: string;
+  }
 }
 
 type ImageType = {
@@ -42,7 +45,7 @@ type ArticleAuthor = {
 const Article = ({ article, imageProps, author }: { article: Article; imageProps: ImageType; author: ArticleAuthor }) => {
   if (!article) return <p>Sorry, this article could not be loaded. Please try again later</p>
 
-  const { title, subtitle, updated_at, content, image } = article;
+  const { title, subtitle, updated_at, content, image, category } = article;
   const updatedAt = dayjs(updated_at);
 
   const META = <Meta title={`Omar Dini | ${title}`} description={subtitle} images={[{
@@ -79,6 +82,8 @@ const Article = ({ article, imageProps, author }: { article: Article; imageProps
             </div>
           </div>
         )}
+
+        {category?.name && (<span className="block px-4 py-1 text-sm bg-gray-900 text-white rounded-[4px] mt-[1rem] mb-[-0.5rem] md:mb-0 w-min">{category.name}</span>)}
 
         <article className="!max-w-full prose-sm md:prose sm:prose 2xl:prose-xl mt-8">
           {parse(content)}

@@ -15,6 +15,9 @@ export const ARTICLE = gql`
         mime
       }
       content
+      category {
+        name
+      }
     }
   }
 `;
