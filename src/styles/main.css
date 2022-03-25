@@ -36,6 +36,11 @@
 
 @tailwind utilities;
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 .nav-padding {
   @apply px-md md:px-lg lg:px-2xl;
 }

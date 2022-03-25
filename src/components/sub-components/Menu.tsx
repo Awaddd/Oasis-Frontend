@@ -20,11 +20,11 @@ export type link = {
 
 type Props = {
   label: string;
-  data: link[];
+  data?: link[];
 }
 
 const BasicMenu: FC<Props> = ({ label, data }) => {
-  if (!label || !data) return null;
+  if (!label) return null;
   const category = useRecoilValue(selectedCategoryState);
 
   return (
@@ -47,17 +47,19 @@ const BasicMenu: FC<Props> = ({ label, data }) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-50 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            {data.map(({ name, link }, key) => (
-              <Menu.Item key={key}>
-                {({ active }) => (
-                  <MyLink href={link} className={`block px-4 py-2 text-sm hover:bg-primary hover:text-gray-100 ${category === name.toLowerCase() && 'text-primary'} ${active && 'bg-primary text-gray-100'}`}>{name}</MyLink>
-                )}
-              </Menu.Item>
-            ))}
-          </div>
-        </Menu.Items>
+        {data && (
+          <Menu.Items className="absolute right-0 z-50 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="py-1">
+              {data.map(({ name, link }, key) => (
+                <Menu.Item key={key}>
+                  {({ active }) => (
+                    <MyLink href={link} className={`block px-4 py-2 text-sm hover:bg-primary hover:text-gray-100 ${category === name.toLowerCase() && 'text-primary'} ${active && 'bg-primary text-gray-100'}`}>{name}</MyLink>
+                  )}
+                </Menu.Item>
+              ))}
+            </div>
+          </Menu.Items>
+        )}
       </Transition>
     </Menu>
   );

@@ -47,7 +47,7 @@ const Navigation = () => {
         <a className={`${classes} ${router.pathname === '/author' && 'text-primary'}`}>Author</a>
       </Link>
 
-      {menuData && <Menu label="Articles" data={menuData} />}
+      <Menu label="Articles" data={menuData} />
 
       <div className="flex flex-col gap-2 md:hidden">
         {!isLoading && data && data?.categories.map(({ pluralName }: Category, key: Key | null | undefined) => (
