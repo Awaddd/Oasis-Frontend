@@ -26,9 +26,8 @@ type IndexProps = {
 const Index = ({ hero, featuredArticle, articles, authorBio }: IndexProps) => {
   return (
     <Main meta={META} footerProps={{ dark: true }} >
-      <header className="reverse-global-padding reverse-top-global-page-padding">
-        <HeroImage data={hero} />
-      </header>
+
+      <HeroImage data={hero} />
 
       <div className="2xl:w-9/12 2xl:mx-auto">
         <section className="2xl:mt-xl md:mt-[45px] mt-lg">
