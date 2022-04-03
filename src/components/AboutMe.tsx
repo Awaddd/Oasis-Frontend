@@ -13,9 +13,9 @@ const AboutMe: FC<Props> = ({ data }) => {
 
   return (
     <main className="bg-gray-900 global-padding py-lg md:py-xl">
-      <div className="container mx-auto 2xl:w-9/12">
-        <div className="items-center md:flex md:px-[45px] md:gap-8 lg:px-0 lg:gap-0">
-          <article className="lg:px-xl md:w-3/4 lg:w-max">
+      <div className="container grid mx-auto 2xl:w-9/12">
+        <div className="items-center md:flex md:px-[45px] md:gap-8 lg:px-0 lg:gap-0 justify-self-center">
+          <article className="lg:pr-xl md:w-3/4 lg:w-max">
             <h2 className="text-3xl font-bold text-gray-100">{firstName} {lastName}</h2>
 
             {bio && (<p className="text-gray-400 lg:max-w-md">{bio}</p>)}
