@@ -62,7 +62,7 @@ export async function getStaticPaths() {
 
   return {
     paths: categories?.map((category: any) => `/${category.pluralName.toLowerCase()}`) || [],
-    fallback: true,
+    fallback: false,
   }
 }
 
