@@ -9,7 +9,7 @@ import { capitaliseFirstLetter } from '../utils/helpers';
 import EmptySVG from '../../public/assets/images/empty.svg';
 import Image from 'next/image';
 
-const Index = ({ category, articles }: { category: string, articles: any }) => {
+const Index = ({ category, articles }: { category: string, articles: Article[] }) => {
 
   const META = (
     <Meta

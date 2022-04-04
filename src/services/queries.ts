@@ -51,6 +51,47 @@ export const FIRST_THREE_ARTICLES = gql`
   }
 `;
 
+export const BOOK = gql`
+  query GetBookBySlug($slug: String!) {
+    books(where: { slug: $slug }) {
+      title
+      subtitle
+      updated_at
+      image {
+        url
+        width
+        height
+        alternativeText
+        mime
+      }
+      content
+    }
+  }
+`;
+
+export const BOOKS_ONLY_SLUG = gql`
+  query GetBooks {
+    books {
+      slug
+    }
+  }
+`;
+
+export const BOOKS = gql`
+  query GetBooks {
+    books {
+      title
+      slug
+      subtitle
+      updated_at
+      image {
+        url
+        alternativeText
+      }
+    }
+  }
+`;
+
 export const HERO = gql`
   query GetHeroImage {
     heroImage {

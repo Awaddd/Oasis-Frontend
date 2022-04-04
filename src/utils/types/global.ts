@@ -13,12 +13,22 @@ export type FooterProps = {
 };
 
 export type Article = {
-  id: number;
+  id?: number;
   title: string;
+  slug?: string;
   subtitle?: string;
-  slug: string;
-  image?: {
+  content?: string;
+  updated_at?: string;
+  image: {
     url: string;
+    alternativeText: string;
+    width: number;
+    height: number;
+    mime: string;
+  };
+  category?: {
+    name: string;
+    pluralName: string;
   };
 };
 
@@ -55,4 +65,17 @@ export type AuthorBio = {
     url: string;
   };
   socialLinks?: SocialLink[];
+};
+
+export type ArticleAuthor = {
+  firstName: string;
+  lastName: string;
+  socialLinks: SocialLink[];
+  email?: string;
+};
+
+export type ImageType = {
+  src: string;
+  type: string;
+  blurDataURL: string;
 };

@@ -47,6 +47,10 @@ const Navigation = () => {
         <a className={`${classes} ${router.pathname === '/author' && 'text-primary'}`}>Author</a>
       </Link>
 
+      <Link href="/books">
+        <a className={`${classes} ${router.pathname === '/books' && 'text-primary'}`}>Books</a>
+      </Link>
+
       <Menu label="Articles" data={menuData} />
 
       <div className="flex flex-col gap-2 md:hidden">
