@@ -108,6 +108,15 @@ export const HERO = gql`
 export const FEATURED_ARTICLE = gql`
   query GetFeaturedArticleID {
     featuredArticle {
+      book {
+        title
+        subtitle
+        slug
+        updated_at
+        image {
+          url
+        }
+      }
       article {
         title
         subtitle

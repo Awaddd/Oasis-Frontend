@@ -2,13 +2,16 @@ import Link from 'next/link';
 import { api } from '../services/api';
 import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import { Article } from '../utils/types/global';
 dayjs.extend(advancedFormat);
 
-const FeaturedArticle = ({ data }: { data: any }) => {
+const FeaturedArticle = ({ type, data }: { type: 'book' | 'article' | null, data: Article }) => {
 
   if (!data) return null;
   const { title, slug, updated_at, image } = data
   const updatedAt = dayjs(updated_at);
+
+  const link = type === 'book' ? `/book/${slug}` : `/article/${slug}`;
 
   return (
     <div className="flex flex-col-reverse md:flex-row-reverse md:gap-[45px]">
@@ -21,7 +24,7 @@ const FeaturedArticle = ({ data }: { data: any }) => {
             </div>
           </header>
           <h1 className="text-xl font-bold leading-7 text-gray-800 md:font-bold mt-sm lg:mt-md md:leading-10 md:underline md:text-4xl 2xl:w-9/12">{title}</h1>
-          <Link href={`/article/${slug}`} passHref>
+          <Link href={link} passHref>
             <a className="shadow-sm featured-button shadow-primary/50 hover:shadow-none">Read More</a>
           </Link>
         </div>

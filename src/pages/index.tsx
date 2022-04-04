@@ -18,12 +18,13 @@ const META = (
 
 type IndexProps = {
   hero: any;
-  featuredArticle: any;
   articles: any;
   authorBio?: AuthorBio;
+  featuredArticle: Article;
+  type: 'book' | 'article' | null;
 };
 
-const Index = ({ hero, featuredArticle, articles, authorBio }: IndexProps) => {
+const Index = ({ hero, articles, authorBio, featuredArticle, type }: IndexProps) => {
   return (
     <Main meta={META} footerProps={{ dark: true }} >
 
@@ -31,7 +32,7 @@ const Index = ({ hero, featuredArticle, articles, authorBio }: IndexProps) => {
 
       <div className="2xl:w-9/12 2xl:mx-auto">
         <section className="2xl:mt-xl md:mt-[45px] mt-lg">
-          <FeaturedArticle data={featuredArticle} />
+          <FeaturedArticle type={type} data={featuredArticle} />
         </section>
 
         <section className="2xl:mt-xl mt-[45px] articles">
@@ -55,15 +56,25 @@ const Index = ({ hero, featuredArticle, articles, authorBio }: IndexProps) => {
 export async function getStaticProps({ }) {
   const data = await getArticles(true);
   const heroData = await getHero();
-  const featuredArticleData = await getFeaturedArticle();
   const authorBioData = await getAuthorBio();
+  const featuredArticleData = await getFeaturedArticle();
+  const featuredArticle = featuredArticleData?.featuredArticle;
+
+  let type = 'article';
+  let featuredPost = featuredArticle.article;
+
+  if (!!featuredArticle?.book) {
+    type = 'book';
+    featuredPost = featuredArticle.book;
+  }
 
   return {
     props: {
       articles: data?.articles || [],
       hero: heroData?.heroImage || null,
-      featuredArticle: featuredArticleData?.featuredArticle?.article || null,
       authorBio: authorBioData?.author || null,
+      featuredArticle: featuredPost,
+      type,
     },
     revalidate: 60
   }
