@@ -26,9 +26,8 @@ const AboutMe: FC<Props> = ({ data }) => {
           </article>
 
           <div className="mt-8 sm:w-64 md:w-32 md:self-start lg:self-center lg:w-48 lg:mt-0 lg:ml-[-24px]">
-            <img src={`${api}${picture?.url}`} alt="author image" className="object-contain rounded-lg md:rounded-full" />
+            {picture && (<img src={`${api}${picture?.url}`} alt="author image" className="object-contain rounded-lg md:rounded-full" />)}
           </div>
-
 
           <div className="flex items-center mt-4 -mx-2 md:hidden lg:mt-2">
             <SocialIconBar links={socialLinks} email={email} />
