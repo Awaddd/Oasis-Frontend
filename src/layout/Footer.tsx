@@ -1,6 +1,6 @@
 import { AppConfig } from '../utils/AppConfig';
 import { FooterProps } from '../utils/types/global';
-import { classNames } from '../utils/helpers';
+import classNames from 'clsx';
 
 const Footer = ({ dark, children }: FooterProps) => {
 
