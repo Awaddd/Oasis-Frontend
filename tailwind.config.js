@@ -15,6 +15,9 @@ module.exports = {
       "6xl": "4rem",
     },
     extend: {
+      screens: {
+        "3xl": "1800px",
+      },
       fontFamily: {
         inter: "Inter, sans-serif",
       },
