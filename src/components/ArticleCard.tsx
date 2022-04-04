@@ -10,7 +10,7 @@ const ArticleCard = ({ data }: { data: Article }) => {
     <article className="grid cursor-pointer">
       {image?.url && (
         <div className="">
-          <img src={`${api}${image.url}`} alt="cover image" className="object-cover w-full h-48 rounded-lg" />
+          <img src={`${api}${image.url}`} alt="cover image" className="object-cover w-full h-48 rounded-lg 2xl:h-60" />
         </div>
       )}
       <div className="mt-2.5 mx-2.5">

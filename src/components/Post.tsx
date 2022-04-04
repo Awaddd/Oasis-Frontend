@@ -22,7 +22,7 @@ const Post: FC<Props> = ({ data, author, imageProps }) => {
     <div className="lg:w-3/5 md:mx-auto my-lg mb-[45px] 2xl:w-2/4">
 
       {image?.url && (
-        <div className="relative h-52 sm:h-60 lg:h-80 2xl:h-96 mt-md">
+        <div className="relative h-52 sm:h-60 lg:h-80 2xl:h-[28rem] mt-md">
           {imageProps && (<Image layout="fill" {...imageProps} placeholder="blur" priority alt={title} className="absolute top-0 z-10 text-center text-gray-200 bg-gray-900 rounded-lg heroImage" />)}
           <div className="absolute top-0 left-0 grid w-full h-full">
             <div className="absolute z-10 w-full h-full rounded-lg hero-image-overlay"></div>
