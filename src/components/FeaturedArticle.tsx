@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { api } from '../services/api';
 import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { Article } from '../utils/types/global';
@@ -34,7 +33,7 @@ const FeaturedArticle = ({ type, data }: { type: 'book' | 'article' | null, data
           <p className="justify-self-start text-primary">Featured</p>
           <p className="text-sm justify-self-end lg:hidden">{updatedAt.format('MMMM Do')}</p>
         </div>
-        <img src={`${api}${image?.url}`} alt="cover image" className="object-cover w-full h-48 rounded-lg sm:rounded-md sm:h-52 md:h-64 lg:h-80 3xl:h-[22rem]" />
+        {image && (<img src={image?.url} alt="cover image" className="object-cover w-full h-52 rounded-lg sm:rounded-md md:h-64 lg:h-80 3xl:h-[22rem]" />)}
       </div>
     </div>
   )

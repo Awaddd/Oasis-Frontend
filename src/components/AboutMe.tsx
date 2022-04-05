@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { api } from "../services/api";
 import { AuthorBio } from "../utils/types/global";
 import SocialIconBar from "./SocialIconBar";
 
@@ -25,9 +24,11 @@ const AboutMe: FC<Props> = ({ data }) => {
             </div>
           </article>
 
-          <div className="mt-8 md:mt-0 sm:w-64 md:w-[10rem] md:h-[10rem] md:self-start lg:self-center lg:w-[10rem] lg:h-[10rem] lg:mt-0 lg:ml-[-24px]">
-            {picture && (<img src={`${api}${picture?.url}`} alt="author image" className="object-fill w-full h-full rounded-lg shadow-inner md:rounded-full" />)}
-          </div>
+          {picture && (
+            <div className="mt-8 md:mt-0 sm:w-64 md:w-[10rem] md:h-[10rem] md:self-start lg:self-center lg:w-[10rem] lg:h-[10rem] lg:mt-0 lg:ml-[-24px]">
+              {picture && (<img src={picture?.url} alt="author image" className="object-fill w-full h-full rounded-lg shadow-inner md:rounded-full" />)}
+            </div>
+          )}
 
           <div className="flex items-center mt-4 -mx-2 md:hidden lg:mt-2">
             <SocialIconBar links={socialLinks} email={email} />

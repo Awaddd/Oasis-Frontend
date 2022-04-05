@@ -3,7 +3,6 @@ import { Main } from '../../templates/Main';
 import { getBook, getBooksOnlySlug } from '../../services/books';
 import { getArticleAuthor } from '../../services/global';
 import { Article, ArticleAuthor, ImageType, SSGParams } from '../../utils/types/global';
-import { api } from '../../services/api';
 import { getPlaiceholder as getPlaceholder } from "plaiceholder";
 import ArticleFooter from '../../components/ArticleFooter';
 import Post from '../../components/Post';
@@ -35,10 +34,7 @@ export async function getStaticProps({ params }: SSGParams) {
   const path = data?.books[0]?.image?.url;
   if (!path) return { props: { book: data?.books[0] } }
 
-  const { base64, img } = await getPlaceholder(
-    `${api}${path}`,
-    { size: 10 }
-  );
+  const { base64, img } = await getPlaceholder(path, { size: 10 });
 
   return {
     props: {
