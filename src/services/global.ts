@@ -5,6 +5,7 @@ import {
   AUTHOR_PROFILE,
   AUTHOR_BIO,
   ARTICLE_AUTHOR,
+  NEWSLETTER,
 } from "./queries";
 
 export async function getHero() {
@@ -31,3 +32,7 @@ export async function getArticleAuthor() {
   const data = (await client.request(ARTICLE_AUTHOR)) || null;
   return data;
 }
+
+export const getNewsletter = async () => {
+  return (await client.request(NEWSLETTER)) || null;
+};

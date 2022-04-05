@@ -1,11 +1,11 @@
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 import { getArticles, getFeaturedArticle } from '../services/articles';
-import { getAuthorBio, getHero } from '../services/global';
+import { getAuthorBio, getHero, getNewsletter } from '../services/global';
 import HeroImage from '../components/HeroImage';
 import FeaturedArticle from '../components/FeaturedArticle';
 import ArticleCardWithLink from '../components/ArticleCardWithLink';
-import { Article, AuthorBio } from '../utils/types/global';
+import { Article, AuthorBio, Newsletter as NewsletterType } from '../utils/types/global';
 import AboutMe from '../components/AboutMe';
 import Newsletter from '../components/Newsletter';
 
@@ -21,10 +21,11 @@ type IndexProps = {
   articles: any;
   authorBio?: AuthorBio;
   featuredArticle: Article;
+  newsletter: NewsletterType;
   type: 'book' | 'article' | null;
 };
 
-const Index = ({ hero, articles, authorBio, featuredArticle, type }: IndexProps) => {
+const Index = ({ hero, articles, authorBio, featuredArticle, newsletter, type }: IndexProps) => {
   return (
     <Main meta={META} footerProps={{ classes: 'bg-dark text-gray-200' }} >
 
@@ -42,7 +43,7 @@ const Index = ({ hero, articles, authorBio, featuredArticle, type }: IndexProps)
         </section>
 
         <section className="2xl:mt-xl md:mt-[45px] mt-lg">
-          <Newsletter />
+          <Newsletter data={newsletter} />
         </section>
       </div>
 
@@ -57,6 +58,7 @@ export async function getStaticProps({ }) {
   const data = await getArticles(true);
   const heroData = await getHero();
   const authorBioData = await getAuthorBio();
+  const newsletterData = await getNewsletter();
   const featuredArticleData = await getFeaturedArticle();
   const featuredArticle = featuredArticleData?.featuredArticle;
 
@@ -73,6 +75,7 @@ export async function getStaticProps({ }) {
       articles: data?.articles || [],
       hero: heroData?.heroImage || null,
       authorBio: authorBioData?.author || null,
+      newsletter: newsletterData?.newsletter || null,
       featuredArticle: featuredPost,
       type,
     }

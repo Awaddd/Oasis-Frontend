@@ -212,3 +212,13 @@ export const ARTICLE_AUTHOR = gql`
     }
   }
 `;
+
+export const NEWSLETTER = gql`
+  query GetNewsletter {
+    newsletter {
+      title
+      subtitle
+      description
+    }
+  }
+`;

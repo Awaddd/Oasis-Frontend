@@ -79,3 +79,9 @@ export type ImageType = {
   type: string;
   blurDataURL: string;
 };
+
+export type Newsletter = {
+  title: string;
+  subtitle?: string;
+  description: string;
+};
