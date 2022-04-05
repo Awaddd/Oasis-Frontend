@@ -11,7 +11,7 @@ const AboutMe: FC<Props> = ({ data }) => {
   const { firstName, lastName, bio, email, picture, socialLinks } = data;
 
   return (
-    <main className="bg-gray-900 global-padding py-lg md:py-xl">
+    <main className="bg-dark global-padding py-lg md:py-xl">
       <div className="container grid mx-auto 2xl:w-9/12">
         <div className="items-center md:flex md:px-[45px] md:gap-8 lg:px-0 lg:gap-0 justify-self-center">
           <article className="lg:pr-xl md:w-8/12 lg:w-max">

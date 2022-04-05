@@ -8,7 +8,7 @@ export type Middleware = (
 ) => Promise<Response | undefined> | Response | undefined;
 
 export type FooterProps = {
-  dark?: boolean;
+  classes?: string;
   children?: ReactNode;
 };
 

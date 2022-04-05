@@ -10,7 +10,7 @@ type IMainProps = {
   meta: ReactNode;
   color?: string;
   classes?: string;
-  footerProps?: { dark?: boolean; }
+  footerProps?: { classes?: string; }
   footer?: FC | JSX.Element;
   children: ReactNode;
 };
@@ -20,7 +20,7 @@ const Main = ({ meta, color, classes, footerProps, footer, children }: IMainProp
 
   return (
     <>
-      <div className={`md:hidden ease-in-out duration-300 fixed top-0 right-0 z-30 flex flex-col gap-2 w-3/4 h-full px-4 pt-16 text-2xl text-center text-white bg-black ${sidebarIsOpen ? 'translate-x-0' : `translate-x-full`}`}>
+      <div className={`md:hidden ease-in-out duration-300 fixed top-0 right-0 z-30 flex flex-col gap-2 w-3/4 h-full px-4 pt-16 text-2xl text-center text-white bg-dark ${sidebarIsOpen ? 'translate-x-0' : `translate-x-full`}`}>
         <Navigation />
       </div>
       <div className="flex flex-col w-screen h-full antialiased font-inter" onClick={() => setSidebarIsOpen(false)}>

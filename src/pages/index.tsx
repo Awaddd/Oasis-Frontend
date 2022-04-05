@@ -26,7 +26,7 @@ type IndexProps = {
 
 const Index = ({ hero, articles, authorBio, featuredArticle, type }: IndexProps) => {
   return (
-    <Main meta={META} footerProps={{ dark: true }} >
+    <Main meta={META} footerProps={{ classes: 'bg-dark text-gray-200' }} >
 
       <HeroImage data={hero} />
 
