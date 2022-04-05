@@ -22,7 +22,11 @@ const FeaturedArticle = ({ type, data }: { type: 'book' | 'article' | null, data
               <p className="justify-self-end">{updatedAt.format('MMMM Do, YYYY')}</p>
             </div>
           </header>
-          <h1 className="text-xl font-bold leading-7 text-gray-800 md:font-bold mt-sm lg:mt-md md:leading-10 md:underline md:text-4xl 2xl:w-9/12">{title}</h1>
+
+          <Link href={link} passHref>
+            <h1 className="cursor-pointer text-xl font-bold leading-7 text-gray-800 md:font-bold mt-sm lg:mt-md md:leading-10 md:underline md:text-4xl 2xl:w-9/12">{title}</h1>
+          </Link>
+
           <Link href={link} passHref>
             <a className="shadow-sm featured-button shadow-primary/50 hover:shadow-none">Read More</a>
           </Link>
@@ -33,7 +37,11 @@ const FeaturedArticle = ({ type, data }: { type: 'book' | 'article' | null, data
           <p className="justify-self-start text-primary">Featured</p>
           <p className="text-sm justify-self-end lg:hidden">{updatedAt.format('MMMM Do')}</p>
         </div>
-        {image && (<img src={image?.url} alt="cover image" className="object-cover w-full h-52 rounded-lg sm:rounded-md md:h-64 lg:h-80 3xl:h-[22rem]" />)}
+        {image && (
+          <Link href={link} passHref>
+            <img src={image?.url} alt="cover image" className="cursor-pointer object-cover w-full h-52 rounded-lg sm:rounded-md md:h-64 lg:h-80 3xl:h-[22rem]" />
+          </Link>
+        )}
       </div>
     </div>
   )
