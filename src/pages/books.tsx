@@ -47,8 +47,7 @@ export async function getStaticProps() {
   return {
     props: {
       books: (data?.books) || [],
-    },
-    revalidate: 60
+    }
   }
 }
 
