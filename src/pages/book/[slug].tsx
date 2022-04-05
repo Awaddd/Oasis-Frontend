@@ -45,7 +45,8 @@ export async function getStaticProps({ params }: SSGParams) {
         type: img?.type,
         blurDataURL: base64,
       },
-    }
+    },
+    revalidate: 60,
   }
 }
 

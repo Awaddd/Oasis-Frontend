@@ -9,9 +9,11 @@ export default async (_: NextApiRequest, res: ApiResponse) => {
     await res.unstable_revalidate("/");
     await res.unstable_revalidate("/author");
     await res.unstable_revalidate("/books");
-    await res.unstable_revalidate("/[category]");
-    await res.unstable_revalidate("/book/[slug]");
-    await res.unstable_revalidate("/article/[slug]");
+    await res.unstable_revalidate("/articles");
+    await res.unstable_revalidate("/reviews");
+    await res.unstable_revalidate("/journals");
+    await res.unstable_revalidate("/stories");
+    await res.unstable_revalidate("/other");
 
     return res.status(200).json({ revalidated: true });
   } catch (err) {
