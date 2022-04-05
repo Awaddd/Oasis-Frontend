@@ -41,6 +41,10 @@ body {
   overflow-x: hidden;
 }
 
+.app-grid {
+  grid-template-rows: min-content 1fr min-content;
+}
+
 .nav-padding {
   @apply px-md md:px-lg lg:px-2xl;
 }
@@ -59,10 +63,6 @@ body {
 
 .reverse-top-global-page-padding {
   @apply -mt-xs sm:-mt-sm;
-}
-
-.footer {
-  @apply self-end w-full;
 }
 
 .articles {

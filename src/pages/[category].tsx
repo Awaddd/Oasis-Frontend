@@ -20,7 +20,7 @@ const Index = ({ category, articles }: { category: string, articles: Article[] }
 
   if (!articles || articles.length === 0) return (
     <Main meta={META}>
-      <section className="grid items-center h-full text-center mt-lg mb-lg">
+      <section className="grid items-center text-center mt-lg mb-lg">
         <h1>{capitaliseFirstLetter(category)}</h1>
         <p className="text-sm font-normal lg:text-lg mt-md">Sorry there are no posts at the moment. Please check back later</p>
         <div className="mt-lg md:mt-[45px]">
