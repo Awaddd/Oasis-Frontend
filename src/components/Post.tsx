@@ -9,12 +9,13 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
 
 type Props = {
+  type?: 'article' | 'book';
   data: Article;
   author: ArticleAuthor;
   imageProps?: ImageType;
 }
 
-const Post: FC<Props> = ({ data, author, imageProps }) => {
+const Post: FC<Props> = ({ type, data, author, imageProps }) => {
   const { title, updated_at, content, image, category } = data;
   const updatedAt = dayjs(updated_at);
 
@@ -43,9 +44,15 @@ const Post: FC<Props> = ({ data, author, imageProps }) => {
         </div>
       )}
 
-      {category && (
+      {type === 'article' && category && (
         <Link href={`/${category?.pluralName}`} passHref>
           <span className="cursor-pointer block px-4 py-1 text-sm bg-gray-900 text-white rounded-[4px] mt-[1rem] mb-[-0.5rem] md:mb-0 w-min">{category.name}</span>
+        </Link>
+      )}
+
+      {type === 'book' && (
+        <Link href={`/books`} passHref>
+          <span className="cursor-pointer block px-4 py-1 text-sm bg-gray-900 text-white rounded-[4px] mt-[1rem] mb-[-0.5rem] md:mb-0 w-min">Book</span>
         </Link>
       )}
 

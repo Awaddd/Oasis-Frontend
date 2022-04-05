@@ -22,7 +22,7 @@ const Article = ({ article, imageProps, author }: { article: ArticleType; imageP
 
   return (
     <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />} >
-      <Post data={article} author={author} imageProps={imageProps} />
+      <Post type="article" data={article} author={author} imageProps={imageProps} />
     </Main>
   );
 };

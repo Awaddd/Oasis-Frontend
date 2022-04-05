@@ -22,7 +22,7 @@ const Book = ({ book, imageProps, author }: { book: Article; imageProps: ImageTy
 
   return (
     <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />} >
-      <Post data={book} author={author} imageProps={imageProps} />
+      <Post type="book" data={book} author={author} imageProps={imageProps} />
     </Main>
   );
 };
