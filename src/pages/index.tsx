@@ -75,8 +75,7 @@ export async function getStaticProps({ }) {
       authorBio: authorBioData?.author || null,
       featuredArticle: featuredPost,
       type,
-    },
-    revalidate: 60
+    }
   }
 }
 
