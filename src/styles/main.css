@@ -74,7 +74,7 @@ body {
 }
 
 .heroImage {
-  @apply object-cover w-full h-52 sm:h-60 lg:h-80 3xl:h-[24rem];
+  @apply w-full h-52 sm:h-60 lg:h-80 3xl:h-[24rem];
 }
 
 .hero-image-overlay {

@@ -85,3 +85,11 @@ export type Newsletter = {
   subtitle?: string;
   description: string;
 };
+
+export type HeroImage = {
+  image?: {
+    url: string;
+  };
+  title?: string;
+  subtitle?: string;
+};

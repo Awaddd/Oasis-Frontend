@@ -32,7 +32,7 @@ export async function getStaticProps({ params }: SSGParams) {
   const authorData = await getArticleAuthor();
 
   const path = data?.books[0]?.image?.url;
-  if (!path) return { props: { book: data?.books[0] } }
+  if (!path) return { props: { book: data?.books[0] }, revalidate: 60 }
 
   const { base64, img } = await getPlaceholder(path, { size: 10 });
 

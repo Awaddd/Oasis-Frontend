@@ -1,22 +1,25 @@
-type Data = {
-  image?: {
-    url: string;
-  };
-  title?: string;
-  subtitle?: string;
-};
+import Image from 'next/image';
+import { FC } from "react";
+import { HeroImage, ImageType } from "../utils/types/global";
 
-const HeroImage = ({ data }: { data: Data }) => {
+type Props = {
+  data: HeroImage;
+  imageProps: ImageType;
+}
 
-  if (!data) return null;
-  const { image, title, subtitle } = data;
+const Hero: FC<Props> = ({ data, imageProps }) => {
+  if (!data || !imageProps) return null;
 
-  if (!image) return null;
+  const { title, subtitle } = data;
 
   return (
     <header className="reverse-global-padding reverse-top-global-page-padding">
       <div className="relative">
-        {image && (<img src={image?.url} alt="hero image" className="heroImage" />)}
+        {imageProps && (
+          <div className="heroImage">
+            <Image layout="fill" {...imageProps} placeholder="blur" priority alt="hero image" className="object-cover" />
+          </div>
+        )}
         <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full">
           <div className="absolute w-full h-full hero-image-overlay"></div>
           <header className="z-10 text-center text-white md:text-gray-200">
@@ -29,6 +32,4 @@ const HeroImage = ({ data }: { data: Data }) => {
   )
 };
 
-
-
-export default HeroImage;
+export default Hero;
