@@ -1,13 +1,20 @@
+import Image from 'next/image';
+import { FC } from "react";
 import { Article } from "../utils/types/global";
 
-const ArticleCard = ({ data }: { data: Article }) => {
-  const { title, subtitle, image } = data
+type Props = {
+  data: Article;
+}
 
-  if (!image) return null;
+const ArticleCard: FC<Props> = ({ data }) => {
+  const { title, subtitle, imageProps } = data
+  if (!imageProps) return null;
 
   return (
     <article className="grid cursor-pointer">
-      {image && (<img src={image?.url} alt="cover image" className="object-cover w-full rounded-lg md:h-48 h-52 3xl:h-60" />)}
+      <div className="relative h-52 md:h-48 3xl:h-60">
+        <Image layout="fill" {...imageProps} placeholder="blur" priority alt="cover image" className="object-cover rounded-lg" />
+      </div>
       <div className="mt-2.5 mx-[.525rem]">
         <h2 className="text-xl font-bold leading-7 text-black">{title}</h2>
         {subtitle && <p className="md:mt-[2px]">{subtitle}</p>}

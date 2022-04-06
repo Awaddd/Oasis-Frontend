@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 import { Article } from '../utils/types/global';
@@ -5,9 +6,9 @@ import ArticleCardWithLink from '../components/ArticleCardWithLink';
 import { CategoryParams } from '../utils/types/global';
 import { getArticlesByCategory } from '../services/articles';
 import { getCategories } from '../services/global';
-import { capitaliseFirstLetter } from '../utils/helpers';
+import { blurImage, capitaliseFirstLetter } from '../utils/helpers';
+import { getPlaiceholder as getPlaceholder } from 'plaiceholder';
 import EmptySVG from '../../public/assets/images/empty.svg';
-import Image from 'next/image';
 
 const Index = ({ category, articles }: { category: string, articles: Article[] }) => {
 
@@ -46,6 +47,10 @@ const Index = ({ category, articles }: { category: string, articles: Article[] }
 
 export async function getStaticProps({ params }: CategoryParams) {
   const data = await getArticlesByCategory(capitaliseFirstLetter(params.category));
+
+  for (const article of (data?.categories[0].articles || [])) {
+    article.imageProps = await blurImage(article?.image?.url, getPlaceholder);
+  }
 
   return {
     props: {

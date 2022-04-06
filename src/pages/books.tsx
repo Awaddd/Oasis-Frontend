@@ -1,10 +1,12 @@
+import Image from 'next/image';
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 import { Article } from '../utils/types/global';
 import { getBooks } from '../services/books';
 import ArticleCardWithLink from '../components/ArticleCardWithLink';
 import EmptySVG from '../../public/assets/images/empty.svg';
-import Image from 'next/image';
+import { blurImage } from '../utils/helpers';
+import { getPlaiceholder as getPlaceholder } from 'plaiceholder';
 
 const Books = ({ books }: { books: Article[] }) => {
 
@@ -43,6 +45,10 @@ const Books = ({ books }: { books: Article[] }) => {
 
 export async function getStaticProps() {
   const data = await getBooks();
+
+  for (const article of (data?.books || [])) {
+    article.imageProps = await blurImage(article?.image?.url, getPlaceholder);
+  }
 
   return {
     props: {

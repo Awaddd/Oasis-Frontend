@@ -26,6 +26,7 @@ export type Article = {
     height: number;
     mime: string;
   };
+  imageProps: ImageType;
   category?: {
     name: string;
     pluralName: string;

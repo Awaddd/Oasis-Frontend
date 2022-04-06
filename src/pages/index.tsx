@@ -90,7 +90,7 @@ export async function getStaticProps({ }) {
   const featuredArticleImageProps = await blurImage(featuredPost?.image?.url, getPlaceholder);
   const authorImageProps = await blurImage(authorBioData?.author?.picture?.url, getPlaceholder);
 
-  for (const article of articleData?.articles) {
+  for (const article of (articleData?.articles || [])) {
     article.imageProps = await blurImage(article?.image?.url, getPlaceholder);
   }
 
