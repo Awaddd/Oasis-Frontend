@@ -6,7 +6,7 @@ const Footer = ({ classes, children }: FooterProps) => {
 
   return (
     <footer className={classes}>
-      <div className="text-center py-md lg:pb-lg">
+      <div className="text-center py-md lg:pb-[1.25rem] 3xl:pb-lg">
         <span className="text-sm">{AppConfig.title} © Copyright {new Date().getFullYear()}</span>
       </div>
     </footer>
