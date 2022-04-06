@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 import { getArticles, getFeaturedArticle } from '../services/articles';
@@ -8,8 +9,8 @@ import ArticleCardWithLink from '../components/ArticleCardWithLink';
 import { Article, AuthorBio, ImageType, Newsletter as NewsletterType } from '../utils/types/global';
 import AboutMe from '../components/AboutMe';
 import Newsletter from '../components/Newsletter';
-import { getPlaiceholder as getPlaceholder } from 'plaiceholder';
 import { blurImage } from '../utils/helpers';
+import { getPlaiceholder as getPlaceholder } from 'plaiceholder';
 
 const META = (
   <Meta
@@ -20,42 +21,50 @@ const META = (
 
 type IndexProps = {
   hero: any;
-  heroImageProps: ImageType;
   articles: any;
   authorBio?: AuthorBio;
   featuredArticle: Article;
   newsletter: NewsletterType;
   type: 'book' | 'article' | null;
+  featuredArticleImageProps: ImageType;
+  heroImageProps: ImageType;
 };
 
-const Index = ({ hero, heroImageProps, articles, authorBio, featuredArticle, newsletter, type }: IndexProps) => {
-  return (
-    <Main meta={META} footerProps={{ classes: 'bg-dark text-gray-200' }} >
+const Index: FC<IndexProps> = ({
+  hero,
+  articles,
+  authorBio,
+  featuredArticle,
+  newsletter,
+  type,
+  heroImageProps,
+  featuredArticleImageProps,
+}) => (
+  <Main meta={META} footerProps={{ classes: 'bg-dark text-gray-200' }} >
 
-      <HeroImage data={hero} imageProps={heroImageProps} />
+    <HeroImage data={hero} imageProps={heroImageProps} />
 
-      <div className="2xl:w-9/12 2xl:mx-auto">
-        <section className="2xl:mt-xl md:mt-[45px] mt-lg">
-          <FeaturedArticle type={type} data={featuredArticle} />
-        </section>
+    <div className="2xl:w-9/12 2xl:mx-auto">
+      <section className="2xl:mt-xl md:mt-[45px] mt-lg">
+        <FeaturedArticle type={type} data={featuredArticle} imageProps={featuredArticleImageProps} />
+      </section>
 
-        <section className="2xl:mt-xl mt-[45px] articles">
-          {articles.map((data: Article, key: number) => (
-            <ArticleCardWithLink data={data} key={key} />
-          ))}
-        </section>
+      <section className="2xl:mt-xl mt-[45px] articles">
+        {articles.map((data: Article, key: number) => (
+          <ArticleCardWithLink data={data} key={key} />
+        ))}
+      </section>
 
-        <section className="2xl:mt-xl md:mt-[45px] mt-lg">
-          <Newsletter data={newsletter} />
-        </section>
-      </div>
+      <section className="2xl:mt-xl md:mt-[45px] mt-lg">
+        <Newsletter data={newsletter} />
+      </section>
+    </div>
 
-      <footer className="2xl:mt-xl md:mt-[45px] mt-lg reverse-global-padding">
-        <AboutMe data={authorBio} />
-      </footer>
-    </Main>
-  );
-};
+    <footer className="2xl:mt-xl md:mt-[45px] mt-lg reverse-global-padding">
+      <AboutMe data={authorBio} />
+    </footer>
+  </Main>
+);
 
 export async function getStaticProps({ }) {
   const data = await getArticles(true);
@@ -74,6 +83,7 @@ export async function getStaticProps({ }) {
   }
 
   const heroImageProps = await blurImage(heroData?.heroImage?.image?.url, getPlaceholder);
+  const featuredArticleImageProps = await blurImage(featuredPost?.image?.url, getPlaceholder);
 
   return {
     props: {
@@ -82,6 +92,7 @@ export async function getStaticProps({ }) {
       authorBio: authorBioData?.author || null,
       newsletter: newsletterData?.newsletter || null,
       featuredArticle: featuredPost,
+      featuredArticleImageProps,
       heroImageProps,
       type,
     }

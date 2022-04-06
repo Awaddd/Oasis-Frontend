@@ -1,13 +1,21 @@
-import Link from 'next/link';
+import Image from 'next/image';
+import { FC } from "react";
+import { ImageType } from "../utils/types/global"; import Link from 'next/link';
 import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { Article } from '../utils/types/global';
 dayjs.extend(advancedFormat);
 
-const FeaturedArticle = ({ type, data }: { type: 'book' | 'article' | null, data: Article }) => {
+type Props = {
+  type: 'book' | 'article' | null;
+  data: Article;
+  imageProps: ImageType;
+}
 
-  if (!data) return null;
-  const { title, slug, updated_at, image } = data
+const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
+  if (!data || !imageProps) return null;
+
+  const { title, slug, updated_at } = data
   const updatedAt = dayjs(updated_at);
 
   const link = type === 'book' ? `/book/${slug}` : `/article/${slug}`;
@@ -37,11 +45,11 @@ const FeaturedArticle = ({ type, data }: { type: 'book' | 'article' | null, data
           <p className="justify-self-start text-primary">Featured</p>
           <p className="text-sm justify-self-end lg:hidden">{updatedAt.format('MMMM Do')}</p>
         </div>
-        {image && (
-          <Link href={link} passHref>
-            <img src={image?.url} alt="cover image" className="cursor-pointer object-cover w-full h-52 rounded-lg sm:rounded-md md:h-64 lg:h-80 3xl:h-[22rem]" />
-          </Link>
-        )}
+        <Link href={link} passHref>
+          <div className="relative w-full h-52 md:h-64 lg:h-80 3xl:h-[22rem]">
+            <Image layout="fill" {...imageProps} placeholder="blur" priority alt="cover image" className="cursor-pointer object-cover rounded-lg sm:rounded-md" />
+          </div>
+        </Link>
       </div>
     </div>
   )
