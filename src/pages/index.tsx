@@ -51,11 +51,13 @@ const Index: FC<IndexProps> = ({
         <FeaturedArticle type={type} data={featuredArticle} imageProps={featuredArticleImageProps} />
       </section>
 
-      <section className="2xl:mt-xl mt-[45px] articles">
-        {articles.map((data: Article, key: number) => (
-          <ArticleCardWithLink data={data} key={key} />
-        ))}
-      </section>
+      {articles && (
+        <section className="2xl:mt-xl mt-[45px] articles">
+          {articles.map((data: Article, key: number) => (
+            <ArticleCardWithLink data={data} key={key} />
+          ))}
+        </section>
+      )}
 
       <section className="2xl:mt-xl md:mt-[45px] mt-lg">
         <Newsletter data={newsletter} />
@@ -69,7 +71,7 @@ const Index: FC<IndexProps> = ({
 );
 
 export async function getStaticProps({ }) {
-  const data = await getArticles(true);
+  const articleData = await getArticles(true);
   const heroData = await getHero();
   const authorBioData = await getAuthorBio();
   const newsletterData = await getNewsletter();
@@ -88,9 +90,13 @@ export async function getStaticProps({ }) {
   const featuredArticleImageProps = await blurImage(featuredPost?.image?.url, getPlaceholder);
   const authorImageProps = await blurImage(authorBioData?.author?.picture?.url, getPlaceholder);
 
+  for (const article of articleData?.articles) {
+    article.imageProps = await blurImage(article?.image?.url, getPlaceholder);
+  }
+
   return {
     props: {
-      articles: data?.articles || [],
+      articles: articleData?.articles || [],
       hero: heroData?.heroImage || null,
       authorBio: authorBioData?.author || null,
       newsletter: newsletterData?.newsletter || null,
