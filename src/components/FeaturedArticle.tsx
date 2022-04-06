@@ -47,7 +47,7 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
         </div>
         <Link href={link} passHref>
           <div className="relative w-full h-52 md:h-64 lg:h-80 3xl:h-[22rem]">
-            <Image layout="fill" {...imageProps} placeholder="blur" priority alt="cover image" className="cursor-pointer object-cover rounded-lg sm:rounded-md" />
+            <Image layout="fill" {...imageProps} placeholder="blur" priority alt="featured post image" className="cursor-pointer object-cover rounded-lg sm:rounded-md" />
           </div>
         </Link>
       </div>
