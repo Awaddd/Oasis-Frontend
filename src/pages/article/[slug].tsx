@@ -6,6 +6,7 @@ import { Article as ArticleType, ArticleAuthor, ImageType, SSGParams } from '../
 import { getPlaiceholder as getPlaceholder } from "plaiceholder";
 import ArticleFooter from '../../components/ArticleFooter';
 import Post from '../../components/Post';
+import { blurImage } from '../../utils/helpers';
 
 const Article = ({ article, imageProps, author }: { article: ArticleType; imageProps: ImageType; author: ArticleAuthor }) => {
   if (!article) return <p>Sorry, this article could not be loaded. Please try again later</p>
@@ -30,21 +31,13 @@ const Article = ({ article, imageProps, author }: { article: ArticleType; imageP
 export async function getStaticProps({ params }: SSGParams) {
   const data = await getArticle(params.slug);
   const authorData = await getArticleAuthor();
-
-  const path = data?.articles[0]?.image?.url;
-  if (!path) return { props: { article: data?.articles[0] }, revalidate: 60 }
-
-  const { base64, img } = await getPlaceholder(path, { size: 10 });
+  const imageProps = await blurImage(data?.articles[0]?.image?.url, getPlaceholder);
 
   return {
     props: {
       article: data?.articles[0],
       author: authorData?.author || null,
-      imageProps: {
-        src: img?.src,
-        type: img?.type,
-        blurDataURL: base64,
-      },
+      imageProps,
     },
     revalidate: 60,
   }

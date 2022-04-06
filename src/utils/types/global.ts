@@ -93,3 +93,8 @@ export type HeroImage = {
   title?: string;
   subtitle?: string;
 };
+
+export type PlaceholderCallback = (
+  url: string,
+  options: { [key: string]: any }
+) => any;

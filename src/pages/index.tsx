@@ -8,7 +8,8 @@ import ArticleCardWithLink from '../components/ArticleCardWithLink';
 import { Article, AuthorBio, ImageType, Newsletter as NewsletterType } from '../utils/types/global';
 import AboutMe from '../components/AboutMe';
 import Newsletter from '../components/Newsletter';
-import { getPlaiceholder as getPlaceholder } from "plaiceholder";
+import { getPlaiceholder as getPlaceholder } from 'plaiceholder';
+import { blurImage } from '../utils/helpers';
 
 const META = (
   <Meta
@@ -72,16 +73,7 @@ export async function getStaticProps({ }) {
     featuredPost = featuredArticle.book;
   }
 
-  const heroImageProps = await (async () => {
-    if (!heroData?.heroImage?.image?.url) return null;
-    const { base64, img } = await getPlaceholder(heroData.heroImage.image.url, { size: 10 });
-
-    return {
-      src: img?.src,
-      type: img?.type,
-      blurDataURL: base64,
-    }
-  })();
+  const heroImageProps = await blurImage(heroData?.heroImage?.image?.url, getPlaceholder);
 
   return {
     props: {

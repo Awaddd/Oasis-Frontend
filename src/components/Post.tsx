@@ -16,13 +16,13 @@ type Props = {
 }
 
 const Post: FC<Props> = ({ type, data, author, imageProps }) => {
-  const { title, updated_at, content, image, category } = data;
+  const { title, updated_at, content, category } = data;
   const updatedAt = dayjs(updated_at);
 
   return (
     <div className="lg:w-3/5 md:mx-auto my-lg mb-[45px] 2xl:w-2/4">
 
-      {image?.url && (
+      {imageProps && (
         <div className="relative h-52 sm:h-60 md:h-80 lg:h-96 3xl:h-[28rem] mt-md">
           {imageProps && (<Image layout="fill" {...imageProps} placeholder="blur" priority alt={title} className="absolute top-0 z-10 text-center text-gray-200 bg-gray-900 rounded-lg object-cover heroImage" />)}
           <div className="absolute top-0 left-0 grid w-full h-full">

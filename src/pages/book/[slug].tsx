@@ -6,6 +6,7 @@ import { Article, ArticleAuthor, ImageType, SSGParams } from '../../utils/types/
 import { getPlaiceholder as getPlaceholder } from "plaiceholder";
 import ArticleFooter from '../../components/ArticleFooter';
 import Post from '../../components/Post';
+import { blurImage } from '../../utils/helpers';
 
 const Book = ({ book, imageProps, author }: { book: Article; imageProps: ImageType; author: ArticleAuthor }) => {
   if (!book) return <p>Sorry, this book could not be loaded. Please try again later</p>
@@ -30,21 +31,13 @@ const Book = ({ book, imageProps, author }: { book: Article; imageProps: ImageTy
 export async function getStaticProps({ params }: SSGParams) {
   const data = await getBook(params.slug);
   const authorData = await getArticleAuthor();
-
-  const path = data?.books[0]?.image?.url;
-  if (!path) return { props: { book: data?.books[0] }, revalidate: 60 }
-
-  const { base64, img } = await getPlaceholder(path, { size: 10 });
+  const imageProps = await blurImage(data?.books[0]?.image?.url, getPlaceholder);
 
   return {
     props: {
       book: data?.books[0],
       author: authorData?.author || null,
-      imageProps: {
-        src: img?.src,
-        type: img?.type,
-        blurDataURL: base64,
-      },
+      imageProps,
     },
     revalidate: 60,
   }
