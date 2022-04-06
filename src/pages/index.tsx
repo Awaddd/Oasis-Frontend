@@ -28,6 +28,7 @@ type IndexProps = {
   type: 'book' | 'article' | null;
   featuredArticleImageProps: ImageType;
   heroImageProps: ImageType;
+  authorImageProps: ImageType;
 };
 
 const Index: FC<IndexProps> = ({
@@ -36,9 +37,10 @@ const Index: FC<IndexProps> = ({
   authorBio,
   featuredArticle,
   newsletter,
-  type,
   heroImageProps,
   featuredArticleImageProps,
+  authorImageProps,
+  type,
 }) => (
   <Main meta={META} footerProps={{ classes: 'bg-dark text-gray-200' }} >
 
@@ -61,7 +63,7 @@ const Index: FC<IndexProps> = ({
     </div>
 
     <footer className="2xl:mt-xl md:mt-[45px] mt-lg reverse-global-padding">
-      <AboutMe data={authorBio} />
+      <AboutMe data={authorBio} imageProps={authorImageProps} />
     </footer>
   </Main>
 );
@@ -84,6 +86,7 @@ export async function getStaticProps({ }) {
 
   const heroImageProps = await blurImage(heroData?.heroImage?.image?.url, getPlaceholder);
   const featuredArticleImageProps = await blurImage(featuredPost?.image?.url, getPlaceholder);
+  const authorImageProps = await blurImage(authorBioData?.author?.picture?.url, getPlaceholder);
 
   return {
     props: {
@@ -94,6 +97,7 @@ export async function getStaticProps({ }) {
       featuredArticle: featuredPost,
       featuredArticleImageProps,
       heroImageProps,
+      authorImageProps,
       type,
     }
   }

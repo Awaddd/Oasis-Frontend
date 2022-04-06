@@ -1,14 +1,16 @@
+import Image from "next/image";
 import { FC } from "react";
-import { AuthorBio } from "../utils/types/global";
+import { AuthorBio, ImageType } from "../utils/types/global";
 import SocialIconBar from "./SocialIconBar";
 
 type Props = {
   data?: AuthorBio;
+  imageProps: ImageType;
 }
 
-const AboutMe: FC<Props> = ({ data }) => {
+const AboutMe: FC<Props> = ({ data, imageProps }) => {
   if (!data) return null;
-  const { firstName, lastName, bio, email, picture, socialLinks } = data;
+  const { firstName, lastName, bio, email, socialLinks } = data;
 
   return (
     <main className="bg-dark global-padding py-lg md:py-xl lg:pb-lg">
@@ -24,10 +26,10 @@ const AboutMe: FC<Props> = ({ data }) => {
             </div>
           </article>
 
-          {picture && (
-            <div className="mt-8 md:mt-0 sm:w-64 md:w-[10rem] md:h-[10rem] md:self-start lg:self-center lg:w-[10rem] lg:h-[10rem] lg:mt-0 lg:ml-[-24px]">
-              {picture && (<img src={picture?.url} alt="author image" className="object-fill w-full h-full rounded-lg shadow-inner md:rounded-full" />)}
-            </div>
+          {imageProps && (
+            <figure className="relative mt-8 md:mt-0 sm:w-64 md:w-[10rem] md:h-[10rem] md:self-start lg:self-center lg:w-[10rem] lg:h-[10rem] lg:mt-0 lg:ml-[-24px]">
+              <Image layout="fill" {...imageProps} placeholder="blur" priority alt="author image" className="object-fill rounded-lg shadow-inner md:rounded-full" />
+            </figure>
           )}
 
           <div className="flex items-center mt-4 -mx-2 md:hidden lg:mt-2">
