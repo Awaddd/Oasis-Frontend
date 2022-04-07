@@ -43,7 +43,7 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
         </div>
       </div>
       <div className="md:mt-0 md:flex-1">
-        <div className="grid grid-cols-2 mx-xs mb-sm md:hidden">
+        <div className="grid grid-cols-2 mx-xs mb-xs md:hidden">
           <p className="justify-self-start text-primary">Featured</p>
           <p className="text-sm justify-self-end lg:hidden">{updatedAt.format('MMMM Do')}</p>
         </div>
