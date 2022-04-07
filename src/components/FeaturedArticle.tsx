@@ -34,7 +34,7 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
           </header>
 
           <Link href={link} passHref>
-            <h1 className="cursor-pointer text-xl font-bold leading-7 text-gray-800 md:font-bold mt-sm lg:mt-md md:leading-10 md:underline md:text-4xl 2xl:w-9/12">{title}</h1>
+            <h1 className="cursor-pointer text-xl font-bold leading-7 text-black md:font-bold mt-sm lg:mt-md md:leading-10 md:underline md:text-4xl 2xl:w-9/12">{title}</h1>
           </Link>
 
           <Link href={link} passHref>
