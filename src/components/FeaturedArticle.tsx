@@ -48,7 +48,7 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
           <p className="justify-self-start text-primary">Featured</p>
           <p className="text-sm justify-self-end lg:hidden">{updatedAt.format('MMMM Do')}</p>
         </div>
-        <ImageCard title={title} imageProps={imageProps} classes="md:hidden" />
+        <ImageCard title={title} imageProps={imageProps} link={link} classes="md:hidden" />
         <Link href={link} passHref>
           <div className="relative hidden md:block w-full h-52 md:h-64 lg:h-80 3xl:h-[22rem]">
             <Image layout="fill" {...imageProps} placeholder="blur" priority alt="featured post image" className="cursor-pointer object-cover rounded-lg sm:rounded-md" />
