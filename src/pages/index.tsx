@@ -52,10 +52,13 @@ const Index: FC<IndexProps> = ({
       </section>
 
       {articles && (
-        <section className="2xl:mt-xl mt-[45px] articles">
-          {articles.map((data: Article, key: number) => (
-            <ArticleCardWithLink data={data} key={key} />
-          ))}
+        <section className="2xl:mt-xl mt-lg md:mt-[45px]">
+          <h2 className="text-black md:hidden">Recently Updated</h2>
+          <div className="articles mt-md">
+            {articles.map((data: Article, key: number) => (
+              <ArticleCardWithLink data={data} key={key} />
+            ))}
+          </div>
         </section>
       )}
 

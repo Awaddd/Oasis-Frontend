@@ -4,6 +4,7 @@ import { ImageType } from "../utils/types/global"; import Link from 'next/link';
 import { Article } from '../utils/types/global';
 import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import ImageCard from './sub-components/ImageCard';
 dayjs.extend(advancedFormat);
 
 type Props = {
@@ -24,9 +25,9 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
 
   return (
     <div className="flex flex-col-reverse md:flex-row-reverse md:gap-[45px]">
-      <div className="md:grid md:flex-1">
+      <div className="hidden md:grid md:flex-1">
         <div className="text-center md:justify-self-start md:text-left mt-sm md:mt-md">
-          <header className="hidden md:block">
+          <header>
             <div className="grid grid-cols-2">
               <p className="justify-self-start text-primary">Featured</p>
               <p className="justify-self-end">{updatedAt.format('MMMM Do, YYYY')}</p>
@@ -47,8 +48,9 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
           <p className="justify-self-start text-primary">Featured</p>
           <p className="text-sm justify-self-end lg:hidden">{updatedAt.format('MMMM Do')}</p>
         </div>
+        <ImageCard title={title} imageProps={imageProps} classes="md:hidden" />
         <Link href={link} passHref>
-          <div className="relative w-full h-52 md:h-64 lg:h-80 3xl:h-[22rem]">
+          <div className="relative hidden md:block w-full h-52 md:h-64 lg:h-80 3xl:h-[22rem]">
             <Image layout="fill" {...imageProps} placeholder="blur" priority alt="featured post image" className="cursor-pointer object-cover rounded-lg sm:rounded-md" />
           </div>
         </Link>

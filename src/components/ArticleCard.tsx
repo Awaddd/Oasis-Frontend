@@ -16,7 +16,7 @@ const ArticleCard: FC<Props> = ({ data }) => {
         <Image layout="fill" {...imageProps} placeholder="blur" priority alt="cover image" className="object-cover rounded-lg" />
       </div>
       <div className="mt-2.5 mx-[.525rem]">
-        <h2 className="text-xl font-bold leading-7 text-black">{title}</h2>
+        <h3 className="font-bold leading-7 text-black">{title}</h3>
         {subtitle && <p className="md:mt-[2px]">{subtitle}</p>}
       </div>
     </article>

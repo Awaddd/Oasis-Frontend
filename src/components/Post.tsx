@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Article, ArticleAuthor, ImageType } from '../utils/types/global';
 import parse from 'html-react-parser';
 import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
+import ImageCard from './sub-components/ImageCard';
 
 dayjs.extend(advancedFormat);
 
@@ -23,25 +23,16 @@ const Post: FC<Props> = ({ type, data, author, imageProps }) => {
     <div className="lg:w-3/5 md:mx-auto my-lg mb-[45px] 2xl:w-2/4">
 
       {imageProps && (
-        <div className="relative h-52 sm:h-60 md:h-80 lg:h-96 3xl:h-[28rem] mt-md">
-          {imageProps && (<Image layout="fill" {...imageProps} placeholder="blur" priority alt={title} className="absolute top-0 z-10 text-center text-gray-200 bg-gray-900 rounded-lg object-cover heroImage" />)}
-          <div className="absolute top-0 left-0 grid w-full h-full">
-            <div className="absolute z-10 w-full h-full rounded-lg hero-image-overlay"></div>
-            <div className="z-10 flex flex-col w-full h-full text-center text-white px-md py-sm">
-              <header className="flex items-center justify-center flex-1 w-11/12 mx-auto">
-                <h1 className="text-2xl tracking-tight md:text-3xl md:font-semibold lg:text-4xl 2xl:text-5xl">{title}</h1>
-              </header>
-              <footer className="flex items-end w-full">
-                <div className="flex justify-between w-full">
-                  <div className="relative flex items-center">
-                    <span className="text-sm font-normal mt-md 2xl:text-normal">{author?.firstName} {author?.lastName}</span>
-                  </div>
-                  <span className="text-sm mt-md 2xl:text-normal">{updatedAt.format('MMMM Do, YYYY')}</span>
-                </div>
-              </footer>
+        <ImageCard title={title} imageProps={imageProps} classes="mt-md">
+          <footer className="flex items-end w-full">
+            <div className="flex justify-between w-full">
+              <div className="relative flex items-center">
+                <span className="text-sm font-normal mt-md 2xl:text-normal">{author?.firstName} {author?.lastName}</span>
+              </div>
+              <span className="text-sm mt-md 2xl:text-normal">{updatedAt.format('MMMM Do, YYYY')}</span>
             </div>
-          </div>
-        </div>
+          </footer>
+        </ImageCard>
       )}
 
       {type === 'article' && category && (
