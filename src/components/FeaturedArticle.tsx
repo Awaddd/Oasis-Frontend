@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { FC } from "react";
 import { ImageType } from "../utils/types/global"; import Link from 'next/link';
+import { Article } from '../utils/types/global';
 import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
-import { Article } from '../utils/types/global';
 dayjs.extend(advancedFormat);
 
 type Props = {
@@ -15,10 +15,12 @@ type Props = {
 const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
   if (!data || !imageProps) return null;
 
-  const { title, slug, updated_at } = data
+  const { title, slug, updated_at, category } = data
   const updatedAt = dayjs(updated_at);
 
   const link = type === 'book' ? `/book/${slug}` : `/article/${slug}`;
+
+  const buttonLabel = type === 'article' ? category?.name.toLowerCase() === 'other' ? 'article' : category?.name.toLowerCase() : 'book';
 
   return (
     <div className="flex flex-col-reverse md:flex-row-reverse md:gap-[45px]">
@@ -36,7 +38,7 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
           </Link>
 
           <Link href={link} passHref>
-            <a className="shadow-sm featured-button shadow-primary/50 hover:shadow-none">Read More</a>
+            <a className="shadow-sm featured-button shadow-primary/50 hover:shadow-none">Read {buttonLabel}</a>
           </Link>
         </div>
       </div>

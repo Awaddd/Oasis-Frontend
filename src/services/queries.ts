@@ -125,6 +125,9 @@ export const FEATURED_ARTICLE = gql`
         image {
           url
         }
+        category {
+          name
+        }
       }
     }
   }
