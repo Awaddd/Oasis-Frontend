@@ -9,7 +9,7 @@ const SocialIconBar = ({ links, email, dark }: { links?: SocialLink[]; email?: s
   return (
     <>
       {links.map((link, key) => (
-        <a className="mx-2 outline-none" href={link?.link} aria-label={link?.brand} target="_blank" rel="noopener noreferrer" key={key}>
+        <a className="mr-[14px] outline-none" href={link?.link} aria-label={link?.brand} target="_blank" rel="noopener noreferrer" key={key}>
           {link?.brand.toLowerCase() === 'linkedin' && (
             <svg className={`${classes} ${variant}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <path d="M417.2 64H96.8C79.3 64 64 76.6 64 93.9V415c0 17.4 15.3 32.9 32.8 32.9h320.3c17.6 0 30.8-15.6 30.8-32.9V93.9C448 76.6 434.7 64 417.2 64zM183 384h-55V213h55v171zm-25.6-197h-.4c-17.6 0-29-13.1-29-29.5 0-16.7 11.7-29.5 29.7-29.5s29 12.7 29.4 29.5c0 16.4-11.4 29.5-29.7 29.5zM384 384h-55v-93.5c0-22.4-8-37.7-27.9-37.7-15.2 0-24.2 10.3-28.2 20.3-1.5 3.6-1.9 8.5-1.9 13.5V384h-55V213h55v23.8c8-11.4 20.5-27.8 49.6-27.8 36.1 0 63.4 23.8 63.4 75.1V384z" />
@@ -31,7 +31,7 @@ const SocialIconBar = ({ links, email, dark }: { links?: SocialLink[]; email?: s
       ))}
 
       {email && (
-        <a className="mx-2 outline-none" href={`mailto:${email}`} aria-label="Email">
+        <a className="outline-none" href={`mailto:${email}`} aria-label="Email">
           <svg className={`${classes} ${variant}`} viewBox="0 0 24 24" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
             <path d="M20,3H4C1.8,3,0,4.8,0,7v10c0,2.2,1.8,4,4,4h16c2.2,0,4-1.8,4-4V7C24,4.8,22.2,3,20,3z M21.6,8.8l-7.9,5.3   c-0.5,0.3-1.1,0.5-1.7,0.5s-1.2-0.2-1.7-0.5L2.4,8.8C2,8.5,1.9,7.9,2.2,7.4C2.5,7,3.1,6.9,3.6,7.2l7.9,5.3c0.3,0.2,0.8,0.2,1.1,0   l7.9-5.3c0.5-0.3,1.1-0.2,1.4,0.3C22.1,7.9,22,8.5,21.6,8.8z" id="email" />
           </svg>

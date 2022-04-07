@@ -21,7 +21,7 @@ const AboutMe: FC<Props> = ({ data, imageProps }) => {
 
             {bio && (<p className="text-gray-400 lg:max-w-md">{bio}</p>)}
 
-            <div className="items-center hidden mt-6 -mx-2 md:flex lg:mt-2">
+            <div className="items-center hidden mt-6 md:flex lg:mt-[10px]">
               <SocialIconBar links={socialLinks} email={email} />
             </div>
           </article>
@@ -32,7 +32,7 @@ const AboutMe: FC<Props> = ({ data, imageProps }) => {
             </figure>
           )}
 
-          <div className="flex items-center mt-4 -mx-2 md:hidden lg:mt-2">
+          <div className="flex items-center mt-4 md:hidden lg:mt-2">
             <SocialIconBar links={socialLinks} email={email} />
           </div>
         </div>
