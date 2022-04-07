@@ -20,7 +20,7 @@ const Post: FC<Props> = ({ type, data, author, imageProps }) => {
   const updatedAt = dayjs(updated_at);
 
   return (
-    <div className="lg:w-3/5 md:mx-auto my-lg mb-[45px] 2xl:w-2/4">
+    <div className="lg:w-3/5 md:mx-auto mb-[45px] 2xl:w-2/4">
 
       {imageProps && (
         <ImageCard title={title} imageProps={imageProps} classes="mt-md">
