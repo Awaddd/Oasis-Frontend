@@ -28,7 +28,7 @@ const AboutMe: FC<Props> = ({ data, imageProps }) => {
 
           {imageProps && (
             <figure className="relative mt-8 md:mt-0 h-[20rem] sm:w-64 md:w-[10rem] md:h-[10rem] md:self-start lg:self-center lg:w-[10rem] lg:h-[10rem] lg:mt-0 lg:ml-[-24px]">
-              <Image layout="fill" {...imageProps} placeholder="blur" priority alt="author image" className="object-fill h-full rounded-lg shadow-inner md:rounded-full" />
+              <Image layout="fill" {...imageProps} placeholder="blur" priority alt="author image" className="object-cover h-full rounded-lg shadow-inner md:rounded-full" />
             </figure>
           )}
 
