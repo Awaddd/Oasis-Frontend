@@ -70,7 +70,7 @@ body {
 }
 
 .featured-button {
-  @apply select-none inline-block cursor-pointer transition duration-150 ease-linear hover:bg-[#0c65ff] lg:mt-[45px] md:mt-lg lg:text-lg md:py-[11px] md:px-[30px] md:text-base text-sm font-semibold text-white rounded-[3px] py-sm mt-md bg-primary px-lg;
+  @apply select-none inline-block cursor-pointer transition duration-150 ease-linear hover:bg-[#0033ff] lg:mt-[45px] md:mt-lg lg:text-lg md:py-[11px] md:px-[30px] md:text-base text-sm font-semibold text-white rounded-[3px] py-sm mt-md bg-primary px-lg;
 }
 
 .heroImage {

@@ -22,7 +22,7 @@ module.exports = {
         inter: "Inter, sans-serif",
       },
       colors: {
-        primary: "#1c86ff",
+        primary: "#015aff",
         dark: "#0B111A",
         gray: {
           100: "#f7fafc",
