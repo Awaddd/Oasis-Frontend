@@ -110,6 +110,10 @@ h3 {
   @apply text-xl;
 }
 
+.md\:prose :where(a):not(:where([class~="not-prose"] *)) {
+  color: #2c69eb !important;
+}
+
 .brand {
   font-family: "Courier Prime", monospace;
   font-size: 1.6rem;
