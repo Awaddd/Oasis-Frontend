@@ -5,6 +5,7 @@ import parse from 'html-react-parser';
 import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import ImageCard from './sub-components/ImageCard';
+import Comments from './comments/Comments';
 
 dayjs.extend(advancedFormat);
 
@@ -52,6 +53,8 @@ const Post: FC<Props> = ({ type, data, author, imageProps }) => {
           {parse(content)}
         </article>
       )}
+
+      <Comments className="2xl:mt-[45px] mt-lg" />
     </div>
   );
 }

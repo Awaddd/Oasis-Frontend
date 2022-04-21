@@ -99,3 +99,9 @@ export type PlaceholderCallback = (
   url: string,
   options: { [key: string]: any }
 ) => any;
+
+export type Comment = {
+  text: string;
+  author: string;
+  date: string;
+};
