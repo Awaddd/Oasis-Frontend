@@ -29,8 +29,8 @@ export const useAddComment = ({
   };
 
   const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (!comment) return;
     e.preventDefault();
+    if (!comment) return;
 
     let newThread: string = thread || "";
 

@@ -10,6 +10,11 @@ export const selectedCategoryState = atom({
   default: "",
 });
 
+export const activeCommentState = atom({
+  key: "activeCommentState",
+  default: "",
+});
+
 export const threadsState = atom({
   key: "threadsState",
   default: ["blahblahblah1", "blahblahblah2", "blahblahblah3"],
