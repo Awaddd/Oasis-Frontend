@@ -102,6 +102,7 @@ export type PlaceholderCallback = (
 
 export type Comment = {
   id: string;
+  thread: string;
   text: string;
   author: string;
   date: string;

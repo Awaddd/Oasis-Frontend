@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useRecoilValue } from 'recoil';
-import { commentsState } from '../../state/state';
+import { commentsState, threadsState } from '../../state/state';
 import AddComment from './AddComment';
 import Comment from './Comment';
 
@@ -9,7 +9,8 @@ type Props = {
 }
 
 const Comments: FC<Props> = ({ className }) => {
-  const comments = useRecoilValue(commentsState);
+  const comments = useRecoilValue(commentsState)
+  const threads = useRecoilValue(threadsState)
 
   return (
     <section className={className}>
@@ -26,9 +27,13 @@ const Comments: FC<Props> = ({ className }) => {
       )}
 
       <main className="flex flex-col md:gap-1 mt-md">
-        {comments.map((comment) => (
-          <Comment comment={comment} key={comment.id} />
-        ))}
+        {threads.map(thread => {
+          const key = thread as keyof typeof comments
+          if (!comments.hasOwnProperty(key)) return
+          return comments[key].map(comment => (
+            <Comment comment={comment} key={comment.id} />
+          ))
+        })}
       </main>
     </section>
   );

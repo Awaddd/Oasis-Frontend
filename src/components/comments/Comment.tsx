@@ -11,24 +11,27 @@ const Comment: FC<Props> = ({ comment }) => {
   const [showReplyBox, setShowReplyBox] = useState<boolean>(false);
 
   if (!comment) return null;
-  const { text, author, date } = comment;
+  const { thread, text, author, date, replyTo } = comment;
 
   const handleOnClick = () => {
     setShowReplyBox(currentValue => !currentValue)
   }
 
   return (
-    <div className="py-2 rounded px-sm">
+    <div className={`py-2 rounded px-sm ${replyTo && 'ml-8'}`}>
       <header className="flex items-center gap-[0.4rem] text-sm">
-        <span className="text-primary">@{author}</span>
+        <span className="">{author}</span>
         <span className="">({date})</span>
-        <ReplyIcon classes="primary ml-2 cursor-pointer" size={1} onClick={handleOnClick} />
+        {replyTo && (
+          <span className="text-primary">@{replyTo}</span>
+        )}
+        <ReplyIcon classes="primary ml-2 cursor-pointer" size={16} onClick={handleOnClick} />
       </header>
 
       <p className="prose-md mt-[0.25rem]">{text}</p>
 
       {showReplyBox && (
-        <AddComment onComplete={() => setShowReplyBox(false)} />
+        <AddComment thread={thread} replyTo={author} onComplete={() => setShowReplyBox(false)} />
       )}
     </div>
   );
