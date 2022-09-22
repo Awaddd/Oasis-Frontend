@@ -1,19 +1,26 @@
 import React, { useState } from "react";
+import { useSetRecoilState } from "recoil"
 import { addComment } from "../../services/comments";
+import { commentsState } from "../../state/state";
 
 const AddComment = () => {
-
   const [comment, setComment] = useState<string | undefined>();
+  const saveComment = useSetRecoilState(commentsState)
 
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value)
   }
 
-  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
     if (comment) {
-      addComment(comment)
+      const newComment = await addComment(comment)
+
+      saveComment(comments => {
+        return [newComment, ...comments]
+      })
+
       setComment('')
     }
   }
