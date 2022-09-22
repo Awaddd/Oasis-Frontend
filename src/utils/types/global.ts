@@ -101,7 +101,9 @@ export type PlaceholderCallback = (
 ) => any;
 
 export type Comment = {
+  id: string;
   text: string;
   author: string;
   date: string;
+  replyTo?: string;
 };

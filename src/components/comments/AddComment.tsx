@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { useSetRecoilState } from "recoil"
 import { addComment } from "../../services/comments";
 import { commentsState } from "../../state/state";
 
-const AddComment = () => {
+type Props = {
+  onComplete?: () => void
+}
+
+const AddComment: FC<Props> = ({ onComplete }) => {
   const [comment, setComment] = useState<string | undefined>();
   const saveComment = useSetRecoilState(commentsState)
 
@@ -21,6 +25,7 @@ const AddComment = () => {
         return [newComment, ...comments]
       })
 
+      if (onComplete) onComplete()
       setComment('')
     }
   }

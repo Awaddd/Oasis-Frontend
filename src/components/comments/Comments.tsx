@@ -27,7 +27,7 @@ const Comments: FC<Props> = ({ className }) => {
 
       <main className="flex flex-col md:gap-1 mt-md">
         {comments.map((comment) => (
-          <Comment comment={comment} key={comment.text} /> //change key to unique id from graphql api
+          <Comment comment={comment} key={comment.id} />
         ))}
       </main>
     </section>

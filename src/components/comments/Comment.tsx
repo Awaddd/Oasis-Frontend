@@ -10,7 +10,6 @@ type Props = {
 const Comment: FC<Props> = ({ comment }) => {
   const [showReplyBox, setShowReplyBox] = useState<boolean>(false);
 
-
   if (!comment) return null;
   const { text, author, date } = comment;
 
@@ -23,13 +22,13 @@ const Comment: FC<Props> = ({ comment }) => {
       <header className="flex items-center gap-[0.4rem] text-sm">
         <span className="text-primary">@{author}</span>
         <span className="">({date})</span>
-        <ReplyIcon classes="primary ml-2 cursor-pointer" size={1.25} onClick={handleOnClick} />
+        <ReplyIcon classes="primary ml-2 cursor-pointer" size={1} onClick={handleOnClick} />
       </header>
 
       <p className="prose-md mt-[0.25rem]">{text}</p>
 
       {showReplyBox && (
-        <AddComment />
+        <AddComment onComplete={() => setShowReplyBox(false)} />
       )}
     </div>
   );
