@@ -125,3 +125,7 @@ h3 {
 .btn {
   @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#0033ff] text-sm font-semibold text-white rounded-[3px] bg-primary px-[0.8rem] py-[0.3rem];
 }
+
+.btn-flex {
+  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#000000] text-white rounded-[3px] bg-dark;
+}
