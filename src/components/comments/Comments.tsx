@@ -20,7 +20,7 @@ const Comments: FC<Props> = ({ className }) => {
       {true && (
         <header className="mt-rl">
           <h4 className="font-semibold">Leave a comment</h4>
-          <div className="mt-2">
+          <div className="mt-2 mb-8 md:mb-0">
             <AddComment />
           </div>
         </header>
