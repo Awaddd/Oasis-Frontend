@@ -21,9 +21,7 @@ const Comment: FC<Props> = ({ comment }) => {
       <header className="flex items-center gap-[0.4rem] text-sm">
         <span className="">{author}</span>
         <span className="">({date})</span>
-        {replyTo && (
-          <span className="text-primary">@{replyTo}</span>
-        )}
+
 
         {id === activeComment ? (
           <CloseIcon classes="primary ml-2 cursor-pointer" size={14} onClick={() => setActiveComment('')} />
@@ -32,7 +30,12 @@ const Comment: FC<Props> = ({ comment }) => {
         )}
       </header>
 
-      <p className="prose-md mt-[0.25rem]">{text}</p>
+      <p className="prose-md mt-[0.25rem]">
+        {replyTo && (
+          <span className="text-primary">@{replyTo}</span>
+        )}&nbsp;
+        {text}
+      </p>
 
       {id === activeComment && (
         <AddComment thread={thread} replyTo={author} onComplete={() => setActiveComment('')} />
