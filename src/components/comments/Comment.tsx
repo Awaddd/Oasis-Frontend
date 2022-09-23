@@ -31,8 +31,8 @@ const Comment: FC<Props> = ({ comment }) => {
 
       <p className="mt-[0.25rem]">
         {replyTo && (
-          <span className="text-primary">@{replyTo}</span>
-        )}&nbsp;
+          <span className="text-primary">@{replyTo}&nbsp;</span>
+        )}
         {text}
       </p>
 
