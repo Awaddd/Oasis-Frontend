@@ -5,6 +5,10 @@ import AddComment from "./AddComment";
 import { useRecoilState } from "recoil";
 import { activeCommentState } from "../../state/state";
 import CloseIcon from "../../assets/icons/CloseIcon";
+import dayjs from 'dayjs';
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime)
 
 type Props = {
   comment: CommentType;
@@ -20,7 +24,7 @@ const Comment: FC<Props> = ({ comment }) => {
     <div className={`py-2 ${replyTo && 'ml-8'}`}>
       <header className="flex items-center gap-[0.4rem] text-sm">
         <span className="font-semibold">{author}</span>
-        <span className="">({created_at})</span>
+        <span className="">({dayjs(created_at).fromNow()})</span>
 
         {id === activeComment ? (
           <CloseIcon classes="primary ml-2 cursor-pointer" size={14} onClick={() => setActiveComment('')} />
