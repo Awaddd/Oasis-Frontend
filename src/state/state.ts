@@ -11,6 +11,11 @@ export const selectedCategoryState = atom({
   default: "",
 });
 
+export const ArticleState = atom({
+  key: "articleState",
+  default: "",
+});
+
 export const activeCommentState = atom({
   key: "activeCommentState",
   default: "",

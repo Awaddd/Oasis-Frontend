@@ -8,7 +8,7 @@ import ArticleFooter from '../../components/ArticleFooter';
 import Post from '../../components/Post';
 import { blurImage } from '../../utils/helpers';
 
-const Book = ({ book, imageProps, author }: { book: Article; imageProps: ImageType; author: ArticleAuthor }) => {
+const Book = ({ book, imageProps, author, slug }: { book: Article; imageProps: ImageType; author: ArticleAuthor, slug: string }) => {
   if (!book) return <p>Sorry, this book could not be loaded. Please try again later</p>
 
   const { title, subtitle, image } = book;
@@ -23,7 +23,7 @@ const Book = ({ book, imageProps, author }: { book: Article; imageProps: ImageTy
 
   return (
     <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />} >
-      <Post type="book" data={book} author={author} imageProps={imageProps} />
+      <Post type="book" data={book} slug={slug} author={author} imageProps={imageProps} />
     </Main>
   );
 };
@@ -38,6 +38,7 @@ export async function getStaticProps({ params }: SSGParams) {
       book: data?.books[0],
       author: authorData?.author || null,
       imageProps,
+      slug: params.slug
     },
     revalidate: 60,
   }

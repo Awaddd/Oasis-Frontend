@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Article, ArticleAuthor, ImageType } from '../utils/types/global';
 import parse from 'html-react-parser';
@@ -7,8 +7,8 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import ImageCard from './sub-components/ImageCard';
 import Comments from './comments/Comments';
 import { getComments } from '../services/comments';
-import { useRecoilState } from 'recoil';
-import { CommentsState } from '../state/state';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { ArticleState, CommentsState } from '../state/state';
 
 dayjs.extend(advancedFormat);
 
@@ -23,6 +23,11 @@ type Props = {
 const Post: FC<Props> = ({ type, data, slug, author, imageProps }) => {
   const [showComments, setShowComments] = useState<boolean>(false);
   const [comments, setComments] = useRecoilState(CommentsState)
+  const setArticle = useSetRecoilState(ArticleState)
+
+  useEffect(() => {
+    setArticle(slug)
+  }, [])
 
   const { title, updated_at, content, category } = data;
   const updatedAt = dayjs(updated_at);

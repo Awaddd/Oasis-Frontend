@@ -1,7 +1,7 @@
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useState } from "react";
 import { addComment } from "../services/comments";
-import { CommentsState } from "../state/state";
+import { ArticleState, CommentsState } from "../state/state";
 import { cloneDeep } from "lodash";
 
 type UseAddCommentArgs = {
@@ -21,6 +21,7 @@ export const useAddComment = ({
 } => {
   const [comment, setComment] = useState<string | undefined>();
   const setComments = useSetRecoilState(CommentsState);
+  const article = useRecoilValue(ArticleState);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -31,7 +32,7 @@ export const useAddComment = ({
 
     if (!comment) return;
 
-    const { data } = await addComment(comment, thread, replyTo);
+    const { data } = await addComment(comment, article, thread, replyTo);
 
     const newComment = data[0];
 
