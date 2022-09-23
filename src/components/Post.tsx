@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Link from 'next/link';
 import { Article, ArticleAuthor, ImageType } from '../utils/types/global';
 import parse from 'html-react-parser';
@@ -6,22 +6,32 @@ import dayjs from 'dayjs';
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import ImageCard from './sub-components/ImageCard';
 import Comments from './comments/Comments';
+import { getComments } from '../services/comments';
 
 dayjs.extend(advancedFormat);
 
 type Props = {
   type?: 'article' | 'book';
   data: Article;
+  slug: string;
   author: ArticleAuthor;
   imageProps?: ImageType;
 }
 
-const Post: FC<Props> = ({ type, data, author, imageProps }) => {
+const Post: FC<Props> = ({ type, data, slug, author, imageProps }) => {
+  const [showComments, setShowComments] = useState<boolean>(false);
+
   const { title, updated_at, content, category } = data;
   const updatedAt = dayjs(updated_at);
 
+  const fetchComments = async () => {
+    const comments = await getComments(slug)
+    console.log('comments', comments)
+    setShowComments(true)
+  }
+
   return (
-    <div className="lg:w-3/5 md:mx-auto mb-[45px] 2xl:w-2/4">
+    <div className="lg:w-3/5 md:mx-auto mb-[30px] 2xl:w-2/4">
 
       {imageProps && (
         <ImageCard title={title} imageProps={imageProps} classes="mt-md">
@@ -54,7 +64,13 @@ const Post: FC<Props> = ({ type, data, author, imageProps }) => {
         </article>
       )}
 
-      <Comments className="2xl:mt-[45px] mt-lg" />
+      {showComments ? (
+        <Comments className="2xl:mt-[45px] mt-lg" />
+      ) : (
+        <div className='flex justify-center mt-8 md:mt-12'>
+          <button className="btn-flex md:self-end min-h-8 px-8 py-[0.4rem] font-medium" onClick={fetchComments}>Show Comments</button>
+        </div>
+      )}
     </div>
   );
 }

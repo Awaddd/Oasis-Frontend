@@ -8,7 +8,7 @@ import ArticleFooter from '../../components/ArticleFooter';
 import Post from '../../components/Post';
 import { blurImage } from '../../utils/helpers';
 
-const Article = ({ article, imageProps, author }: { article: ArticleType; imageProps: ImageType; author: ArticleAuthor }) => {
+const Article = ({ article, imageProps, author, slug }: { article: ArticleType; imageProps: ImageType; author: ArticleAuthor, slug: string }) => {
   if (!article) return <p>Sorry, this article could not be loaded. Please try again later</p>
 
   const { title, subtitle, image } = article;
@@ -23,7 +23,7 @@ const Article = ({ article, imageProps, author }: { article: ArticleType; imageP
 
   return (
     <Main meta={META} color="bg-slate-50" classes="pb-lg" footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />} >
-      <Post type="article" data={article} author={author} imageProps={imageProps} />
+      <Post type="article" data={article} slug={slug} author={author} imageProps={imageProps} />
     </Main>
   );
 };
@@ -38,6 +38,7 @@ export async function getStaticProps({ params }: SSGParams) {
       article: data?.articles[0],
       author: authorData?.author || null,
       imageProps,
+      slug: params.slug
     },
     revalidate: 60,
   }
