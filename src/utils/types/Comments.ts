@@ -11,4 +11,5 @@ export interface Thread {
   id: string;
   article: string;
   Comments: Comment[];
+  created_at: string;
 }

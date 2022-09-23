@@ -14,6 +14,8 @@ export async function getComments(article: string) {
     .from<Thread>("Threads")
     .select(query)
     .match({ article })
+    .order("created_at", { ascending: false })
+    .order("created_at", { foreignTable: "Comments", ascending: true })
     .then(({ data }) => data);
 }
 
