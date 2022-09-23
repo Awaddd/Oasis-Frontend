@@ -21,19 +21,25 @@ export async function getComments(article: string) {
 
 export async function addComment(
   comment: string,
-  thread: string,
+  thread?: string,
   replyTo?: string
-): Promise<Comment> {
-  return new Promise((resolve) => {
-    const id = `comment-${generateId()}`;
+): Promise<any> {
+  if (!thread) {
+    const { data } = await supabase.from<Thread>("Threads").insert({
+      id: `thread-${generateId()}`,
+      article: "active-learning",
+    });
 
-    resolve({
-      id,
+    if (data) thread = data[0]?.id;
+  }
+
+  return await supabase.from<Comment>("Comments").insert([
+    {
+      id: `comment-${generateId()}`,
       thread,
       text: comment,
       author: "Awad",
-      created_at: "Just now",
       replyTo,
-    });
-  });
+    },
+  ]);
 }
