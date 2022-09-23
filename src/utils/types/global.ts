@@ -99,12 +99,3 @@ export type PlaceholderCallback = (
   url: string,
   options: { [key: string]: any }
 ) => any;
-
-export type Comment = {
-  id: string;
-  thread: string;
-  text: string;
-  author: string;
-  date: string;
-  replyTo?: string;
-};

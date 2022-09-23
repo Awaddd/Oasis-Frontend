@@ -1,15 +1,20 @@
 import { generateId } from "./../utils/helpers";
-import { Comment } from "../utils/types/global";
+import { Comment } from "../utils/types/Comments";
+import { supabase } from "./api";
+import { GetCommentsResponse } from "../utils/types/Comments";
 
 export async function getComments(article: string) {
-  const url = `http://localhost:3000/api/get-comments/${article}`;
+  const query = `
+    id, article, Comments(
+      id, text, author, created_at, replyTo, thread
+    )
+  `;
 
-  try {
-    return await fetch(url).then((response) => response.json());
-  } catch (error) {
-    console.log(error);
-    throw new Error(`error with fetch to ${url}`);
-  }
+  return await supabase
+    .from<GetCommentsResponse>("Threads")
+    .select(query)
+    .match({ article })
+    .then(({ data }) => data);
 }
 
 export async function addComment(
@@ -25,7 +30,7 @@ export async function addComment(
       thread,
       text: comment,
       author: "Awad",
-      date: "Just now",
+      created_at: "Just now",
       replyTo,
     });
   });

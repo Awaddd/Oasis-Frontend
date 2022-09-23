@@ -1,16 +1,14 @@
 import { FC } from 'react';
-import { useRecoilValue } from 'recoil';
-import { commentsState, threadsState } from '../../state/state';
+import { GetCommentsResponse, Comment as CommentType } from '../../utils/types/Comments';
 import AddComment from './AddComment';
 import Comment from './Comment';
 
 type Props = {
   className?: string;
+  threads: GetCommentsResponse[] | null;
 }
 
-const Comments: FC<Props> = ({ className }) => {
-  const comments = useRecoilValue(commentsState)
-  const threads = useRecoilValue(threadsState)
+const Comments: FC<Props> = ({ className, threads }) => {
 
   return (
     <section className={className}>
@@ -26,15 +24,15 @@ const Comments: FC<Props> = ({ className }) => {
         </header>
       )}
 
-      <main className="flex flex-col md:gap-1 mt-md">
-        {threads.map(thread => {
-          const key = thread as keyof typeof comments
-          if (!comments.hasOwnProperty(key)) return
-          return comments[key].map(comment => (
-            <Comment comment={comment} key={comment.id} />
-          ))
-        })}
-      </main>
+      {threads && (
+        <main className="flex flex-col md:gap-1 mt-md">
+          {threads.map(({ Comments }) => (
+            Comments.map((comment: CommentType) => (
+              <Comment comment={comment} key={comment.id} />
+            ))
+          ))}
+        </main>
+      )}
     </section>
   );
 };

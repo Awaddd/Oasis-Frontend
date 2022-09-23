@@ -7,6 +7,7 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import ImageCard from './sub-components/ImageCard';
 import Comments from './comments/Comments';
 import { getComments } from '../services/comments';
+import { GetCommentsResponse } from '../utils/types/Comments';
 
 dayjs.extend(advancedFormat);
 
@@ -20,12 +21,14 @@ type Props = {
 
 const Post: FC<Props> = ({ type, data, slug, author, imageProps }) => {
   const [showComments, setShowComments] = useState<boolean>(false);
+  const [comments, setComments] = useState<GetCommentsResponse[] | null>(null);
 
   const { title, updated_at, content, category } = data;
   const updatedAt = dayjs(updated_at);
 
   const fetchComments = async () => {
     const comments = await getComments(slug)
+    setComments(comments)
     console.log('comments', comments)
     setShowComments(true)
   }
@@ -65,7 +68,7 @@ const Post: FC<Props> = ({ type, data, slug, author, imageProps }) => {
       )}
 
       {showComments ? (
-        <Comments className="2xl:mt-[45px] mt-lg" />
+        <Comments threads={comments} className="2xl:mt-[45px] mt-lg" />
       ) : (
         <div className='flex justify-center mt-8 md:mt-12'>
           <button className="btn-flex md:self-end min-h-8 px-8 py-[0.4rem] font-medium" onClick={fetchComments}>Show Comments</button>

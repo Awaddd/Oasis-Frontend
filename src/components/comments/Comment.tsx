@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Comment as CommentType } from '../../utils/types/global'
+import { Comment as CommentType } from '../../utils/types/Comments'
 import ReplyIcon from '../../assets/icons/ReplyIcon'
 import AddComment from "./AddComment";
 import { useRecoilState } from "recoil";
@@ -14,13 +14,13 @@ const Comment: FC<Props> = ({ comment }) => {
   const [activeComment, setActiveComment] = useRecoilState(activeCommentState)
 
   if (!comment) return null;
-  const { id, thread, text, author, date, replyTo } = comment;
+  const { id, thread, text, author, created_at, replyTo } = comment;
 
   return (
     <div className={`py-2 ${replyTo && 'ml-8'}`}>
       <header className="flex items-center gap-[0.4rem] text-sm">
         <span className="font-semibold">{author}</span>
-        <span className="">({date})</span>
+        <span className="">({created_at})</span>
 
         {id === activeComment ? (
           <CloseIcon classes="primary ml-2 cursor-pointer" size={14} onClick={() => setActiveComment('')} />
