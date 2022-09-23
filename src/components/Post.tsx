@@ -7,7 +7,7 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import ImageCard from './sub-components/ImageCard';
 import Comments from './comments/Comments';
 import { getComments } from '../services/comments';
-import { GetCommentsResponse } from '../utils/types/Comments';
+import { Thread } from '../utils/types/Comments';
 
 dayjs.extend(advancedFormat);
 
@@ -21,7 +21,7 @@ type Props = {
 
 const Post: FC<Props> = ({ type, data, slug, author, imageProps }) => {
   const [showComments, setShowComments] = useState<boolean>(false);
-  const [comments, setComments] = useState<GetCommentsResponse[] | null>(null);
+  const [comments, setComments] = useState<Thread[] | null>(null);
 
   const { title, updated_at, content, category } = data;
   const updatedAt = dayjs(updated_at);

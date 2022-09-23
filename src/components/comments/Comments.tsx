@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { GetCommentsResponse, Comment as CommentType } from '../../utils/types/Comments';
+import { Thread, Comment as CommentType } from '../../utils/types/Comments';
 import AddComment from './AddComment';
 import Comment from './Comment';
 
 type Props = {
   className?: string;
-  threads: GetCommentsResponse[] | null;
+  threads: Thread[] | null;
 }
 
 const Comments: FC<Props> = ({ className, threads }) => {

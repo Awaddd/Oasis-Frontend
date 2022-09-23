@@ -1,7 +1,7 @@
 import { generateId } from "./../utils/helpers";
 import { Comment } from "../utils/types/Comments";
 import { supabase } from "./api";
-import { GetCommentsResponse } from "../utils/types/Comments";
+import { Thread } from "../utils/types/Comments";
 
 export async function getComments(article: string) {
   const query = `
@@ -11,7 +11,7 @@ export async function getComments(article: string) {
   `;
 
   return await supabase
-    .from<GetCommentsResponse>("Threads")
+    .from<Thread>("Threads")
     .select(query)
     .match({ article })
     .then(({ data }) => data);

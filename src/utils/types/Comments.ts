@@ -7,7 +7,7 @@ export type Comment = {
   replyTo?: string;
 };
 
-export interface GetCommentsResponse {
+export interface Thread {
   id: string;
   article: string;
   Comments: Comment[];
