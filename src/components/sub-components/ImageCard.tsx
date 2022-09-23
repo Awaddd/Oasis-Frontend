@@ -9,7 +9,7 @@ type Props = {
   imageProps: ImageType;
   link?: string;
   classes?: string;
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 const Container: FC<{ link?: string; children: React.ReactNode }> = ({ link, children }) => {

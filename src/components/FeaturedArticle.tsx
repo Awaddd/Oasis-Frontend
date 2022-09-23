@@ -35,7 +35,7 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
           </header>
 
           <Link href={link} passHref>
-            <h1 className="cursor-pointer text-xl font-bold leading-7 text-black md:font-bold mt-sm lg:mt-md md:leading-10 md:underline md:text-4xl 2xl:w-9/12">{title}</h1>
+            <h1 className="text-xl font-bold leading-7 text-black cursor-pointer md:font-bold mt-sm lg:mt-md md:leading-10 md:underline md:text-4xl 2xl:w-9/12">{title}</h1>
           </Link>
 
           <Link href={link} passHref>
@@ -51,7 +51,7 @@ const FeaturedArticle: FC<Props> = ({ type, data, imageProps }) => {
         <ImageCard title={title} imageProps={imageProps} link={link} classes="md:hidden" />
         <Link href={link} passHref>
           <div className="relative hidden md:block w-full h-52 md:h-64 lg:h-80 3xl:h-[22rem]">
-            <Image layout="fill" {...imageProps} placeholder="blur" priority alt="featured post image" className="cursor-pointer object-cover rounded-lg sm:rounded-md" />
+            <Image layout="fill" {...imageProps} placeholder="blur" priority alt="featured post image" className="object-cover rounded-lg cursor-pointer sm:rounded-md" />
           </div>
         </Link>
       </div>
