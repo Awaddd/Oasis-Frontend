@@ -7,7 +7,8 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 import ImageCard from './sub-components/ImageCard';
 import Comments from './comments/Comments';
 import { getComments } from '../services/comments';
-import { Thread } from '../utils/types/Comments';
+import { useRecoilState } from 'recoil';
+import { CommentsState } from '../state/state';
 
 dayjs.extend(advancedFormat);
 
@@ -21,15 +22,14 @@ type Props = {
 
 const Post: FC<Props> = ({ type, data, slug, author, imageProps }) => {
   const [showComments, setShowComments] = useState<boolean>(false);
-  const [comments, setComments] = useState<Thread[] | null>(null);
+  const [comments, setComments] = useRecoilState(CommentsState)
 
   const { title, updated_at, content, category } = data;
   const updatedAt = dayjs(updated_at);
 
   const fetchComments = async () => {
     const comments = await getComments(slug)
-    setComments(comments)
-    console.log('comments', comments)
+    setComments(comments || [])
     setShowComments(true)
   }
 

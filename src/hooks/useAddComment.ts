@@ -1,5 +1,8 @@
+import { useSetRecoilState } from "recoil";
 import { useState } from "react";
 import { addComment } from "../services/comments";
+import { CommentsState } from "../state/state";
+import { cloneDeep } from "lodash";
 
 type UseAddCommentArgs = {
   thread?: string;
@@ -17,6 +20,7 @@ export const useAddComment = ({
   handleOnClick: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>;
 } => {
   const [comment, setComment] = useState<string | undefined>();
+  const setComments = useSetRecoilState(CommentsState);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -27,7 +31,33 @@ export const useAddComment = ({
 
     if (!comment) return;
 
-    await addComment(comment, thread, replyTo);
+    const { data } = await addComment(comment, thread, replyTo);
+
+    const newComment = data[0];
+
+    setComments((threads) => {
+      const arr = cloneDeep(threads);
+
+      let updated = false;
+
+      arr?.forEach((thread) => {
+        if (thread.id === newComment.thread) {
+          thread.Comments.push(newComment);
+          updated = true;
+        }
+      });
+
+      if (!updated) {
+        arr.unshift({
+          Comments: [newComment],
+          id: newComment.thread,
+          article: "",
+          created_at: "",
+        });
+      }
+
+      return arr;
+    });
 
     setComment("");
 
