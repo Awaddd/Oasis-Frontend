@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 import { Thread } from "../utils/types/Comments";
+import { Notification } from "../utils/types/global";
 
 export const sidebarIsOpenState = atom({
   key: "sidebarIsOpenState",
@@ -24,4 +25,11 @@ export const activeCommentState = atom({
 export const CommentsState = atom<Thread[]>({
   key: "commentsState",
   default: [],
+});
+
+export const NotificationState = atom<Notification>({
+  key: "notificationState",
+  default: {
+    message: "",
+  },
 });

@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useState } from "react";
 import { addComment } from "../services/comments";
-import { ArticleState, CommentsState } from "../state/state";
+import { ArticleState, CommentsState, NotificationState } from "../state/state";
 import { cloneDeep } from "lodash";
 
 type UseAddCommentArgs = {
@@ -22,6 +22,7 @@ export const useAddComment = ({
   const [comment, setComment] = useState<string | undefined>();
   const setComments = useSetRecoilState(CommentsState);
   const article = useRecoilValue(ArticleState);
+  const setNotification = useSetRecoilState(NotificationState);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -58,6 +59,10 @@ export const useAddComment = ({
       }
 
       return arr;
+    });
+
+    setNotification({
+      message: "Comment has been posted successfully!",
     });
 
     setComment("");
