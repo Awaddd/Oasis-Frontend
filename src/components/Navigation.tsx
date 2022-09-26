@@ -60,6 +60,14 @@ const Navigation = () => {
           </Link>
         ))}
       </div>
+
+      <Link href="/user/register">
+        <a className={`${classes} ${router.pathname === '/user/register' && 'text-primary'}`}>Register</a>
+      </Link>
+
+      <Link href="/user/login">
+        <a className={`${classes} ${router.pathname === '/user/login' && 'text-primary'}`}>Login</a>
+      </Link>
     </>
   )
 
