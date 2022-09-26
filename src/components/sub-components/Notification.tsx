@@ -24,7 +24,7 @@ const Notification: FC<NotificationType> = ({ message, variant = 'success', dura
 
   return (
     <div className="fixed left-0 right-0 z-20 p-0 m-0 mx-auto top-8 lg:top-12 w-max">
-      <span className={`rounded-sm font-medium py-2 lg:py-3 px-12 lg:text-lg ${variants[variant]}`}>{message}</span>
+      <span className={`rounded-sm font-medium py-2 lg:py-3 px-6 lg:text-lg ${variants[variant]}`}>{message}</span>
     </div>
   )
 }

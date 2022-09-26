@@ -62,7 +62,7 @@ export const useAddComment = ({
     });
 
     setNotification({
-      message: "Comment has been posted successfully!",
+      message: "Comment has been posted",
     });
 
     setComment("");
