@@ -129,3 +129,23 @@ h3 {
 .btn-flex {
   @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#000000] text-white rounded-[3px] bg-dark;
 }
+
+.form {
+  @apply grid gap-4;
+}
+
+.form-margins {
+  @apply 2xl:mt-xl lg:mt-[45px] mt-lg;
+}
+
+.fieldset {
+  @apply grid gap-2;
+}
+
+.label {
+  @apply font-medium;
+}
+
+.input {
+  @apply p-2 border-2 rounded-md border-dark;
+}
