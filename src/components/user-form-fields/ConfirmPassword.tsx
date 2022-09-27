@@ -8,7 +8,7 @@ const ConfirmPassword: FC<UserFormField & { password?: string }> = ({ register, 
     <input type="password" {...register('confirmPassword', {
       required: 'Confirm Password is required',
       minLength: {
-        value: 8,
+        value: 7,
         message: 'Password must be at least 8 characters'
       },
       validate: (confirmPassword) => confirmPassword === password || 'Confirm password must be the same as the password'

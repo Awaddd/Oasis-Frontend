@@ -1,6 +1,7 @@
 import { atom } from "recoil";
 import { Thread } from "../utils/types/Comments";
 import { Notification } from "../utils/types/global";
+import { Session } from "../utils/types/Users";
 
 export const sidebarIsOpenState = atom({
   key: "sidebarIsOpenState",
@@ -32,4 +33,9 @@ export const NotificationState = atom<Notification>({
   default: {
     message: "",
   },
+});
+
+export const userSessionState = atom<Session | null>({
+  key: "userSessionState",
+  default: null,
 });
