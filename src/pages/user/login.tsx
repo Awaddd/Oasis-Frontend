@@ -1,10 +1,16 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Meta } from "../../layout/Meta";
 import { Main } from "../../templates/Main";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { RegisterUserFormFields } from "../../utils/types/Users";
 import Email from "../../components/user-form-fields/Email";
 import Password from "../../components/user-form-fields/Password";
+import { login } from "../../services/users";
+import { useRouter } from "next/router";
+import { useSetRecoilState } from "recoil";
+import { userSessionState } from "../../state/state";
+import { createUserSessionObject } from "../../utils/helpers";
+import ErrorMessage from "../../components/sub-components/ErrorMessage";
 
 const META = (
   <Meta
@@ -14,12 +20,26 @@ const META = (
 );
 
 const Login: FC = () => {
+  const setSession = useSetRecoilState(userSessionState)
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterUserFormFields>();
+  const [error, setError] = useState<string>('');
 
-  const onSubmit: SubmitHandler<RegisterUserFormFields> = (data, e) => {
+  const { push } = useRouter();
+
+  const onSubmit: SubmitHandler<RegisterUserFormFields> = async (data, e) => {
     e?.preventDefault()
 
-    console.log('data', data)
+    const { error, session, user } = await login(data)
+
+    if (error) {
+      setError(error.message)
+      console.log('error', error)
+      return
+    }
+
+    setSession(await createUserSessionObject(user, session))
+
+    push('/')
   }
 
   return (
@@ -29,6 +49,7 @@ const Login: FC = () => {
         <form className="form form-margins" onSubmit={handleSubmit(onSubmit)}>
           <Email register={register} error={errors?.email?.message} />
           <Password register={register} error={errors?.password?.message} />
+          <ErrorMessage error={error} />
           <button className="py-3 mt-2 btn-flex">Login</button>
         </form>
       </section>

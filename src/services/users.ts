@@ -21,6 +21,13 @@ export async function createUser({
   );
 }
 
+export async function login({ email, password }: User) {
+  return await supabase.auth.signIn({
+    email,
+    password,
+  });
+}
+
 export async function logout() {
   return await supabase.auth.signOut();
 }

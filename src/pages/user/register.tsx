@@ -13,6 +13,7 @@ import { useSetRecoilState } from "recoil";
 import { userSessionState } from "../../state/state";
 import ErrorMessage from "../../components/sub-components/ErrorMessage";
 import { useRouter } from "next/router";
+import { createUserSessionObject } from "../../utils/helpers";
 
 const META = (
   <Meta
@@ -41,27 +42,7 @@ const Register: FC = () => {
       return
     }
 
-    if (!session || !user || !user.email) {
-      setError('Sorry! Something went wrong - Please try again later')
-      return
-    }
-
-    const { access_token, refresh_token, expires_in, expires_at, token_type } = session;
-    const { email, user_metadata } = user
-    const { firstName, lastName } = user_metadata
-
-    setSession({
-      access_token,
-      refresh_token,
-      expires_in,
-      expires_at,
-      token_type,
-      user: {
-        email,
-        firstName,
-        lastName
-      }
-    })
+    setSession(await createUserSessionObject(user, session))
 
     push('/')
   }

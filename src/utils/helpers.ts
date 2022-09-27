@@ -1,3 +1,4 @@
+import { ApiError, Session, User } from "@supabase/supabase-js";
 import { PlaceholderCallback } from "./types/global";
 
 export const capitaliseFirstLetter = (string?: string) => {
@@ -13,6 +14,34 @@ export const blurImage = async (url: string, callback: PlaceholderCallback) => {
     src: img?.src,
     type: img?.type,
     blurDataURL: base64,
+  };
+};
+
+export const createUserSessionObject = async (
+  user: User | null,
+  session: Session | null
+) => {
+  if (!session || !user || !user.email) {
+    console.log("Unable to set session", session, user, user?.email);
+    return null;
+  }
+
+  const { access_token, refresh_token, expires_in, expires_at, token_type } =
+    session;
+  const { email, user_metadata } = user;
+  const { firstName, lastName } = user_metadata;
+
+  return {
+    access_token,
+    refresh_token,
+    expires_in,
+    expires_at,
+    token_type,
+    user: {
+      email,
+      firstName,
+      lastName,
+    },
   };
 };
 
