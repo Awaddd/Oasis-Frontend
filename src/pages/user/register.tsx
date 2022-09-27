@@ -28,6 +28,10 @@ const Register: FC = () => {
   }
 
   const password = watch("password")
+  const passwordValidation = {
+    value: 8,
+    message: 'Password must be at least 8 characters'
+  }
 
   return (
     <Main meta={META}>
@@ -37,7 +41,7 @@ const Register: FC = () => {
           <Email register={register} error={errors?.email?.message} />
           <FirstName register={register} error={errors?.firstName?.message} />
           <LastName register={register} error={errors?.lastName?.message} />
-          <Password register={register} error={errors?.password?.message} />
+          <Password register={register} error={errors?.password?.message} minLength={passwordValidation} />
           <ConfirmPassword register={register} error={errors?.confirmPassword?.message} password={password} />
           <button className="py-3 mt-2 btn-flex">Register</button>
         </form>

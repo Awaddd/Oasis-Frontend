@@ -1,6 +1,10 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Meta } from "../../layout/Meta";
 import { Main } from "../../templates/Main";
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { RegisterUserFormFields } from "../../utils/types/Users";
+import Email from "../../components/user-form-fields/Email";
+import Password from "../../components/user-form-fields/Password";
 
 const META = (
   <Meta
@@ -10,31 +14,22 @@ const META = (
 );
 
 const Login: FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const { register, handleSubmit, formState: { errors } } = useForm<RegisterUserFormFields>();
 
-  const handleEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
+  const onSubmit: SubmitHandler<RegisterUserFormFields> = (data, e) => {
+    e?.preventDefault()
 
-  const handlePasswordOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
+    console.log('data', data)
   }
 
   return (
     <Main meta={META}>
       <section className="mt-lg mb-lg 2xl:w-9/12 md:mx-auto">
         <h1 className="text-center">Login</h1>
-        <form className="form form-margins">
-          <fieldset className="fieldset">
-            <label className="label">Email </label>
-            <input type="email" name="email" value={email} onChange={handleEmailOnChange} className="input" />
-          </fieldset>
-
-          <fieldset className="fieldset">
-            <label className="label">Password </label>
-            <input type="password" name="password" value={password} onChange={handlePasswordOnChange} className="input" />
-          </fieldset>
+        <form className="form form-margins" onSubmit={handleSubmit(onSubmit)}>
+          <Email register={register} error={errors?.email?.message} />
+          <Password register={register} error={errors?.password?.message} />
+          <button className="py-3 mt-2 btn-flex">Login</button>
         </form>
       </section>
     </Main>
