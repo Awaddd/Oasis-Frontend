@@ -1,18 +1,6 @@
+import { User } from "../utils/types/Users";
 import { supabase } from "./api";
 
-export async function createUser({
-  email,
-  firstName,
-  lastName,
-  password,
-}: {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-}) {
-  console.log("email", email);
-  console.log("firstName", firstName);
-  console.log("lastName", lastName);
-  console.log("password", password);
+export async function createUser(user: User) {
+  console.log("created user...", user);
 }
