@@ -11,6 +11,7 @@ import { useSetRecoilState } from "recoil";
 import { userSessionState } from "../../state/state";
 import { createUserSessionObject } from "../../utils/helpers";
 import ErrorMessage from "../../components/sub-components/ErrorMessage";
+import Link from "next/link";
 
 const META = (
   <Meta
@@ -45,12 +46,17 @@ const Login: FC = () => {
   return (
     <Main meta={META}>
       <section className="mt-lg mb-lg 2xl:w-9/12 md:mx-auto">
-        <h1 className="text-center">Login</h1>
+        <h1 className="text-center mt-xl">Login</h1>
         <form className="form form-margins" onSubmit={handleSubmit(onSubmit)}>
           <Email register={register} error={errors?.email?.message} />
           <Password register={register} error={errors?.password?.message} />
           <ErrorMessage error={error} />
-          <button className="py-3 mt-2 btn-flex">Login</button>
+          <button className="py-[0.8rem] btn-flex">Login</button>
+          <span>Don't have an account?&nbsp;
+            <Link href="/user/register">
+              <a className="link">Sign up instead</a>
+            </Link>
+          </span>
         </form>
       </section>
     </Main>

@@ -5,11 +5,10 @@ import ErrorMessage from "../sub-components/ErrorMessage";
 
 const Password: FC<UserFormField & { minLength?: ValidationRule<number> }> = ({ register, error, minLength }) => (
   <fieldset className="fieldset">
-    <label className="label">Password</label>
     <input type="password" {...register('password', {
       required: 'Password is required',
       minLength
-    })} className="input" />
+    })} className="input" placeholder="Password" />
     <ErrorMessage error={error} />
   </fieldset>
 )

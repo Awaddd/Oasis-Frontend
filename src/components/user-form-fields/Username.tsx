@@ -4,7 +4,6 @@ import ErrorMessage from "../sub-components/ErrorMessage";
 
 const Username: FC<UserFormField> = ({ register, error }) => (
   <fieldset className="fieldset">
-    <label className="label">Username</label>
     <input {...register('username', {
       required: 'Username is required',
       minLength: {
@@ -15,7 +14,7 @@ const Username: FC<UserFormField> = ({ register, error }) => (
         value: /([A-Za-z])\w+/i,
         message: 'Username cannot contain any numbers'
       }
-    })} className="input" />
+    })} className="input" placeholder="Username" />
     <ErrorMessage error={error} />
   </fieldset>
 )

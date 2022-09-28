@@ -127,19 +127,19 @@ h3 {
 }
 
 .btn-primary {
-  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#0033ff] text-sm font-semibold text-white rounded-[3px] bg-primary;
+  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#0033ff] text-lg font-medium text-white rounded-[3px] bg-primary;
 }
 
 .btn-flex {
-  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#000000] text-white rounded-[3px] bg-dark;
+  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#000000] text-white font-medium rounded-[3px] bg-dark;
 }
 
 .form {
-  @apply grid gap-4;
+  @apply grid gap-4 md:gap-5;
 }
 
 .form-margins {
-  @apply 2xl:mt-xl lg:mt-[45px] mt-lg;
+  @apply 2xl:mt-xl lg:mt-[45px] mt-xl;
 }
 
 .fieldset {
@@ -151,5 +151,9 @@ h3 {
 }
 
 .input {
-  @apply p-2 border-2 border-dark rounded;
+  @apply py-3 px-4 border border-[#dfe2e8] bg-[#FCFDFE] placeholder-[#141414] text-base rounded;
+}
+
+.link {
+  @apply text-primary underline;
 }

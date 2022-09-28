@@ -4,7 +4,6 @@ import ErrorMessage from "../sub-components/ErrorMessage";
 
 const ConfirmPassword: FC<UserFormField & { password?: string }> = ({ register, error, password }) => (
   <fieldset className="fieldset">
-    <label className="label">Confirm Password</label>
     <input type="password" {...register('confirmPassword', {
       required: 'Confirm Password is required',
       minLength: {
@@ -12,7 +11,7 @@ const ConfirmPassword: FC<UserFormField & { password?: string }> = ({ register, 
         message: 'Password must be at least 8 characters'
       },
       validate: (confirmPassword) => confirmPassword === password || 'Confirm password must be the same as the password'
-    })} className="input" />
+    })} className="input" placeholder="Confirm Password" />
     <ErrorMessage error={error} />
   </fieldset>
 )

@@ -13,6 +13,7 @@ import { userSessionState } from "../../state/state";
 import ErrorMessage from "../../components/sub-components/ErrorMessage";
 import { useRouter } from "next/router";
 import { createUserSessionObject } from "../../utils/helpers";
+import Link from 'next/link';
 
 const META = (
   <Meta
@@ -55,14 +56,18 @@ const Register: FC = () => {
   return (
     <Main meta={META}>
       <section className="mt-lg mb-lg 2xl:w-9/12 md:mx-auto">
-        <h1 className="text-center">Register</h1>
+        <h1 className="text-center mt-xl">Sign Up</h1>
         <form className="form form-margins" onSubmit={handleSubmit(onSubmit)}>
           <Email register={register} error={errors?.email?.message} />
           <Username register={register} error={errors?.username?.message} />
           <Password register={register} error={errors?.password?.message} minLength={passwordValidation} />
           <ConfirmPassword register={register} error={errors?.confirmPassword?.message} password={password} />
           <ErrorMessage error={error} />
-          <button className="py-3 mt-2 btn-flex">Register</button>
+          <button className="py-[0.8rem] btn-flex">Sign Up</button>
+          <span>Already have an account?&nbsp;
+            <Link href="/user/login">
+              <a className="link">Sign in instead</a>
+            </Link></span>
         </form>
       </section>
     </Main>

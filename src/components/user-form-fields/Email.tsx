@@ -4,14 +4,13 @@ import ErrorMessage from "../sub-components/ErrorMessage";
 
 const Email: FC<UserFormField> = ({ register, error }) => (
   <fieldset className="fieldset">
-    <label className="label">Email</label>
     <input type="email" {...register('email', {
       required: 'Email is required',
       pattern: {
         value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
         message: 'Email must be valid'
       }
-    })} className="input" />
+    })} className="input" placeholder="Email" />
     <ErrorMessage error={error} />
   </fieldset>
 )
