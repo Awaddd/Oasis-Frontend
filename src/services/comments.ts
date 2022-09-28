@@ -1,8 +1,6 @@
-import { generateId } from "./../utils/helpers";
 import { Comment } from "../utils/types/Comments";
 import { supabase } from "./api";
 import { Thread } from "../utils/types/Comments";
-import { Session } from "../utils/types/Users";
 
 export async function getComments(article: string) {
   const query = `
@@ -29,7 +27,6 @@ export async function addComment(
 ): Promise<any> {
   if (!thread) {
     const { data } = await supabase.from<Thread>("Threads").insert({
-      id: `thread-${generateId()}`,
       article,
     });
 
@@ -38,7 +35,6 @@ export async function addComment(
 
   return await supabase.from<Comment>("Comments").insert([
     {
-      id: `comment-${generateId()}`,
       thread,
       text: comment,
       author,
