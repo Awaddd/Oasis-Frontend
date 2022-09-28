@@ -2,6 +2,7 @@ import { generateId } from "./../utils/helpers";
 import { Comment } from "../utils/types/Comments";
 import { supabase } from "./api";
 import { Thread } from "../utils/types/Comments";
+import { Session } from "../utils/types/Users";
 
 export async function getComments(article: string) {
   const query = `

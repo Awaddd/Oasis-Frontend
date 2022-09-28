@@ -1,3 +1,4 @@
+import { userSessionState } from "./../state/state";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useState } from "react";
 import { addComment } from "../services/comments";
@@ -23,6 +24,7 @@ export const useAddComment = ({
   const setComments = useSetRecoilState(CommentsState);
   const article = useRecoilValue(ArticleState);
   const setNotification = useSetRecoilState(NotificationState);
+  const session = useRecoilValue(userSessionState);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
@@ -31,9 +33,15 @@ export const useAddComment = ({
   const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    if (!comment) return;
+    if (!comment || !session) return;
 
-    const { data } = await addComment(comment, article, thread, replyTo);
+    const { data, error } = await addComment(comment, article, thread, replyTo);
+
+    if (error) {
+      console.log(error.message);
+      // show error notification here with a generic message
+      return;
+    }
 
     const newComment = data[0];
 
