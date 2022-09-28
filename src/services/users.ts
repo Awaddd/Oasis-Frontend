@@ -1,12 +1,7 @@
 import { User } from "../utils/types/Users";
 import { supabase } from "./api";
 
-export async function createUser({
-  email,
-  password,
-  firstName,
-  lastName,
-}: User) {
+export async function createUser({ email, password, username }: User) {
   return await supabase.auth.signUp(
     {
       email,
@@ -14,8 +9,7 @@ export async function createUser({
     },
     {
       data: {
-        firstName,
-        lastName,
+        username,
       },
     }
   );

@@ -1,4 +1,4 @@
-import { ApiError, Session, User } from "@supabase/supabase-js";
+import { Session, User } from "@supabase/supabase-js";
 import { PlaceholderCallback } from "./types/global";
 
 export const capitaliseFirstLetter = (string?: string) => {
@@ -28,8 +28,6 @@ export const createUserSessionObject = async (
 
   const { access_token, refresh_token, expires_in, expires_at, token_type } =
     session;
-  const { email, user_metadata } = user;
-  const { firstName, lastName } = user_metadata;
 
   return {
     access_token,
@@ -38,9 +36,8 @@ export const createUserSessionObject = async (
     expires_at,
     token_type,
     user: {
-      email,
-      firstName,
-      lastName,
+      email: user.email,
+      username: user.user_metadata.username,
     },
   };
 };

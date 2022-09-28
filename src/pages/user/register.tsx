@@ -5,8 +5,7 @@ import { Main } from "../../templates/Main";
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { RegisterUserFormFields } from "../../utils/types/Users";
 import Email from "../../components/user-form-fields/Email";
-import FirstName from "../../components/user-form-fields/FirstName";
-import LastName from "../../components/user-form-fields/LastName";
+import Username from "../../components/user-form-fields/Username";
 import Password from "../../components/user-form-fields/Password";
 import ConfirmPassword from "../../components/user-form-fields/ConfirmPassword";
 import { useSetRecoilState } from "recoil";
@@ -59,8 +58,7 @@ const Register: FC = () => {
         <h1 className="text-center">Register</h1>
         <form className="form form-margins" onSubmit={handleSubmit(onSubmit)}>
           <Email register={register} error={errors?.email?.message} />
-          <FirstName register={register} error={errors?.firstName?.message} />
-          <LastName register={register} error={errors?.lastName?.message} />
+          <Username register={register} error={errors?.username?.message} />
           <Password register={register} error={errors?.password?.message} minLength={passwordValidation} />
           <ConfirmPassword register={register} error={errors?.confirmPassword?.message} password={password} />
           <ErrorMessage error={error} />

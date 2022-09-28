@@ -78,7 +78,7 @@ const Navigation = () => {
 
       {session ? (
         <>
-          <p>{capitaliseFirstLetter(session.user.firstName)}</p>
+          <p>{capitaliseFirstLetter(session.user.username)}</p>
           <a className={classes} onClick={handleOnClickLogout}>Logout</a>
         </>
       ) : (

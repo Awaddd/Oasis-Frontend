@@ -2,8 +2,7 @@ import { UseFormRegister } from "react-hook-form";
 
 export interface User {
   email: string;
-  firstName: string;
-  lastName: string;
+  username: string;
   password: string;
 }
 
@@ -15,16 +14,14 @@ export interface Session {
   token_type: string;
   user: {
     email: string;
-    firstName: string;
-    lastName: string;
+    username: string;
   };
 }
 
 export interface RegisterUserFormFields {
   confirmPassword: string;
   email: string;
-  firstName: string;
-  lastName: string;
+  username: string;
   password: string;
 }
 
