@@ -23,6 +23,7 @@ export async function getComments(article: string) {
 export async function addComment(
   comment: string,
   article: string,
+  author: string,
   thread?: string,
   replyTo?: string
 ): Promise<any> {
@@ -40,7 +41,7 @@ export async function addComment(
       id: `comment-${generateId()}`,
       thread,
       text: comment,
-      author: "Awad",
+      author,
       replyTo,
     },
   ]);

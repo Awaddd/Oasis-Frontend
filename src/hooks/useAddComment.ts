@@ -35,7 +35,15 @@ export const useAddComment = ({
 
     if (!comment || !session) return;
 
-    const { data, error } = await addComment(comment, article, thread, replyTo);
+    const author = `${session.user.firstName} ${session.user.lastName}`;
+
+    const { data, error } = await addComment(
+      comment,
+      article,
+      author,
+      thread,
+      replyTo
+    );
 
     if (error) {
       console.log(error.message);
