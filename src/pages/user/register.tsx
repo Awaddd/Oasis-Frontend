@@ -56,8 +56,8 @@ const Register: FC = () => {
 
   return (
     <Main meta={META}>
-      <section className="mt-lg mb-lg 2xl:w-9/12 md:mx-auto">
-        <h1 className="text-center mt-xl">Sign Up</h1>
+      <section className="auth-section">
+        <h1 className="text-center auth-header">Sign Up</h1>
         <form className="form form-margins" onSubmit={handleSubmit(onSubmit)}>
           <Email register={register} error={errors?.email?.message} />
           <Username register={register} error={errors?.username?.message} />

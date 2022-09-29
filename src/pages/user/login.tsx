@@ -46,8 +46,8 @@ const Login: FC = () => {
 
   return (
     <Main meta={META}>
-      <section className="mt-lg mb-lg 2xl:w-9/12 md:mx-auto">
-        <h1 className="text-center mt-xl">Login</h1>
+      <section className="auth-section">
+        <h1 className="text-center auth-header">Login</h1>
         <form className="form form-margins" onSubmit={handleSubmit(onSubmit)}>
           <Email register={register} error={errors?.email?.message} />
           <Password register={register} error={errors?.password?.message} />
