@@ -22,6 +22,12 @@ export async function login({ email, password }: User) {
   });
 }
 
+export async function loginWithProvider(provider: 'google' | 'twitter' | 'facebook') {
+  return await supabase.auth.signIn({
+    provider
+  });
+}
+
 export async function logout() {
   return await supabase.auth.signOut();
 }
