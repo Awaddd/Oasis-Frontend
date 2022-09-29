@@ -14,6 +14,7 @@ import ErrorMessage from "../../components/sub-components/ErrorMessage";
 import { useRouter } from "next/router";
 import { createUserSessionObject } from "../../utils/helpers";
 import Link from 'next/link';
+import SocialLogin from "../../components/SocialLogin";
 
 const META = (
   <Meta
@@ -64,10 +65,16 @@ const Register: FC = () => {
           <ConfirmPassword register={register} error={errors?.confirmPassword?.message} password={password} />
           <ErrorMessage error={error} />
           <button className="py-[0.8rem] btn-flex">Sign Up</button>
-          <span>Already have an account?&nbsp;
+
+          <p className="my-4 font-semibold text-center text-gray-600">Sign Up with</p>
+
+          <SocialLogin />
+
+          <span className="mt-4">Already have an account?&nbsp;
             <Link href="/user/login">
               <a className="link">Sign in instead</a>
-            </Link></span>
+            </Link>
+          </span>
         </form>
       </section>
     </Main>

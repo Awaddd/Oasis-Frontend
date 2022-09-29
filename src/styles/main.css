@@ -134,6 +134,10 @@ h3 {
   @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#000000] text-white font-medium rounded-[3px] bg-dark;
 }
 
+.btn-social {
+  @apply px-4 py-2 sm:py-3 rounded text-white grid items-center justify-center;
+}
+
 .form {
   @apply grid gap-4 md:gap-5;
 }

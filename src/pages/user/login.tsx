@@ -12,6 +12,7 @@ import { userSessionState } from "../../state/state";
 import { createUserSessionObject } from "../../utils/helpers";
 import ErrorMessage from "../../components/sub-components/ErrorMessage";
 import Link from "next/link";
+import SocialLogin from "../../components/SocialLogin";
 
 const META = (
   <Meta
@@ -52,7 +53,12 @@ const Login: FC = () => {
           <Password register={register} error={errors?.password?.message} />
           <ErrorMessage error={error} />
           <button className="py-[0.8rem] btn-flex">Login</button>
-          <span>Don't have an account?&nbsp;
+
+          <p className="my-4 font-semibold text-center text-gray-600">Login with</p>
+
+          <SocialLogin />
+
+          <span className="mt-4">Don't have an account?&nbsp;
             <Link href="/user/register">
               <a className="link">Sign up instead</a>
             </Link>
