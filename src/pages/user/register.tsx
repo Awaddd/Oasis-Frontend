@@ -70,11 +70,17 @@ const Register: FC = () => {
 
           <SocialLogin />
 
-          <span className="mt-4">Already have an account?&nbsp;
+          <span className="mt-4 font-medium text-center text-gray-900">Already have an account?&nbsp;
             <Link href="/user/login">
               <a className="link">Sign in instead</a>
             </Link>
           </span>
+
+          <p className="mt-2 font-semibold text-center text-gray-600">By registering for an account, you agree with our&nbsp;
+            <a href="privacy-policy">privacy policy</a> and our&nbsp;
+            <a href="terms-and-conditions">terms and conditions</a>
+          </p>
+
         </form>
       </section>
     </Main>

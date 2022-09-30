@@ -159,7 +159,7 @@ h3 {
 }
 
 .link {
-  @apply text-primary underline;
+  @apply text-primary underline font-normal;
 }
 
 .auth-section {

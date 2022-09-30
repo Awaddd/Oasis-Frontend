@@ -58,7 +58,7 @@ const Login: FC = () => {
 
           <SocialLogin />
 
-          <span className="mt-4">Don't have an account?&nbsp;
+          <span className="mt-4 font-medium text-center text-gray-900">Don't have an account?&nbsp;
             <Link href="/user/register">
               <a className="link">Sign up instead</a>
             </Link>
