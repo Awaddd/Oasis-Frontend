@@ -77,8 +77,8 @@ const Register: FC = () => {
           </span>
 
           <p className="mt-2 font-semibold text-center text-gray-600">By registering for an account, you agree with our&nbsp;
-            <a href="privacy-policy">privacy policy</a> and our&nbsp;
-            <a href="terms-and-conditions">terms and conditions</a>
+            <Link href="/privacy-policy"><a className="font-semibold text-gray-600 underline">privacy policy</a></Link> and our&nbsp;
+            <Link href="/terms-and-conditions"><a className="font-semibold text-gray-600 underline">terms and conditions</a></Link>
           </p>
 
         </form>
