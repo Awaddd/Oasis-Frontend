@@ -6,7 +6,7 @@ import { loginWithProvider } from "../services/users";
 
 const SocialLogin: FC = () => {
   const signInWithFacebook = () => null;
-  const signInWithTwitter = () => null;
+  const signInWithTwitter = () => loginWithProvider('twitter');
   const signInWithGoogle = () => loginWithProvider('google');
 
   return (
