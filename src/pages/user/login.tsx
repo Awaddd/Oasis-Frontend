@@ -16,7 +16,7 @@ import SocialLogin from "../../components/SocialLogin";
 
 const META = (
   <Meta
-    title="Omar Dini"
+    title="Omar Dini | Login"
     description="Omar Dini's personal blog"
   />
 );
