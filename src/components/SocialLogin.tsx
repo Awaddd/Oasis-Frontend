@@ -5,7 +5,7 @@ import TwitterIcon from "../assets/icons/TwitterIcon";
 import { loginWithProvider } from "../services/users";
 
 const SocialLogin: FC = () => {
-  const signInWithFacebook = () => null;
+  const signInWithFacebook = () => loginWithProvider('facebook');
   const signInWithTwitter = () => loginWithProvider('twitter');
   const signInWithGoogle = () => loginWithProvider('google');
 
