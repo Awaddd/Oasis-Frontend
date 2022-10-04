@@ -1,13 +1,13 @@
-import { FC } from "react";
-import GoogleIcon from "../assets/icons/GoogleIcon";
-import FacebookIcon from "../assets/icons/FacebookIcon";
-import TwitterIcon from "../assets/icons/TwitterIcon";
-import { loginWithProvider } from "../services/users";
+import { FC } from "react"
+import GoogleIcon from "../assets/icons/GoogleIcon"
+import FacebookIcon from "../assets/icons/FacebookIcon"
+import TwitterIcon from "../assets/icons/TwitterIcon"
+import { loginWithProvider } from "../services/users"
 
 const SocialLogin: FC = () => {
-  const signInWithFacebook = () => loginWithProvider('facebook');
-  const signInWithTwitter = () => loginWithProvider('twitter');
-  const signInWithGoogle = () => loginWithProvider('google');
+  const signInWithFacebook = () => loginWithProvider("facebook")
+  const signInWithTwitter = () => loginWithProvider("twitter")
+  const signInWithGoogle = () => loginWithProvider("google")
 
   return (
     <div className="grid grid-flow-col gap-2 md:gap-4 auto-cols-fr">
@@ -21,7 +21,7 @@ const SocialLogin: FC = () => {
         <GoogleIcon />
       </button>
     </div>
-  );
+  )
 }
 
 export default SocialLogin

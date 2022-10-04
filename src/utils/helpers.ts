@@ -1,33 +1,29 @@
-import { Session, User } from "@supabase/supabase-js";
-import { PlaceholderCallback } from "./types/global";
+import { Session, User } from "@supabase/supabase-js"
+import { PlaceholderCallback } from "./types/global"
 
 export const capitaliseFirstLetter = (string?: string) => {
-  if (!string) return "";
-  return string && string.charAt(0).toUpperCase() + string.slice(1);
-};
+  if (!string) return ""
+  return string && string.charAt(0).toUpperCase() + string.slice(1)
+}
 
 export const blurImage = async (url: string, callback: PlaceholderCallback) => {
-  if (!url) return null;
-  const { base64, img } = await callback(url, { size: 10 });
+  if (!url) return null
+  const { base64, img } = await callback(url, { size: 10 })
 
   return {
     src: img?.src,
     type: img?.type,
     blurDataURL: base64,
-  };
-};
+  }
+}
 
-export const createUserSessionObject = async (
-  user: User | null,
-  session: Session | null
-) => {
+export const createUserSessionObject = async (user: User | null, session: Session | null) => {
   if (!session || !user || !user.email) {
-    console.log("Unable to set session", session, user, user?.email);
-    return null;
+    console.log("Unable to set session", session, user, user?.email)
+    return null
   }
 
-  const { access_token, refresh_token, expires_in, expires_at, token_type } =
-    session;
+  const { access_token, refresh_token, expires_in, expires_at, token_type } = session
 
   return {
     access_token,
@@ -39,11 +35,11 @@ export const createUserSessionObject = async (
       email: user.email,
       username: user.user_metadata.username,
     },
-  };
-};
+  }
+}
 
 export const generateId = (): string => {
-  let arr = [];
+  let arr = []
   const letters = [
     "a",
     "b",
@@ -71,10 +67,10 @@ export const generateId = (): string => {
     "x",
     "y",
     "z",
-  ];
+  ]
   for (let i = 0; i < letters.length; i++) {
-    const randomLetter = Math.floor(Math.random() * letters.length);
-    arr.push(letters[randomLetter]);
+    const randomLetter = Math.floor(Math.random() * letters.length)
+    arr.push(letters[randomLetter])
   }
-  return arr.join("");
-};
+  return arr.join("")
+}

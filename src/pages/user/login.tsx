@@ -1,32 +1,31 @@
-import { FC, useState } from "react";
-import { Meta } from "../../layout/Meta";
-import { Main } from "../../templates/Main";
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { RegisterUserFormFields } from "../../utils/types/Users";
-import Email from "../../components/user-form-fields/Email";
-import Password from "../../components/user-form-fields/Password";
-import { login } from "../../services/users";
-import { useRouter } from "next/router";
-import { useSetRecoilState } from "recoil";
-import { userSessionState } from "../../state/state";
-import { createUserSessionObject } from "../../utils/helpers";
-import ErrorMessage from "../../components/sub-components/ErrorMessage";
-import Link from "next/link";
-import SocialLogin from "../../components/SocialLogin";
+import { FC, useState } from "react"
+import { Meta } from "../../layout/Meta"
+import { Main } from "../../templates/Main"
+import { SubmitHandler, useForm } from "react-hook-form"
+import { RegisterUserFormFields } from "../../utils/types/Users"
+import Email from "../../components/user-form-fields/Email"
+import Password from "../../components/user-form-fields/Password"
+import { login } from "../../services/users"
+import { useRouter } from "next/router"
+import { useSetRecoilState } from "recoil"
+import { userSessionState } from "../../state/state"
+import { createUserSessionObject } from "../../utils/helpers"
+import ErrorMessage from "../../components/sub-components/ErrorMessage"
+import Link from "next/link"
+import SocialLogin from "../../components/SocialLogin"
 
-const META = (
-  <Meta
-    title="Omar Dini | Login"
-    description="Omar Dini's personal blog"
-  />
-);
+const META = <Meta title="Omar Dini | Login" description="Omar Dini's personal blog" />
 
 const Login: FC = () => {
   const setSession = useSetRecoilState(userSessionState)
-  const { register, handleSubmit, formState: { errors } } = useForm<RegisterUserFormFields>();
-  const [error, setError] = useState<string>('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterUserFormFields>()
+  const [error, setError] = useState<string>("")
 
-  const { push } = useRouter();
+  const { push } = useRouter()
 
   const onSubmit: SubmitHandler<RegisterUserFormFields> = async (data, e) => {
     e?.preventDefault()
@@ -35,13 +34,13 @@ const Login: FC = () => {
 
     if (error) {
       setError(error.message)
-      console.log('error', error)
+      console.log("error", error)
       return
     }
 
     setSession(await createUserSessionObject(user, session))
 
-    push('/')
+    push("/")
   }
 
   return (
@@ -58,7 +57,8 @@ const Login: FC = () => {
 
           <SocialLogin />
 
-          <span className="mt-4 font-medium text-center text-gray-900">Don't have an account?&nbsp;
+          <span className="mt-4 font-medium text-center text-gray-900">
+            Don't have an account?&nbsp;
             <Link href="/user/register">
               <a className="link">Sign up instead</a>
             </Link>

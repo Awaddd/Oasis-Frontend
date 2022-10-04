@@ -1,5 +1,5 @@
-import { User } from "../utils/types/Users";
-import { supabase } from "./api";
+import { User } from "../utils/types/Users"
+import { supabase } from "./api"
 
 export async function createUser({ email, password, username }: User) {
   return await supabase.auth.signUp(
@@ -11,23 +11,23 @@ export async function createUser({ email, password, username }: User) {
       data: {
         username,
       },
-    }
-  );
+    },
+  )
 }
 
 export async function login({ email, password }: User) {
   return await supabase.auth.signIn({
     email,
     password,
-  });
+  })
 }
 
-export async function loginWithProvider(provider: 'google' | 'twitter' | 'facebook') {
+export async function loginWithProvider(provider: "google" | "twitter" | "facebook") {
   return await supabase.auth.signIn({
-    provider
-  });
+    provider,
+  })
 }
 
 export async function logout() {
-  return await supabase.auth.signOut();
+  return await supabase.auth.signOut()
 }

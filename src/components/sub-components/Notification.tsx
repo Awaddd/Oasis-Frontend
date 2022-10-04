@@ -1,18 +1,18 @@
-import { FC, useEffect } from 'react'
-import { useRecoilState } from 'recoil'
-import { NotificationState } from '../../state/state'
-import { Notification as NotificationType } from '../../utils/types/global'
+import { FC, useEffect } from "react"
+import { useRecoilState } from "recoil"
+import { NotificationState } from "../../state/state"
+import { Notification as NotificationType } from "../../utils/types/global"
 
-const Notification: FC<NotificationType> = ({ message, variant = 'success', duration = 3000 }) => {
+const Notification: FC<NotificationType> = ({ message, variant = "success", duration = 3000 }) => {
   const [notification, setNotification] = useRecoilState(NotificationState)
 
   useEffect(() => {
-    let timer: string | number | NodeJS.Timeout | undefined;
+    let timer: string | number | NodeJS.Timeout | undefined
 
     if (notification.message) {
       timer = setTimeout(() => {
         setNotification({
-          message: ''
+          message: "",
         })
       }, duration)
     }
@@ -30,10 +30,10 @@ const Notification: FC<NotificationType> = ({ message, variant = 'success', dura
 }
 
 const variants = {
-  'success': 'bg-green-600 text-white',
-  'info': 'bg-blue-600 text-white',
-  'warning': 'bg-yellow-500 text-white',
-  'danger': 'bg-red-700 text-white',
+  success: "bg-green-600 text-white",
+  info: "bg-blue-600 text-white",
+  warning: "bg-yellow-500 text-white",
+  danger: "bg-red-700 text-white",
 }
 
 export default Notification

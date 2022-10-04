@@ -1,35 +1,30 @@
-import { FC } from 'react';
-import { Meta } from '../layout/Meta';
-import { Main } from '../templates/Main';
-import { getArticles, getFeaturedArticle } from '../services/articles';
-import { getAuthorBio, getHero, getNewsletter } from '../services/global';
-import HeroImage from '../components/HeroImage';
-import FeaturedArticle from '../components/FeaturedArticle';
-import ArticleCardWithLink from '../components/ArticleCardWithLink';
-import { Article, AuthorBio, ImageType, Newsletter as NewsletterType } from '../utils/types/global';
-import AboutMe from '../components/AboutMe';
-import Newsletter from '../components/Newsletter';
-import { blurImage } from '../utils/helpers';
-import { getPlaiceholder as getPlaceholder } from 'plaiceholder';
+import { FC } from "react"
+import { Meta } from "../layout/Meta"
+import { Main } from "../templates/Main"
+import { getArticles, getFeaturedArticle } from "../services/articles"
+import { getAuthorBio, getHero, getNewsletter } from "../services/global"
+import HeroImage from "../components/HeroImage"
+import FeaturedArticle from "../components/FeaturedArticle"
+import ArticleCardWithLink from "../components/ArticleCardWithLink"
+import { Article, AuthorBio, ImageType, Newsletter as NewsletterType } from "../utils/types/global"
+import AboutMe from "../components/AboutMe"
+import Newsletter from "../components/Newsletter"
+import { blurImage } from "../utils/helpers"
+import { getPlaiceholder as getPlaceholder } from "plaiceholder"
 
-const META = (
-  <Meta
-    title="Omar Dini"
-    description="Omar Dini's personal blog"
-  />
-);
+const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
 
 type IndexProps = {
-  hero: any;
-  articles: any;
-  authorBio?: AuthorBio;
-  featuredArticle: Article;
-  newsletter: NewsletterType;
-  type: 'book' | 'article' | null;
-  featuredArticleImageProps: ImageType;
-  heroImageProps: ImageType;
-  authorImageProps: ImageType;
-};
+  hero: any
+  articles: any
+  authorBio?: AuthorBio
+  featuredArticle: Article
+  newsletter: NewsletterType
+  type: "book" | "article" | null
+  featuredArticleImageProps: ImageType
+  heroImageProps: ImageType
+  authorImageProps: ImageType
+}
 
 const Index: FC<IndexProps> = ({
   hero,
@@ -42,8 +37,7 @@ const Index: FC<IndexProps> = ({
   authorImageProps,
   type,
 }) => (
-  <Main meta={META} footerProps={{ classes: 'bg-dark text-gray-200' }} >
-
+  <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
     <HeroImage data={hero} imageProps={heroImageProps} />
 
     <div className="2xl:w-9/12 2xl:mx-auto">
@@ -71,30 +65,30 @@ const Index: FC<IndexProps> = ({
       <AboutMe data={authorBio} imageProps={authorImageProps} />
     </footer>
   </Main>
-);
+)
 
-export async function getStaticProps({ }) {
-  const articleData = await getArticles(true);
-  const heroData = await getHero();
-  const authorBioData = await getAuthorBio();
-  const newsletterData = await getNewsletter();
-  const featuredArticleData = await getFeaturedArticle();
-  const featuredArticle = featuredArticleData?.featuredArticle;
+export async function getStaticProps({}) {
+  const articleData = await getArticles(true)
+  const heroData = await getHero()
+  const authorBioData = await getAuthorBio()
+  const newsletterData = await getNewsletter()
+  const featuredArticleData = await getFeaturedArticle()
+  const featuredArticle = featuredArticleData?.featuredArticle
 
-  let type = 'article';
-  let featuredPost = featuredArticle.article;
+  let type = "article"
+  let featuredPost = featuredArticle.article
 
   if (!!featuredArticle?.book) {
-    type = 'book';
-    featuredPost = featuredArticle.book;
+    type = "book"
+    featuredPost = featuredArticle.book
   }
 
-  const heroImageProps = await blurImage(heroData?.heroImage?.image?.url, getPlaceholder);
-  const featuredArticleImageProps = await blurImage(featuredPost?.image?.url, getPlaceholder);
-  const authorImageProps = await blurImage(authorBioData?.author?.picture?.url, getPlaceholder);
+  const heroImageProps = await blurImage(heroData?.heroImage?.image?.url, getPlaceholder)
+  const featuredArticleImageProps = await blurImage(featuredPost?.image?.url, getPlaceholder)
+  const authorImageProps = await blurImage(authorBioData?.author?.picture?.url, getPlaceholder)
 
-  for (const article of (articleData?.articles || [])) {
-    article.imageProps = await blurImage(article?.image?.url, getPlaceholder);
+  for (const article of articleData?.articles || []) {
+    article.imageProps = await blurImage(article?.image?.url, getPlaceholder)
   }
 
   return {
@@ -108,8 +102,8 @@ export async function getStaticProps({ }) {
       heroImageProps,
       authorImageProps,
       type,
-    }
+    },
   }
 }
 
-export default Index;
+export default Index

@@ -1,6 +1,4 @@
-
-
-import { FC } from "react";
+import { FC } from "react"
 
 type Props = {
   classes?: string
