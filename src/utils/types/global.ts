@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import type { NextFetchEvent } from "next/server";
 import type { NextRequest } from "next/server";
 
@@ -9,7 +9,7 @@ export type Middleware = (
 
 export type FooterProps = {
   classes?: string;
-  children?: ReactNode;
+  children?: ReactNode | FC | JSX.Element;
 };
 
 export type Article = {
