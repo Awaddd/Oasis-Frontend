@@ -21,7 +21,7 @@ const Main = ({ meta, color, classes, footerProps, footer, children }: IMainProp
   return (
     <>
       <div className={`md:hidden ease-in-out duration-300 fixed top-0 right-0 z-30 flex flex-col gap-2 w-3/4 h-full px-4 pt-16 text-2xl text-center text-white bg-dark ${sidebarIsOpen ? 'translate-x-0' : `translate-x-full`}`}>
-        <Navigation />
+        <Navigation isMobile={true} />
       </div>
       <div className="grid w-screen h-full min-h-screen antialiased app-grid font-inter" onClick={() => setSidebarIsOpen(false)}>
         <Nav meta={meta} color={color} />

@@ -1,4 +1,4 @@
-import { useState, useEffect, Key } from 'react';
+import { useState, useEffect, Key, FC } from 'react';
 import { getCategories } from '../services/global';
 import { useQuery } from 'react-query';
 import { useRecoilState } from 'recoil';
@@ -10,9 +10,13 @@ import Menu, { link } from './sub-components/Menu';
 import { capitaliseFirstLetter } from '../utils/helpers';
 import { logout } from '../services/users';
 
-const classes = 'md:transition md:hover:text-primary outline-none';
+const classes = 'md:transition md:hover:text-primary outline-none cursor-pointer';
 
-const Navigation = () => {
+type Props = {
+  isMobile?: boolean;
+}
+
+const Navigation: FC<Props> = ({ isMobile }) => {
   const { error, isLoading, data } = useQuery('categories', getCategories);
   const [menuData, setMenuData] = useState<link[]>();
 
@@ -75,6 +79,9 @@ const Navigation = () => {
         ))}
       </div>
 
+      {isMobile && (
+        <span className="divider"></span>
+      )}
 
       {session ? (
         <>

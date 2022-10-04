@@ -169,3 +169,7 @@ h3 {
 .auth-header {
   @apply mt-lg;
 }
+
+.divider {
+  @apply bg-white h-[2px] my-2 mx-8
+}
