@@ -83,11 +83,7 @@ body {
 }
 
 .overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(7, 7, 7, 0) 60%,
-    rgba(31, 31, 31, 0.705)
-  );
+  background: linear-gradient(to bottom, rgba(7, 7, 7, 0) 60%, rgba(31, 31, 31, 0.705));
 }
 
 h1,
@@ -120,4 +116,56 @@ h3 {
   font-weight: 900;
   letter-spacing: 1px;
   line-height: 1;
+}
+
+.btn {
+  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#0033ff] text-sm font-semibold text-white rounded-[3px] bg-primary px-[0.8rem] py-[0.3rem];
+}
+
+.btn-primary {
+  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#0033ff] text-lg font-medium text-white rounded-[3px] bg-primary;
+}
+
+.btn-flex {
+  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#000000] text-white font-medium rounded-[3px] bg-dark;
+}
+
+.btn-social {
+  @apply px-4 py-2 sm:py-3 rounded text-white grid items-center justify-center;
+}
+
+.form {
+  @apply grid gap-4 md:gap-5;
+}
+
+.form-margins {
+  @apply 2xl:mt-xl lg:mt-[45px] mt-xl;
+}
+
+.fieldset {
+  @apply grid gap-2;
+}
+
+.label {
+  @apply font-medium;
+}
+
+.input {
+  @apply py-3 px-4 border border-[#dfe2e8] bg-[#FCFDFE] placeholder-[#141414] text-base rounded;
+}
+
+.link {
+  @apply text-primary underline font-normal;
+}
+
+.auth-section {
+  @apply mt-rl mb-lg sm:mx-auto sm:w-9/12 lg:w-6/12 xl:w-5/12 2xl:w-4/12;
+}
+
+.auth-header {
+  @apply mt-lg;
+}
+
+.divider {
+  @apply bg-white h-[2px] my-2 mx-8;
 }

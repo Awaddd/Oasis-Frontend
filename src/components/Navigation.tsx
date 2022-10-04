@@ -1,68 +1,110 @@
-import { useState, useEffect, Key } from 'react';
-import { getCategories } from '../services/global';
-import { useQuery } from 'react-query';
-import { useRecoilState } from 'recoil';
-import { selectedCategoryState } from '../state/state';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { Category } from '../utils/types/global';
-import Menu, { link } from './sub-components/Menu';
+import { useState, useEffect, Key, FC } from "react"
+import { getCategories } from "../services/global"
+import { useQuery } from "react-query"
+import { useRecoilState } from "recoil"
+import { selectedCategoryState, userSessionState } from "../state/state"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import { Category } from "../utils/types/global"
+import Menu, { link } from "./sub-components/Menu"
+import { capitaliseFirstLetter } from "../utils/helpers"
+import { logout } from "../services/users"
 
-const classes = 'md:transition md:hover:text-primary outline-none';
+const classes = "md:transition md:hover:text-primary outline-none cursor-pointer"
 
-const Navigation = () => {
-  const { error, isLoading, data } = useQuery('categories', getCategories);
-  const [menuData, setMenuData] = useState<link[]>();
+type Props = {
+  isMobile?: boolean
+}
 
-  const [category, setCategory] = useRecoilState(selectedCategoryState);
+const Navigation: FC<Props> = ({ isMobile }) => {
+  const { error, isLoading, data } = useQuery("categories", getCategories)
+  const [menuData, setMenuData] = useState<link[]>()
 
-  const categories: Category[] = data?.categories;
+  const [category, setCategory] = useRecoilState(selectedCategoryState)
 
-  const router = useRouter();
+  const categories: Category[] = data?.categories
+
+  const [session, setSession] = useRecoilState(userSessionState)
+
+  const router = useRouter()
 
   if (error) return <p>Error...</p>
 
   useEffect(() => {
     if (!isLoading && data && data?.categories) {
-      setMenuData(categories.map(({ pluralName }) => {
-        return {
-          name: pluralName,
-          link: `/${pluralName.toLowerCase()}`,
-        }
-      }));
+      setMenuData(
+        categories.map(({ pluralName }) => {
+          return {
+            name: pluralName,
+            link: `/${pluralName.toLowerCase()}`,
+          }
+        }),
+      )
     }
-  }, [data]);
+  }, [data])
 
   useEffect(() => {
-    setCategory(router.query.category as string);
+    console.log("session", session)
+  }, [session])
+
+  useEffect(() => {
+    setCategory(router.query.category as string)
   }, [router?.query?.category])
+
+  const handleOnClickLogout = async () => {
+    const { error } = await logout()
+    console.log(error?.message)
+    setSession(null)
+  }
 
   return (
     <>
       <Link href="/">
-        <a className={`${classes} ${router.pathname === '/' && 'text-primary'}`}>Home</a>
+        <a className={`${classes} ${router.pathname === "/" && "text-primary"}`}>Home</a>
       </Link>
 
       <Link href="/author">
-        <a className={`${classes} ${router.pathname === '/author' && 'text-primary'}`}>Author</a>
+        <a className={`${classes} ${router.pathname === "/author" && "text-primary"}`}>Author</a>
       </Link>
 
       <Link href="/books">
-        <a className={`${classes} ${router.pathname === '/books' && 'text-primary'}`}>Books</a>
+        <a className={`${classes} ${router.pathname === "/books" && "text-primary"}`}>Books</a>
       </Link>
 
       <Menu label="Articles" data={menuData} />
 
       <div className="flex flex-col gap-2 md:hidden">
-        {!isLoading && data && data?.categories.map(({ pluralName }: Category, key: Key | null | undefined) => (
-          <Link href={`/${pluralName.toLowerCase()}`} key={key}>
-            <a className={`${classes} ${category === pluralName.toLowerCase() && 'text-primary'}`}>{pluralName}</a>
-          </Link>
-        ))}
+        {!isLoading &&
+          data &&
+          data?.categories.map(({ pluralName }: Category, key: Key | null | undefined) => (
+            <Link href={`/${pluralName.toLowerCase()}`} key={key}>
+              <a className={`${classes} ${category === pluralName.toLowerCase() && "text-primary"}`}>{pluralName}</a>
+            </Link>
+          ))}
       </div>
+
+      {isMobile && <span className="divider"></span>}
+
+      {session ? (
+        <>
+          <p>{capitaliseFirstLetter(session.user.username)}</p>
+          <a className={classes} onClick={handleOnClickLogout}>
+            Logout
+          </a>
+        </>
+      ) : (
+        <>
+          <Link href="/user/register">
+            <a className={`${classes} ${router.pathname === "/user/register" && "text-primary"}`}>Register</a>
+          </Link>
+
+          <Link href="/user/login">
+            <a className={`${classes} ${router.pathname === "/user/login" && "text-primary"}`}>Login</a>
+          </Link>
+        </>
+      )}
     </>
   )
-
 }
 
-export default Navigation;
+export default Navigation

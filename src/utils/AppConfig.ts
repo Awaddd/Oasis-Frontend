@@ -3,4 +3,4 @@ export const AppConfig = {
   title: "Omar Dini",
   description: "Omar Dini's personal blog",
   locale: "en",
-};
+}
