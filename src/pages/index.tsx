@@ -58,8 +58,8 @@ const Index: FC<IndexProps> = ({
         }
 
         const user = {
+          email: session?.user?.email,
           user_metadata: {
-            email: session?.user?.email,
             username: session?.user?.user_metadata.full_name
           }
         }
