@@ -41,7 +41,7 @@ const Index: FC<IndexProps> = ({
 
   console.log('here')
   console.log('supabase.auth', supabase.auth)
-  console.log('supabase.auth.session', supabase.auth.session)
+  console.log('supabase.auth.session', supabase.auth.session())
 
   return (
     <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
