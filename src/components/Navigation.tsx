@@ -2,15 +2,16 @@ import { useState, useEffect, Key, FC } from "react"
 import { getCategories } from "../services/global"
 import { useQuery } from "react-query"
 import { useRecoilState } from "recoil"
-import { selectedCategoryState, userSessionState } from "../state/state"
+import { selectedCategoryState } from "../state/state"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { Category } from "../utils/types/global"
 import Menu, { link } from "./sub-components/Menu"
-import { capitaliseFirstLetter } from "../utils/helpers"
-import { logout } from "../services/users"
+import dynamic from "next/dynamic"
 
 const classes = "md:transition md:hover:text-primary outline-none cursor-pointer"
+
+const Auth = dynamic(() => import('./navigation/Auth'), { ssr: false })
 
 type Props = {
   isMobile?: boolean
@@ -23,8 +24,6 @@ const Navigation: FC<Props> = ({ isMobile }) => {
   const [category, setCategory] = useRecoilState(selectedCategoryState)
 
   const categories: Category[] = data?.categories
-
-  const [session, setSession] = useRecoilState(userSessionState)
 
   const router = useRouter()
 
@@ -44,18 +43,8 @@ const Navigation: FC<Props> = ({ isMobile }) => {
   }, [data])
 
   useEffect(() => {
-    console.log("session", session)
-  }, [session])
-
-  useEffect(() => {
     setCategory(router.query.category as string)
   }, [router?.query?.category])
-
-  const handleOnClickLogout = async () => {
-    const { error } = await logout()
-    console.log(error?.message)
-    setSession(null)
-  }
 
   return (
     <>
@@ -85,24 +74,8 @@ const Navigation: FC<Props> = ({ isMobile }) => {
 
       {isMobile && <span className="divider"></span>}
 
-      {session ? (
-        <>
-          <p>{capitaliseFirstLetter(session.user.username)}</p>
-          <a className={classes} onClick={handleOnClickLogout}>
-            Logout
-          </a>
-        </>
-      ) : (
-        <>
-          <Link href="/user/register">
-            <a className={`${classes} ${router.pathname === "/user/register" && "text-primary"}`}>Register</a>
-          </Link>
+      <Auth classes={classes} />
 
-          <Link href="/user/login">
-            <a className={`${classes} ${router.pathname === "/user/login" && "text-primary"}`}>Login</a>
-          </Link>
-        </>
-      )}
     </>
   )
 }

@@ -2,6 +2,7 @@ import { atom } from "recoil"
 import { Thread } from "../utils/types/Comments"
 import { Notification } from "../utils/types/global"
 import { Session } from "../utils/types/Users"
+import { recoilPersist } from 'recoil-persist'
 
 export const sidebarIsOpenState = atom({
   key: "sidebarIsOpenState",
@@ -35,7 +36,10 @@ export const NotificationState = atom<Notification>({
   },
 })
 
+const { persistAtom } = recoilPersist()
+
 export const userSessionState = atom<Session | null>({
   key: "userSessionState",
   default: null,
+  effects_UNSTABLE: [persistAtom],
 })
