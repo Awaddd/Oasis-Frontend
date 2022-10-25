@@ -6,6 +6,13 @@ export interface User {
   password: string
 }
 
+export interface GenericUser {
+  email?: string;
+  user_metadata: {
+    username: string
+  }
+}
+
 export interface Session {
   access_token: string
   refresh_token?: string

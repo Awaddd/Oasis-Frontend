@@ -1,5 +1,6 @@
 import { Session, User } from "@supabase/supabase-js"
 import { PlaceholderCallback } from "./types/global"
+import { GenericUser } from "./types/Users"
 
 export const capitaliseFirstLetter = (string?: string) => {
   if (!string) return ""
@@ -17,7 +18,7 @@ export const blurImage = async (url: string, callback: PlaceholderCallback) => {
   }
 }
 
-export const createUserSessionObject = async (user: User | null, session: Session | null) => {
+export const createUserSessionObject = (user: User | GenericUser | null, session: Session | null) => {
   if (!session || !user || !user.email) {
     console.log("Unable to set session", session, user, user?.email)
     return null

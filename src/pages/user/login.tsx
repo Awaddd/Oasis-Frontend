@@ -38,7 +38,7 @@ const Login: FC = () => {
       return
     }
 
-    setSession(await createUserSessionObject(user, session))
+    setSession(createUserSessionObject(user, session))
 
     push("/")
   }

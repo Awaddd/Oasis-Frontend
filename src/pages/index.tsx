@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useEffect } from "react"
 import { Meta } from "../layout/Meta"
 import { Main } from "../templates/Main"
 import { getArticles, getFeaturedArticle } from "../services/articles"
@@ -9,9 +9,11 @@ import ArticleCardWithLink from "../components/ArticleCardWithLink"
 import { Article, AuthorBio, ImageType, Newsletter as NewsletterType } from "../utils/types/global"
 import AboutMe from "../components/AboutMe"
 import Newsletter from "../components/Newsletter"
-import { blurImage } from "../utils/helpers"
+import { blurImage, createUserSessionObject } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
 import { supabase } from "../services/api"
+import { useRecoilState } from "recoil"
+import { userSessionState } from "../state/state"
 
 const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
 
@@ -39,9 +41,35 @@ const Index: FC<IndexProps> = ({
   type,
 }) => {
 
+  const [localSession, setSession] = useRecoilState(userSessionState)
+
   console.log('here')
-  console.log('supabase.auth', supabase.auth)
-  console.log('supabase.auth.session', supabase.auth.session())
+
+  useEffect(() => {
+    const updateUserSessionState = async () => {
+      console.log('checking')
+      if (!localSession) {
+        console.log('running')
+        const session = supabase.auth.session();
+        console.log('session from supabase', session)
+        
+        if (!session) {
+          return;
+        }
+
+        const user = {
+          user_metadata: {
+            email: session?.user?.email,
+            username: session?.user?.user_metadata.full_name
+          }
+        }
+        
+        setSession(createUserSessionObject(user, session))
+      }
+    }
+
+    updateUserSessionState()
+  }, [])
 
   return (
     <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
