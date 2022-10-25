@@ -11,6 +11,7 @@ import AboutMe from "../components/AboutMe"
 import Newsletter from "../components/Newsletter"
 import { blurImage } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
+import { supabase } from "../services/api"
 
 const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
 
@@ -36,36 +37,43 @@ const Index: FC<IndexProps> = ({
   featuredArticleImageProps,
   authorImageProps,
   type,
-}) => (
-  <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
-    <HeroImage data={hero} imageProps={heroImageProps} />
+}) => {
 
-    <div className="2xl:w-9/12 2xl:mx-auto">
-      <section className="2xl:mt-xl md:mt-[45px] mt-lg">
-        <FeaturedArticle type={type} data={featuredArticle} imageProps={featuredArticleImageProps} />
-      </section>
+  console.log('here')
+  console.log('supabase.auth', supabase.auth)
+  console.log('supabase.auth.session', supabase.auth)
+  
+  return (
+    <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
+      <HeroImage data={hero} imageProps={heroImageProps} />
 
-      {articles && (
-        <section className="2xl:mt-xl mt-lg md:mt-[45px]">
-          <h2 className="text-black md:hidden">Recently Updated</h2>
-          <div className="articles mt-md">
-            {articles.map((data: Article, key: number) => (
-              <ArticleCardWithLink data={data} key={key} />
-            ))}
-          </div>
+      <div className="2xl:w-9/12 2xl:mx-auto">
+        <section className="2xl:mt-xl md:mt-[45px] mt-lg">
+          <FeaturedArticle type={type} data={featuredArticle} imageProps={featuredArticleImageProps} />
         </section>
-      )}
 
-      <section className="2xl:mt-xl md:mt-[45px] mt-lg">
-        <Newsletter data={newsletter} />
-      </section>
-    </div>
+        {articles && (
+          <section className="2xl:mt-xl mt-lg md:mt-[45px]">
+            <h2 className="text-black md:hidden">Recently Updated</h2>
+            <div className="articles mt-md">
+              {articles.map((data: Article, key: number) => (
+                <ArticleCardWithLink data={data} key={key} />
+              ))}
+            </div>
+          </section>
+        )}
 
-    <footer className="2xl:mt-xl md:mt-[45px] mt-lg reverse-global-padding">
-      <AboutMe data={authorBio} imageProps={authorImageProps} />
-    </footer>
-  </Main>
-)
+        <section className="2xl:mt-xl md:mt-[45px] mt-lg">
+          <Newsletter data={newsletter} />
+        </section>
+      </div>
+
+      <footer className="2xl:mt-xl md:mt-[45px] mt-lg reverse-global-padding">
+        <AboutMe data={authorBio} imageProps={authorImageProps} />
+      </footer>
+    </Main>
+  )
+}
 
 export async function getStaticProps({}) {
   const articleData = await getArticles(true)
