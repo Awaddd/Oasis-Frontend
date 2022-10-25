@@ -1,14 +1,9 @@
-import { Meta } from '../layout/Meta';
-import { Main } from '../templates/Main';
-import EmptySVG from '../../public/assets/images/empty.svg';
-import Image from 'next/image';
+import { Meta } from "../layout/Meta"
+import { Main } from "../templates/Main"
+import EmptySVG from "../../public/assets/images/empty.svg"
+import Image from "next/image"
 
-const META = (
-  <Meta
-    title="Omar Dini | Page Not Found"
-    description="Omar Dini's personal blog"
-  />
-);
+const META = <Meta title="Omar Dini | Page Not Found" description="Omar Dini's personal blog" />
 
 const NotFound = () => (
   <Main meta={META}>
@@ -22,4 +17,4 @@ const NotFound = () => (
   </Main>
 )
 
-export default NotFound;
+export default NotFound
