@@ -14,7 +14,7 @@ const SocialLogin: FC = () => {
       <button type="button" className="btn-social bg-[#4064AC]" onClick={signInWithFacebook}>
         <FacebookIcon />
       </button>
-      <button type="button" className="btn-social bg-[#1C9CEA]" onClick={signInWithTwitter}>
+      <button disabled type="button" className="btn-social bg-[#1C9CEA] disabled:opacity-50" onClick={signInWithTwitter}>
         <TwitterIcon />
       </button>
       <button type="button" className="btn-social bg-[#D64937]" onClick={signInWithGoogle}>
