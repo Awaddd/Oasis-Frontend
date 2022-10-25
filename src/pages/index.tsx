@@ -42,20 +42,16 @@ const Index: FC<IndexProps> = ({
 }) => {
 
   const [localSession, setSession] = useRecoilState(userSessionState)
-
-  console.log('here')
+  const session = supabase.auth.session();
 
   useEffect(() => {
+    if (!session) {
+      return;
+    }
+
     const updateUserSessionState = async () => {
-      console.log('checking')
       if (!localSession) {
-        console.log('running')
-        const session = supabase.auth.session();
         console.log('session from supabase', session)
-        
-        if (!session) {
-          return;
-        }
 
         const user = {
           email: session?.user?.email,
@@ -69,7 +65,7 @@ const Index: FC<IndexProps> = ({
     }
 
     updateUserSessionState()
-  }, [])
+  }, [session])
 
   return (
     <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
