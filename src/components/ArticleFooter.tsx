@@ -1,11 +1,11 @@
-import { FC } from "react"
-import { SocialLink } from "../utils/types/global"
-import SocialIconBar from "./SocialIconBar"
+import { FC } from 'react';
+import { SocialLink } from '../utils/types/global';
+import SocialIconBar from './SocialIconBar';
 
 type Props = {
-  socialLinks?: SocialLink[]
-  email?: string
-  color?: string
+  socialLinks?: SocialLink[];
+  email?: string;
+  color?: string;
 }
 
 const ArticleFooter: FC<Props> = ({ socialLinks, email, color }) => (
@@ -18,4 +18,4 @@ const ArticleFooter: FC<Props> = ({ socialLinks, email, color }) => (
   </footer>
 )
 
-export default ArticleFooter
+export default ArticleFooter;

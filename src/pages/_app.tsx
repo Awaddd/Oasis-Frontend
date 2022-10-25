@@ -1,37 +1,30 @@
-import { AppProps } from "next/app"
-import { useRouter } from "next/router"
-import { useEffect } from "react"
-import { QueryClient, QueryClientProvider } from "react-query"
-import { RecoilRoot, useRecoilState, useRecoilValue } from "recoil"
-import Notification from "../components/sub-components/Notification"
-import { NotificationState, sidebarIsOpenState } from "../state/state"
+import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { RecoilRoot, useRecoilState } from 'recoil';
+import { sidebarIsOpenState } from '../state/state';
 
-import "../styles/main.css"
+import '../styles/main.css';
 
 const App = ({ component }: { component: JSX.Element }) => {
-  const [, setSidebarIsOpen] = useRecoilState(sidebarIsOpenState)
-  const notification = useRecoilValue(NotificationState)
+  const [, setSidebarIsOpen] = useRecoilState(sidebarIsOpenState);
 
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    const handleRouteChange = () => setSidebarIsOpen(false)
-    router.events.on("routeChangeStart", handleRouteChange)
-    return () => router.events.off("routeChangeStart", handleRouteChange)
-  }, [])
+    const handleRouteChange = () => setSidebarIsOpen(false);
+    router.events.on('routeChangeStart', handleRouteChange);
+    return () => router.events.off('routeChangeStart', handleRouteChange);
+  }, []);
 
-  return (
-    <>
-      <Notification {...notification} />
-      {component}
-    </>
-  )
-}
+  return component;
+};
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
 
-  const component = <Component {...pageProps} />
+  const component = <Component {...pageProps} />;
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -40,6 +33,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </RecoilRoot>
     </QueryClientProvider>
   )
-}
+};
 
-export default MyApp
+export default MyApp;

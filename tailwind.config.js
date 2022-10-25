@@ -40,7 +40,6 @@ module.exports = {
         xs: "4px",
         sm: "7px",
         md: "14px",
-        rl: "24px",
         lg: "30px",
         xl: "60px",
         "2xl": "85px",
@@ -49,4 +48,4 @@ module.exports = {
   },
   variants: {},
   plugins: [require("@tailwindcss/typography")],
-}
+};

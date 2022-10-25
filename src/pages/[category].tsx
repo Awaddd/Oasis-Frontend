@@ -1,37 +1,35 @@
-import Image from "next/image"
-import { Meta } from "../layout/Meta"
-import { Main } from "../templates/Main"
-import { Article } from "../utils/types/global"
-import ArticleCardWithLink from "../components/ArticleCardWithLink"
-import { CategoryParams } from "../utils/types/global"
-import { getArticlesByCategory } from "../services/articles"
-import { getCategories } from "../services/global"
-import { blurImage, capitaliseFirstLetter } from "../utils/helpers"
-import { getPlaiceholder as getPlaceholder } from "plaiceholder"
-import EmptySVG from "../../public/assets/images/empty.svg"
+import Image from 'next/image';
+import { Meta } from '../layout/Meta';
+import { Main } from '../templates/Main';
+import { Article } from '../utils/types/global';
+import ArticleCardWithLink from '../components/ArticleCardWithLink';
+import { CategoryParams } from '../utils/types/global';
+import { getArticlesByCategory } from '../services/articles';
+import { getCategories } from '../services/global';
+import { blurImage, capitaliseFirstLetter } from '../utils/helpers';
+import { getPlaiceholder as getPlaceholder } from 'plaiceholder';
+import EmptySVG from '../../public/assets/images/empty.svg';
 
-const Index = ({ category, articles }: { category: string; articles: Article[] }) => {
+const Index = ({ category, articles }: { category: string, articles: Article[] }) => {
+
   const META = (
     <Meta
       title={`Omar Dini | ${category && capitaliseFirstLetter(category)}`}
       description="Omar Dini's personal blog"
     />
-  )
+  );
 
-  if (!articles || articles.length === 0)
-    return (
-      <Main meta={META}>
-        <section className="grid items-center text-center mt-lg mb-lg">
-          <h1>{capitaliseFirstLetter(category)}</h1>
-          <p className="text-sm font-normal lg:text-lg mt-md">
-            Sorry there are no posts at the moment. Please check back later
-          </p>
-          <div className="mt-lg md:mt-[45px]">
-            <Image src={EmptySVG.src} alt="Empty category" height="278" width="333" />
-          </div>
-        </section>
-      </Main>
-    )
+  if (!articles || articles.length === 0) return (
+    <Main meta={META}>
+      <section className="grid items-center text-center mt-lg mb-lg">
+        <h1>{capitaliseFirstLetter(category)}</h1>
+        <p className="text-sm font-normal lg:text-lg mt-md">Sorry there are no posts at the moment. Please check back later</p>
+        <div className="mt-lg md:mt-[45px]">
+          <Image src={EmptySVG.src} alt="Empty category" height="278" width="333" />
+        </div>
+      </section>
+    </Main>
+  )
 
   return (
     <Main meta={META}>
@@ -44,27 +42,27 @@ const Index = ({ category, articles }: { category: string; articles: Article[] }
         </main>
       </section>
     </Main>
-  )
-}
+  );
+};
 
 export async function getStaticProps({ params }: CategoryParams) {
-  const data = await getArticlesByCategory(capitaliseFirstLetter(params.category))
+  const data = await getArticlesByCategory(capitaliseFirstLetter(params.category));
 
-  for (const article of data?.categories[0].articles || []) {
-    article.imageProps = await blurImage(article?.image?.url, getPlaceholder)
+  for (const article of (data?.categories[0].articles || [])) {
+    article.imageProps = await blurImage(article?.image?.url, getPlaceholder);
   }
 
   return {
     props: {
-      category: params?.category || "",
-      articles: data?.categories[0]?.articles || [],
-    },
+      category: params?.category || '',
+      articles: (data?.categories[0]?.articles) || [],
+    }
   }
 }
 
 export async function getStaticPaths() {
-  const data = await getCategories()
-  const categories = data.categories
+  const data = await getCategories();
+  const categories = data.categories;
 
   return {
     paths: categories?.map((category: any) => `/${category.pluralName.toLowerCase()}`) || [],
@@ -72,4 +70,4 @@ export async function getStaticPaths() {
   }
 }
 
-export default Index
+export default Index;

@@ -1,30 +1,33 @@
-import Image from "next/image"
-import { Meta } from "../layout/Meta"
-import { Main } from "../templates/Main"
-import { Article } from "../utils/types/global"
-import { getBooks } from "../services/books"
-import ArticleCardWithLink from "../components/ArticleCardWithLink"
-import EmptySVG from "../../public/assets/images/empty.svg"
-import { blurImage } from "../utils/helpers"
-import { getPlaiceholder as getPlaceholder } from "plaiceholder"
+import Image from 'next/image';
+import { Meta } from '../layout/Meta';
+import { Main } from '../templates/Main';
+import { Article } from '../utils/types/global';
+import { getBooks } from '../services/books';
+import ArticleCardWithLink from '../components/ArticleCardWithLink';
+import EmptySVG from '../../public/assets/images/empty.svg';
+import { blurImage } from '../utils/helpers';
+import { getPlaiceholder as getPlaceholder } from 'plaiceholder';
 
 const Books = ({ books }: { books: Article[] }) => {
-  const META = <Meta title="Omar Dini | Books" description="Omar Dini's personal blog" />
 
-  if (!books || books.length === 0)
-    return (
-      <Main meta={META}>
-        <section className="grid items-center h-full text-center mt-lg mb-lg">
-          <h1>Books</h1>
-          <p className="text-sm font-normal lg:text-lg mt-md">
-            Sorry there are no books at the moment. Please check back later
-          </p>
-          <div className="mt-lg md:mt-[45px]">
-            <Image src={EmptySVG.src} alt="Empty category" height="278" width="333" />
-          </div>
-        </section>
-      </Main>
-    )
+  const META = (
+    <Meta
+      title="Omar Dini | Books"
+      description="Omar Dini's personal blog"
+    />
+  );
+
+  if (!books || books.length === 0) return (
+    <Main meta={META}>
+      <section className="grid items-center h-full text-center mt-lg mb-lg">
+        <h1>Books</h1>
+        <p className="text-sm font-normal lg:text-lg mt-md">Sorry there are no books at the moment. Please check back later</p>
+        <div className="mt-lg md:mt-[45px]">
+          <Image src={EmptySVG.src} alt="Empty category" height="278" width="333" />
+        </div>
+      </section>
+    </Main>
+  )
 
   return (
     <Main meta={META}>
@@ -37,21 +40,21 @@ const Books = ({ books }: { books: Article[] }) => {
         </main>
       </section>
     </Main>
-  )
-}
+  );
+};
 
 export async function getStaticProps() {
-  const data = await getBooks()
+  const data = await getBooks();
 
-  for (const article of data?.books || []) {
-    article.imageProps = await blurImage(article?.image?.url, getPlaceholder)
+  for (const article of (data?.books || [])) {
+    article.imageProps = await blurImage(article?.image?.url, getPlaceholder);
   }
 
   return {
     props: {
-      books: data?.books || [],
-    },
+      books: (data?.books) || [],
+    }
   }
 }
 
-export default Books
+export default Books;

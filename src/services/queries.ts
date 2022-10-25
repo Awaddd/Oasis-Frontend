@@ -1,4 +1,4 @@
-import { gql } from "graphql-request"
+import { gql } from "graphql-request";
 
 export const ARTICLE = gql`
   query GetArticleBySlug($slug: String!) {
@@ -21,7 +21,7 @@ export const ARTICLE = gql`
       }
     }
   }
-`
+`;
 
 export const ARTICLES = gql`
   query GetArticles {
@@ -35,7 +35,7 @@ export const ARTICLES = gql`
       }
     }
   }
-`
+`;
 
 export const FIRST_THREE_ARTICLES = gql`
   query GetArticles {
@@ -49,7 +49,7 @@ export const FIRST_THREE_ARTICLES = gql`
       }
     }
   }
-`
+`;
 
 export const BOOK = gql`
   query GetBookBySlug($slug: String!) {
@@ -67,7 +67,7 @@ export const BOOK = gql`
       content
     }
   }
-`
+`;
 
 export const BOOKS_ONLY_SLUG = gql`
   query GetBooks {
@@ -75,7 +75,7 @@ export const BOOKS_ONLY_SLUG = gql`
       slug
     }
   }
-`
+`;
 
 export const BOOKS = gql`
   query GetBooks {
@@ -90,7 +90,7 @@ export const BOOKS = gql`
       }
     }
   }
-`
+`;
 
 export const HERO = gql`
   query GetHeroImage {
@@ -103,7 +103,7 @@ export const HERO = gql`
       }
     }
   }
-`
+`;
 
 export const FEATURED_ARTICLE = gql`
   query GetFeaturedArticleID {
@@ -131,7 +131,7 @@ export const FEATURED_ARTICLE = gql`
       }
     }
   }
-`
+`;
 
 export const ARTICLES_BY_CATEGORY = gql`
   query GetArticlesByCategory($category: String!) {
@@ -150,7 +150,7 @@ export const ARTICLES_BY_CATEGORY = gql`
       }
     }
   }
-`
+`;
 
 export const CATEGORIES = gql`
   query GetCategories {
@@ -160,7 +160,7 @@ export const CATEGORIES = gql`
       id
     }
   }
-`
+`;
 
 export const AUTHOR_PROFILE = gql`
   query GetAuthorProfile {
@@ -173,7 +173,7 @@ export const AUTHOR_PROFILE = gql`
       }
     }
   }
-`
+`;
 
 export const AUTHOR_NAME = gql`
   query GetAuthorName {
@@ -182,7 +182,7 @@ export const AUTHOR_NAME = gql`
       lastName
     }
   }
-`
+`;
 
 export const AUTHOR_BIO = gql`
   query GetAuthorBio {
@@ -200,7 +200,7 @@ export const AUTHOR_BIO = gql`
       }
     }
   }
-`
+`;
 
 export const ARTICLE_AUTHOR = gql`
   query GetArticleAuthor {
@@ -214,7 +214,7 @@ export const ARTICLE_AUTHOR = gql`
       }
     }
   }
-`
+`;
 
 export const NEWSLETTER = gql`
   query GetNewsletter {
@@ -224,4 +224,4 @@ export const NEWSLETTER = gql`
       description
     }
   }
-`
+`;

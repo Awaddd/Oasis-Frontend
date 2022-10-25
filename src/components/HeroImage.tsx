@@ -1,30 +1,23 @@
-import Image from "next/image"
-import { FC } from "react"
-import { HeroImage, ImageType } from "../utils/types/global"
+import Image from 'next/image';
+import { FC } from "react";
+import { HeroImage, ImageType } from "../utils/types/global";
 
 type Props = {
-  data: HeroImage
-  imageProps: ImageType
+  data: HeroImage;
+  imageProps: ImageType;
 }
 
 const Hero: FC<Props> = ({ data, imageProps }) => {
-  if (!data || !imageProps) return null
+  if (!data || !imageProps) return null;
 
-  const { title, subtitle } = data
+  const { title, subtitle } = data;
 
   return (
     <header className="reverse-global-padding reverse-top-global-page-padding">
       <div className="relative">
         {imageProps && (
           <div className="heroImage">
-            <Image
-              layout="fill"
-              {...imageProps}
-              placeholder="blur"
-              priority
-              alt="hero image"
-              className="object-cover"
-            />
+            <Image layout="fill" {...imageProps} placeholder="blur" priority alt="hero image" className="object-cover" />
           </div>
         )}
         <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full">
@@ -37,6 +30,6 @@ const Hero: FC<Props> = ({ data, imageProps }) => {
       </div>
     </header>
   )
-}
+};
 
-export default Hero
+export default Hero;
