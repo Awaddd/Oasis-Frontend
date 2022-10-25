@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC, useEffect, useState } from "react"
 import { Meta } from "../layout/Meta"
 import { Main } from "../templates/Main"
 import { getArticles, getFeaturedArticle } from "../services/articles"
@@ -12,8 +12,8 @@ import Newsletter from "../components/Newsletter"
 import { blurImage, createUserSessionObject } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
 import { supabase } from "../services/api"
-import { useRecoilState } from "recoil"
-import { userSessionState } from "../state/state"
+import { useRecoilState, useSetRecoilState } from "recoil"
+import { NotificationState, userSessionState } from "../state/state"
 
 const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
 
@@ -40,32 +40,49 @@ const Index: FC<IndexProps> = ({
   authorImageProps,
   type,
 }) => {
+  const [runAgain, setRunAgain] = useState(false);
 
   const [localSession, setSession] = useRecoilState(userSessionState)
-  const session = supabase.auth.session();
+  const setNotification = useSetRecoilState(NotificationState)
 
   useEffect(() => {
-    if (!session) {
+    if (localSession) {
       return;
     }
 
-    const updateUserSessionState = async () => {
-      if (!localSession) {
-        console.log('session from supabase', session)
+    const session = supabase.auth.session();
 
-        const user = {
-          email: session?.user?.email,
-          user_metadata: {
-            username: session?.user?.user_metadata.full_name
-          }
+    if (!session) {
+      const timeout = setTimeout(() => {
+        if (runAgain) {
+          setNotification({
+            message: "Unable to login - please try again later",
+            variant: "danger"
+          })
         }
-        
-        setSession(createUserSessionObject(user, session))
+        setRunAgain(true)
+      }, 500)
+
+      return () => {
+        clearTimeout(timeout)
       }
     }
 
+    const updateUserSessionState = () => {
+      console.log('session from supabase', session)
+
+      const user = {
+        email: session?.user?.email,
+        user_metadata: {
+          username: session?.user?.user_metadata.full_name
+        }
+      }
+
+      setSession(createUserSessionObject(user, session))
+    }
+
     updateUserSessionState()
-  }, [session])
+  }, [runAgain])
 
   return (
     <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
@@ -99,7 +116,7 @@ const Index: FC<IndexProps> = ({
   )
 }
 
-export async function getStaticProps({}) {
+export async function getStaticProps({ }) {
   const articleData = await getArticles(true)
   const heroData = await getHero()
   const authorBioData = await getAuthorBio()
