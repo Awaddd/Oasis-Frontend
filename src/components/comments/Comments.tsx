@@ -17,13 +17,17 @@ const Comments: FC<Props> = ({ className, threads }) => {
     <section className={className}>
       <h3 className="text-center mt-rl">Comments</h3>
 
-      {session && (
-        <header className="mt-rl">
-          <h4 className="font-semibold">Leave a comment</h4>
-          <div className="mt-2 mb-8 md:mb-0">
-            <AddComment />
-          </div>
-        </header>
+      <header className="mt-rl">
+        <h4 className="font-semibold">Leave a comment</h4>
+        <div className="mt-2 mb-8 md:mb-0">
+          <AddComment disabled={!session} />
+        </div>
+      </header>
+
+      {!threads || threads.length === 0 && (
+        <>
+          <h4 className="mt-lg">There are no comments yet</h4>
+        </>
       )}
 
       {threads && (

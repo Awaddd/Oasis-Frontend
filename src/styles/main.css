@@ -127,7 +127,7 @@ h3 {
 }
 
 .btn-flex {
-  @apply select-none cursor-pointer transition duration-150 ease-linear hover:bg-[#000000] text-white font-medium rounded-[3px] bg-dark;
+  @apply select-none cursor-pointer disabled:cursor-default transition duration-150 ease-linear hover:bg-[#000000] text-white font-medium rounded-[3px] bg-dark disabled:opacity-25;
 }
 
 .btn-social {
