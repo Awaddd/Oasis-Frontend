@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC, useEffect } from "react"
 import { Meta } from "../layout/Meta"
 import { Main } from "../templates/Main"
 import { getArticles, getFeaturedArticle } from "../services/articles"
@@ -12,8 +12,8 @@ import Newsletter from "../components/Newsletter"
 import { blurImage, createUserSessionObject } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
 import { supabase } from "../services/api"
-import { useRecoilState, useSetRecoilState } from "recoil"
-import { NotificationState, userSessionState } from "../state/state"
+import { useSetRecoilState } from "recoil"
+import { userSessionState } from "../state/state"
 
 const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
 
@@ -40,36 +40,16 @@ const Index: FC<IndexProps> = ({
   authorImageProps,
   type,
 }) => {
-  const [runAgain, setRunAgain] = useState(false);
-
-  const [localSession, setSession] = useRecoilState(userSessionState)
-  const setNotification = useSetRecoilState(NotificationState)
+  const setSession = useSetRecoilState(userSessionState)
 
   useEffect(() => {
-    if (localSession) {
-      return;
-    }
-
-    const session = supabase.auth.session();
-
-    if (!session) {
-      const timeout = setTimeout(() => {
-        if (runAgain) {
-          setNotification({
-            message: "Unable to login - please try again later",
-            variant: "danger"
-          })
-        }
-        setRunAgain(true)
-      }, 500)
-
-      return () => {
-        clearTimeout(timeout)
-      }
-    }
-
-    const updateUserSessionState = () => {
+    supabase.auth.onAuthStateChange((_event, session) => {
       console.log('session from supabase', session)
+
+      if (!session) {
+        setSession(null)
+        return;
+      }
 
       const user = {
         email: session?.user?.email,
@@ -79,10 +59,8 @@ const Index: FC<IndexProps> = ({
       }
 
       setSession(createUserSessionObject(user, session))
-    }
-
-    updateUserSessionState()
-  }, [runAgain])
+    })
+  }, [])
 
   return (
     <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
