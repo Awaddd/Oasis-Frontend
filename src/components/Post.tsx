@@ -18,9 +18,10 @@ type Props = {
   slug: string
   author: ArticleAuthor
   imageProps?: ImageType
+  video?: string
 }
 
-const Post: FC<Props> = ({ type, data, slug, author, imageProps }) => {
+const Post: FC<Props> = ({ type, data, slug, author, imageProps, video }) => {
   const [showComments, setShowComments] = useState<boolean>(false)
   const [comments, setComments] = useRecoilState(CommentsState)
   const setArticle = useSetRecoilState(ArticleState)
@@ -73,6 +74,13 @@ const Post: FC<Props> = ({ type, data, slug, author, imageProps }) => {
 
       {content && (
         <article className="!max-w-full prose-sm md:prose sm:prose 2xl:prose-xl mt-8">{parse(content)}</article>
+      )}
+
+      {video && (
+        <video controls className="mt-md">
+          <source src={video} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       )}
 
       {showComments ? (

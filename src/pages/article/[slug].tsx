@@ -21,7 +21,7 @@ const Article = ({
 }) => {
   if (!article) return <p>Sorry, this article could not be loaded. Please try again later</p>
 
-  const { title, subtitle, image } = article
+  const { title, subtitle, image, video } = article
 
   const META = (
     <Meta
@@ -46,7 +46,7 @@ const Article = ({
       classes="pb-lg"
       footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />}
     >
-      <Post type="article" data={article} slug={slug} author={author} imageProps={imageProps} />
+      <Post type="article" data={article} slug={slug} author={author} imageProps={imageProps} video={video} />
     </Main>
   )
 }

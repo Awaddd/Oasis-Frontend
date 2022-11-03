@@ -31,6 +31,7 @@ export type Article = {
     name: string
     pluralName: string
   }
+  video?: string
 }
 
 export type SSGParams = {

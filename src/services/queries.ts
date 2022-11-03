@@ -19,6 +19,7 @@ export const ARTICLE = gql`
         name
         pluralName
       }
+      video
     }
   }
 `
@@ -65,6 +66,7 @@ export const BOOK = gql`
         mime
       }
       content
+      video
     }
   }
 `

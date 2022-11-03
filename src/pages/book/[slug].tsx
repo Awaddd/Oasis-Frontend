@@ -21,7 +21,7 @@ const Book = ({
 }) => {
   if (!book) return <p>Sorry, this book could not be loaded. Please try again later</p>
 
-  const { title, subtitle, image } = book
+  const { title, subtitle, image, video } = book
 
   const META = (
     <Meta
@@ -46,7 +46,7 @@ const Book = ({
       classes="pb-lg"
       footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />}
     >
-      <Post type="book" data={book} slug={slug} author={author} imageProps={imageProps} />
+      <Post type="book" data={book} slug={slug} author={author} imageProps={imageProps} video={video} />
     </Main>
   )
 }
