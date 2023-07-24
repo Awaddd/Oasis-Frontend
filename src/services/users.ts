@@ -1,9 +1,6 @@
-import { createUserSessionObject, validate } from "./../utils/helpers"
-import { NewUser, Session } from "../utils/types/Users"
-import { User } from "../utils/types/Users"
+import { validate } from "./../utils/helpers"
+import { NewUser } from "../utils/types/Users"
 import { pb } from "./api"
-import { useSetRecoilState } from "recoil"
-import { currentUserState } from "../state/state"
 import { userMapper } from "../network/user-mapper"
 import type { Record } from "pocketbase"
 

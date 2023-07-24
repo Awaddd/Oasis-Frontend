@@ -1,5 +1,4 @@
 import { Comment } from "../utils/types/Comments"
-import { supabase } from "./api"
 import { Thread } from "../utils/types/Comments"
 
 export async function getComments(article: string) {
