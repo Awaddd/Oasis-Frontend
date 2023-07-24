@@ -8,7 +8,7 @@ import ImageCard from "./sub-components/ImageCard"
 import Comments from "./comments/Comments"
 import { getComments } from "../services/comments"
 import { useRecoilState, useSetRecoilState } from "recoil"
-import { ArticleState, CommentsState } from "../state/state"
+import { ArticleState, CommentsState } from "../state/old-state"
 
 dayjs.extend(advancedFormat)
 

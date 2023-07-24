@@ -1,6 +1,6 @@
 import { FC, Fragment } from "react"
 import { useRecoilValue } from "recoil"
-import { selectedCategoryState } from "../../state/state"
+import { selectedCategoryState } from "../../state/old-state"
 import { Menu, Transition } from "@headlessui/react"
 import Link from "next/link"
 
@@ -64,9 +64,8 @@ const BasicMenu: FC<Props> = ({ label, data }) => {
                   {({ active }) => (
                     <MyLink
                       href={link}
-                      className={`block px-4 py-2 text-sm hover:bg-primary hover:text-gray-100 ${
-                        category === name.toLowerCase() && !active && "text-primary"
-                      } ${active && "bg-primary text-gray-100"}`}
+                      className={`block px-4 py-2 text-sm hover:bg-primary hover:text-gray-100 ${category === name.toLowerCase() && !active && "text-primary"
+                        } ${active && "bg-primary text-gray-100"}`}
                     >
                       {name}
                     </MyLink>

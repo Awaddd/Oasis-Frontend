@@ -1,6 +1,6 @@
 import { ReactNode, MouseEvent } from "react"
 import { useRecoilState } from "recoil"
-import { sidebarIsOpenState } from "../state/state"
+import { sidebarIsOpenState } from "../state/old-state"
 import BurgerMenu from "hamburger-react"
 import Navigation from "../components/Navigation"
 import Link from "next/link"

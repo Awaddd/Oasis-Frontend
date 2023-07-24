@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { RecoilRoot, useRecoilState } from "recoil"
-import { sidebarIsOpenState } from "../state/state"
+import { sidebarIsOpenState } from "../state/old-state"
 
 import "../styles/main.css"
 

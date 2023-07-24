@@ -3,7 +3,7 @@ import React, { ReactNode, FC } from "react"
 import Nav from "../layout/Nav"
 import Footer from "../layout/Footer"
 import { useRecoilState } from "recoil"
-import { sidebarIsOpenState } from "../state/state"
+import { sidebarIsOpenState } from "../state/old-state"
 import Navigation from "../components/Navigation"
 
 type IMainProps = {
@@ -21,9 +21,8 @@ const Main = ({ meta, color, classes, footerProps, footer, children }: IMainProp
   return (
     <>
       <div
-        className={`md:hidden ease-in-out duration-300 fixed top-0 right-0 z-30 flex flex-col gap-2 w-3/4 h-full px-4 pt-16 text-2xl text-center text-white bg-dark ${
-          sidebarIsOpen ? "translate-x-0" : `translate-x-full`
-        }`}
+        className={`md:hidden ease-in-out duration-300 fixed top-0 right-0 z-30 flex flex-col gap-2 w-3/4 h-full px-4 pt-16 text-2xl text-center text-white bg-dark ${sidebarIsOpen ? "translate-x-0" : `translate-x-full`
+          }`}
       >
         <Navigation isMobile={true} />
       </div>

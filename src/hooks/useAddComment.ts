@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import { useState } from "react"
-import { ArticleState, CommentsState } from "../state/state"
+import { ArticleState, CommentsState } from "../state/old-state"
 import { cloneDeep } from "lodash"
 
 type UseAddCommentArgs = {
