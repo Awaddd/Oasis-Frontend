@@ -1,7 +1,6 @@
 import Image from "next/image"
 import { Meta } from "../layout/Meta"
 import { Main } from "../templates/Main"
-import { Article } from "../types/global"
 import ArticleCardWithLink from "../components/ArticleCardWithLink"
 import { CategoryParams } from "../types/global"
 import { getArticlesByCategory } from "../services/articles"
@@ -9,6 +8,7 @@ import { getCategories } from "../services/global"
 import { blurImage, capitaliseFirstLetter } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
 import EmptySVG from "../../public/assets/images/empty.svg"
+import { Article } from "../types/article"
 
 const Index = ({ category, articles }: { category: string; articles: Article[] }) => {
   const META = (

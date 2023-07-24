@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
 import Link from "next/link"
 import ArticleCard from "./ArticleCard"
-import { Article } from "../types/global"
+import { Article } from "../types/article"
 
 type LinkProps = {
   data: Article

@@ -12,28 +12,6 @@ export type FooterProps = {
   children?: ReactNode | FC | JSX.Element
 }
 
-export type Article = {
-  id?: number
-  title: string
-  slug?: string
-  subtitle?: string
-  content?: string
-  updated_at?: string
-  image: {
-    url: string
-    alternativeText: string
-    width: number
-    height: number
-    mime: string
-  }
-  imageProps: ImageType
-  category?: {
-    name: string
-    pluralName: string
-  }
-  video?: string
-}
-
 export type SSGParams = {
   params: {
     slug: string

@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Meta } from "../layout/Meta"
 import { Main } from "../templates/Main"
-import { Article } from "../types/global"
+import { Article } from "../types/article"
 import { getBooks } from "../services/books"
 import ArticleCardWithLink from "../components/ArticleCardWithLink"
 import EmptySVG from "../../public/assets/images/empty.svg"

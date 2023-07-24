@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react"
 import Link from "next/link"
-import { Article, ArticleAuthor, ImageType } from "../types/global"
+import { ArticleAuthor, ImageType } from "../types/global"
 import parse from "html-react-parser"
 import dayjs from "dayjs"
 import advancedFormat from "dayjs/plugin/advancedFormat"
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setCurrentArticle } from "../state/global"
 import { RootState } from "../state/store"
 import { setComments } from "../state/comments"
+import { Article } from "../types/article"
 
 dayjs.extend(advancedFormat)
 

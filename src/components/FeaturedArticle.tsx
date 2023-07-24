@@ -2,10 +2,10 @@ import Image from "next/image"
 import { FC } from "react"
 import { ImageType } from "../types/global"
 import Link from "next/link"
-import { Article } from "../types/global"
 import dayjs from "dayjs"
 import advancedFormat from "dayjs/plugin/advancedFormat"
 import ImageCard from "./sub-components/ImageCard"
+import { Article } from "../types/article"
 dayjs.extend(advancedFormat)
 
 type Props = {

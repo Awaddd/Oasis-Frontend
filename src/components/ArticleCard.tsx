@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { FC } from "react"
-import { Article } from "../types/global"
+import { Article } from "../types/article"
 
 type Props = {
   data: Article
