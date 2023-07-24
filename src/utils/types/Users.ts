@@ -1,13 +1,27 @@
 import { UseFormRegister } from "react-hook-form"
+import type { Admin, Record } from "pocketbase"
 
-export interface User {
+interface BaseUser {
   email: string
   username: string
+}
+
+export interface User extends BaseUser {
+  id: string
+}
+
+export interface NewUser extends BaseUser {
   password: string
+  confirmPassword: string
+}
+
+export interface CurrentUser {
+  user: User | null
+  auth: Record | Admin | null
 }
 
 export interface GenericUser {
-  email?: string;
+  email?: string
   user_metadata: {
     username: string
   }

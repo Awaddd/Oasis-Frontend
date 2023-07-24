@@ -83,7 +83,7 @@ const Post: FC<Props> = ({ type, data, slug, author, imageProps, video }) => {
         </video>
       )}
 
-      {showComments ? (
+      {/* {showComments ? (
         <Comments threads={comments} className="2xl:mt-[45px] mt-lg mb-xl" />
       ) : (
         <div className="flex justify-center mt-8 md:mt-12">
@@ -91,7 +91,7 @@ const Post: FC<Props> = ({ type, data, slug, author, imageProps, video }) => {
             Show Comments
           </button>
         </div>
-      )}
+      )} */}
     </div>
   )
 }

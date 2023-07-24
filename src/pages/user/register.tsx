@@ -8,24 +8,21 @@ import Email from "../../components/user-form-fields/Email"
 import Username from "../../components/user-form-fields/Username"
 import Password from "../../components/user-form-fields/Password"
 import ConfirmPassword from "../../components/user-form-fields/ConfirmPassword"
-import { useSetRecoilState } from "recoil"
-import { userSessionState } from "../../state/state"
 import ErrorMessage from "../../components/sub-components/ErrorMessage"
 import { useRouter } from "next/router"
-import { createUserSessionObject } from "../../utils/helpers"
 import Link from "next/link"
-import SocialLogin from "../../components/SocialLogin"
 
 const META = <Meta title="Omar Dini | Register" description="Omar Dini's personal blog" />
 
 const Register: FC = () => {
-  const setSession = useSetRecoilState(userSessionState)
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<RegisterUserFormFields>()
+
   const [error, setError] = useState<string>("")
 
   const { push } = useRouter()
@@ -33,19 +30,17 @@ const Register: FC = () => {
   const onSubmit: SubmitHandler<RegisterUserFormFields> = async (data, e) => {
     e?.preventDefault()
 
-    const { confirmPassword, ...fields } = data
+    console.log('data', data)
 
-    const { user, session, error } = await createUser(fields)
+    // const error = await createUser(data)
 
-    if (error) {
-      setError(error.message)
-      console.log("error", error)
-      return
-    }
+    // if (error) {
+    //   setError(error.message)
+    //   console.log("error", error)
+    //   return
+    // }
 
-    setSession(createUserSessionObject(user, session))
-
-    push("/")
+    // push("/")
   }
 
   const password = watch("password")
@@ -68,7 +63,8 @@ const Register: FC = () => {
 
           <p className="my-4 font-semibold text-center text-gray-600">Sign Up with</p>
 
-          <SocialLogin />
+          {/* Disabled temporarily */}
+          {/* <SocialLogin /> */}
 
           <span className="mt-4 font-medium text-center text-gray-900">
             Already have an account?&nbsp;

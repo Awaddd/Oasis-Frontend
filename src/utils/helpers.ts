@@ -1,6 +1,4 @@
-import { Session, User } from "@supabase/supabase-js"
-import { PlaceholderCallback } from "./types/global"
-import { GenericUser } from "./types/Users"
+import { PlaceholderCallback, ValidateResponse } from "./types/global"
 
 export const capitaliseFirstLetter = (string?: string) => {
   if (!string) return ""
@@ -18,60 +16,20 @@ export const blurImage = async (url: string, callback: PlaceholderCallback) => {
   }
 }
 
-export const createUserSessionObject = (user: User | GenericUser | null, session: Session | null) => {
-  if (!session || !user || !user.email) {
-    console.log("Unable to set session", session, user, user?.email)
-    return null
+export function validate(strings: Record<string, any>): ValidateResponse {
+  let errorMessage = null
+
+  for (const key in strings) {
+    const string = strings[key]
+
+    if (string == null || string == "" || typeof string === "undefined") {
+      errorMessage = "Required properties cannot be empty"
+      return {
+        valid: false,
+        errorMessage,
+      }
+    }
   }
 
-  const { access_token, refresh_token, expires_in, expires_at, token_type } = session
-
-  return {
-    access_token,
-    refresh_token,
-    expires_in,
-    expires_at,
-    token_type,
-    user: {
-      email: user.email,
-      username: user.user_metadata.username,
-    },
-  }
-}
-
-export const generateId = (): string => {
-  let arr = []
-  const letters = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
-  ]
-  for (let i = 0; i < letters.length; i++) {
-    const randomLetter = Math.floor(Math.random() * letters.length)
-    arr.push(letters[randomLetter])
-  }
-  return arr.join("")
+  return { valid: true }
 }

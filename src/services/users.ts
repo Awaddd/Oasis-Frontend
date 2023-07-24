@@ -1,58 +1,67 @@
-import { createUserSessionObject } from "./../utils/helpers"
-import { Session } from "../utils/types/Users"
+import { createUserSessionObject, validate } from "./../utils/helpers"
+import { NewUser, Session } from "../utils/types/Users"
 import { User } from "../utils/types/Users"
-import { supabase } from "./api"
+import { pb } from "./api"
+import { useSetRecoilState } from "recoil"
+import { currentUserState } from "../state/state"
+import { userMapper } from "../network/user-mapper"
+import type { Record } from "pocketbase"
 
-export async function createUser({ email, password, username }: User) {
-  return await supabase.auth.signUp(
-    {
-      email,
-      password,
-    },
-    {
-      data: {
-        username,
-      },
-    },
-  )
-}
+export async function createUser(newUser: NewUser) {
+  // email = "admin@mail.com"
+  // password = "password123"
 
-export async function login({ email, password }: User) {
-  return await supabase.auth.signIn({
+  const isValid = validate(newUser)
+  if (!isValid.valid) return isValid.errorMessage
+
+  const { email, password, username, confirmPassword } = newUser
+
+  const data = {
     email,
+    name: username,
     password,
-  })
+    passwordConfirm: confirmPassword,
+  }
+
+  try {
+    await pb.collection("users").create(data)
+    login(email, password)
+  } catch (error) {
+    return (isValid.errorMessage = "Failed to authenticate")
+  }
 }
 
-export async function loginWithProvider(provider: "google" | "twitter" | "facebook") {
-  return await supabase.auth.signIn({
-    provider,
-  })
+export async function login(email: string, password: string) {
+  email = "admin@mail.com"
+  password = "password123"
+
+  const isValid = validate([email, password])
+  if (!isValid.valid) return isValid.errorMessage
+
+  try {
+    await pb.collection("users").authWithPassword(email, password)
+  } catch (error) {
+    return (isValid.errorMessage = "Failed to authenticate")
+  }
 }
+
+export async function loginWithProvider(provider: "google" | "twitter" | "facebook") {}
 
 export async function logout() {
-  return await supabase.auth.signOut()
+  // set currentuser state property to null
+  return pb.authStore.clear()
 }
 
-export function registerListener(): Session | null {
-  let sesh: Session | null = null
+export function registerListener() {
+  pb.authStore.onChange(() => {
+    if (pb.authStore.model == null) return
+    const user = userMapper(pb.authStore.model as Record)
 
-  supabase.auth.onAuthStateChange((_event, session) => {
-    console.log("session from supabase", session)
+    // update state
 
-    if (!session) {
-      sesh = null
-    }
-
-    const user = {
-      email: session?.user?.email,
-      user_metadata: {
-        username: session?.user?.user_metadata.full_name,
-      },
-    }
-
-    sesh = createUserSessionObject(user, session)
+    // currentUser.set({
+    //   user,
+    //   auth: pb.authStore.model,
+    // })
   })
-
-  return sesh
 }

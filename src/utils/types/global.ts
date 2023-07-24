@@ -103,3 +103,8 @@ export type Notification = {
   variant?: "success" | "info" | "warning" | "danger"
   duration?: number
 }
+
+export interface ValidateResponse {
+  valid: boolean
+  errorMessage?: string
+}
