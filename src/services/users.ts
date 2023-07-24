@@ -47,7 +47,6 @@ export async function signOut() {
 export function registerAuthListener() {
   pb.authStore.onChange(() => {
     if (pb.authStore.model == null) return
-    console.log("we have a user", pb.authStore.model)
     store.dispatch(setCurrentUser(pb.authStore.model as Record))
   })
 }

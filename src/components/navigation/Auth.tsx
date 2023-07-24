@@ -1,7 +1,10 @@
 import { FC } from "react";
-import { logout } from "../../services/users";
+import { signOut } from "../../services/users";
 import Link from "next/link";
 import { useRouter } from "next/router"
+import { useSelector } from "react-redux";
+import { RootState } from "../../state/store";
+import { capitaliseFirstLetter } from "../../utils/helpers";
 
 type Props = {
   classes: string
@@ -10,20 +13,14 @@ type Props = {
 const NavAuth: FC<Props> = ({ classes }) => {
   const router = useRouter()
 
-  const handleOnClickLogout = async () => {
-    await logout()
-  }
+  const user = useSelector((state: RootState) => state.auth.user);
 
-  // get real session from state
-  const session = null
-
-  if (session) {
+  if (user) {
     return (
       <>
-        {/* show user name here */}
-        {/* <p>{capitaliseFirstLetter(session.user.username)}</p> */}
-        <a className={classes} onClick={handleOnClickLogout}>
-          Logout
+        <p>{capitaliseFirstLetter(user.username)}</p>
+        <a className={classes} onClick={signOut}>
+          Sign out
         </a>
       </>
     )

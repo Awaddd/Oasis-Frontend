@@ -19,11 +19,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setCurrentUser: (state, action: PayloadAction<Record>) => {
-      const user = userMapper(action.payload)
-      state = {
-        user,
-        auth: action.payload,
-      }
+      state.user = userMapper(action.payload)
+      state.auth = action.payload
     },
     logout: (state) => {
       ;(state.user = null), (state.auth = null)
