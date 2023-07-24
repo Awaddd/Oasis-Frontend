@@ -7,11 +7,10 @@ import advancedFormat from "dayjs/plugin/advancedFormat"
 import ImageCard from "./sub-components/ImageCard"
 import Comments from "./comments/Comments"
 import { getComments } from "../services/comments"
-import { useRecoilState } from "recoil"
-import { CommentsState } from "../state/old-state"
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrentArticle } from "../state/global"
 import { RootState } from "../state/store"
+import { setComments } from "../state/comments"
 
 dayjs.extend(advancedFormat)
 
@@ -26,10 +25,7 @@ type Props = {
 
 const Post: FC<Props> = ({ type, data, slug, author, imageProps, video }) => {
   const [showComments, setShowComments] = useState<boolean>(false)
-  const [comments, setComments] = useRecoilState(CommentsState)
-
-  const articleSl = useSelector((state: RootState) => state.global.currentArticle)
-  console.log('current ARTICLE', articleSl)
+  const comments = useSelector((state: RootState) => state.comments.comments)
 
   const dispatch = useDispatch()
 
@@ -42,7 +38,7 @@ const Post: FC<Props> = ({ type, data, slug, author, imageProps, video }) => {
 
   const fetchComments = async () => {
     // const comments = await getComments(slug)
-    // setComments(comments || [])
+    // dispatch(setComments(comments || []))
     // setShowComments(true)
   }
 
