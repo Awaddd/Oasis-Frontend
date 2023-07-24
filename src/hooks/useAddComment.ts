@@ -1,6 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import { useState } from "react"
-import { ArticleState, CommentsState } from "../state/old-state"
+import { CommentsState } from "../state/old-state"
 import { cloneDeep } from "lodash"
 
 type UseAddCommentArgs = {
@@ -20,7 +20,7 @@ type UseAddCommentArgs = {
 // } => {
 //   const [comment, setComment] = useState<string | undefined>()
 //   const setComments = useSetRecoilState(CommentsState)
-//   const article = useRecoilValue(ArticleState)
+//   const article = useSelector((state: RootState) => state.global.currentArticle)
 
 //   // get session from state
 //   const session = null
