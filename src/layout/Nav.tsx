@@ -1,16 +1,18 @@
 import { ReactNode, MouseEvent } from "react"
-import { useRecoilState } from "recoil"
-import { sidebarIsOpenState } from "../state/old-state"
 import BurgerMenu from "hamburger-react"
 import Navigation from "../components/Navigation"
 import Link from "next/link"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../state/store"
+import { toggleSidebar } from "../state/global"
 
 const Nav = ({ meta, color }: { meta: ReactNode; color?: string }) => {
-  const [sidebarIsOpen, setSidebarIsOpen] = useRecoilState(sidebarIsOpenState)
+  const sidebarIsOpen = useSelector((state: RootState) => state.global.sidebarIsOpen);
+  const dispatch = useDispatch()
 
   const handleClick = (e: MouseEvent) => {
     e.stopPropagation()
-    setSidebarIsOpen((currVal) => !currVal)
+    dispatch(toggleSidebar())
   }
 
   return (

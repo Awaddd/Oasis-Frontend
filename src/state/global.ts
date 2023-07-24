@@ -22,6 +22,9 @@ export const globalStateSlice = createSlice({
     setSidebarIsOpen: (state, action: PayloadAction<boolean>) => {
       state.sidebarIsOpen = action.payload
     },
+    toggleSidebar: (state) => {
+      state.sidebarIsOpen = !state.sidebarIsOpen
+    },
     setSelectedCategory: (state, action: PayloadAction<string>) => {
       state.selectedCategory = action.payload
     },
@@ -34,5 +37,6 @@ export const globalStateSlice = createSlice({
   },
 })
 
-export const {} = globalStateSlice.actions
+export const { setSidebarIsOpen, toggleSidebar, setSelectedCategory, setCurrentArticle, setActiveComment } =
+  globalStateSlice.actions
 export default globalStateSlice.reducer

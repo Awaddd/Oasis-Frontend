@@ -2,9 +2,10 @@ import React, { ReactNode, FC } from "react"
 
 import Nav from "../layout/Nav"
 import Footer from "../layout/Footer"
-import { useRecoilState } from "recoil"
-import { sidebarIsOpenState } from "../state/old-state"
 import Navigation from "../components/Navigation"
+import { useDispatch, useSelector } from "react-redux"
+import { setSidebarIsOpen } from "../state/global"
+import { RootState } from "../state/store"
 
 type IMainProps = {
   meta: ReactNode
@@ -16,7 +17,8 @@ type IMainProps = {
 }
 
 const Main = ({ meta, color, classes, footerProps, footer, children }: IMainProps) => {
-  const [sidebarIsOpen, setSidebarIsOpen] = useRecoilState(sidebarIsOpenState)
+  const sidebarIsOpen = useSelector((state: RootState) => state.global.sidebarIsOpen);
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -28,7 +30,7 @@ const Main = ({ meta, color, classes, footerProps, footer, children }: IMainProp
       </div>
       <div
         className="grid w-screen h-full min-h-screen antialiased app-grid font-inter"
-        onClick={() => setSidebarIsOpen(false)}
+        onClick={() => dispatch(setSidebarIsOpen(false))}
       >
         <Nav meta={meta} color={color} />
         <main className={`h-full global-padding ${color} ${classes}`}>{children}</main>
