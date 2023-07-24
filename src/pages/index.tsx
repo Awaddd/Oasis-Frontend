@@ -9,11 +9,11 @@ import ArticleCardWithLink from "../components/ArticleCardWithLink"
 import { Article, AuthorBio, ImageType, Newsletter as NewsletterType } from "../utils/types/global"
 import AboutMe from "../components/AboutMe"
 import Newsletter from "../components/Newsletter"
-import { blurImage, createUserSessionObject } from "../utils/helpers"
+import { blurImage } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
-import { supabase } from "../services/api"
 import { useSetRecoilState } from "recoil"
 import { userSessionState } from "../state/state"
+import { registerListener } from "../services/users"
 
 const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
 
@@ -43,23 +43,8 @@ const Index: FC<IndexProps> = ({
   const setSession = useSetRecoilState(userSessionState)
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((_event, session) => {
-      console.log('session from supabase', session)
-
-      if (!session) {
-        setSession(null)
-        return;
-      }
-
-      const user = {
-        email: session?.user?.email,
-        user_metadata: {
-          username: session?.user?.user_metadata.full_name
-        }
-      }
-
-      setSession(createUserSessionObject(user, session))
-    })
+    const session = registerListener();
+    setSession(session);
   }, [])
 
   return (
