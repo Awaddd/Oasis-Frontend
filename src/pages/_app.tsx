@@ -7,8 +7,9 @@ import { sidebarIsOpenState } from "../state/old-state"
 import { Provider } from 'react-redux'
 
 import "../styles/main.css"
-import { store } from "../state/store"
+import { persistor, store } from "../state/store"
 import { registerAuthListener } from "../services/users"
+import { PersistGate } from "redux-persist/integration/react"
 
 const App = ({ component }: { component: JSX.Element }) => {
   const [, setSidebarIsOpen] = useRecoilState(sidebarIsOpenState)
@@ -35,9 +36,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <Provider store={store}>
-          <App component={component} />
-        </Provider>
+        <PersistGate persistor={persistor}>
+          <Provider store={store}>
+            <App component={component} />
+          </Provider>
+        </PersistGate>
       </RecoilRoot>
     </QueryClientProvider>
   )
