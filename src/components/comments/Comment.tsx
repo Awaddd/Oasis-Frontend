@@ -2,11 +2,12 @@ import React, { FC } from "react"
 import { Comment as CommentType } from "../../utils/types/comments"
 import ReplyIcon from "../../assets/icons/ReplyIcon"
 import AddComment from "./AddComment"
-import { useRecoilState } from "recoil"
-import { activeCommentState } from "../../state/old-state"
 import CloseIcon from "../../assets/icons/CloseIcon"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../state/store"
+import { setActiveComment } from "../../state/global"
 
 dayjs.extend(relativeTime)
 
@@ -15,7 +16,8 @@ type Props = {
 }
 
 const Comment: FC<Props> = ({ comment }) => {
-  const [activeComment, setActiveComment] = useRecoilState(activeCommentState)
+  const activeComment = useSelector((state: RootState) => state.global.activeComment)
+  const dispatch = useDispatch()
 
   if (!comment) return null
   const { id, thread, text, author, created_at, replyTo } = comment
@@ -27,9 +29,9 @@ const Comment: FC<Props> = ({ comment }) => {
         <span className="">({dayjs(created_at).fromNow()})</span>
 
         {id === activeComment ? (
-          <CloseIcon classes="primary ml-2 cursor-pointer" size={14} onClick={() => setActiveComment("")} />
+          <CloseIcon classes="primary ml-2 cursor-pointer" size={14} onClick={() => dispatch(setActiveComment(""))} />
         ) : (
-          <ReplyIcon classes="primary ml-2 cursor-pointer" size={16} onClick={() => setActiveComment(id)} />
+          <ReplyIcon classes="primary ml-2 cursor-pointer" size={16} onClick={() => dispatch(setActiveComment(id))} />
         )}
       </header>
 
@@ -38,7 +40,7 @@ const Comment: FC<Props> = ({ comment }) => {
         {text}
       </p>
 
-      {id === activeComment && <AddComment thread={thread} replyTo={author} onComplete={() => setActiveComment("")} />}
+      {id === activeComment && <AddComment thread={thread} replyTo={author} onComplete={() => dispatch(setActiveComment(""))} />}
     </div>
   )
 }
