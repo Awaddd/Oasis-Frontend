@@ -1,8 +1,8 @@
 import { FC, Fragment } from "react"
-import { useRecoilValue } from "recoil"
-import { selectedCategoryState } from "../../state/old-state"
 import { Menu, Transition } from "@headlessui/react"
 import Link from "next/link"
+import { useSelector } from "react-redux"
+import { RootState } from "../../state/store"
 
 function MyLink(props: { [x: string]: any; href: any; children: any }) {
   let { href, children, ...rest } = props
@@ -25,7 +25,7 @@ type Props = {
 
 const BasicMenu: FC<Props> = ({ label, data }) => {
   if (!label) return null
-  const category = useRecoilValue(selectedCategoryState)
+  const category = useSelector((state: RootState) => state.global.selectedCategory)
 
   return (
     <Menu as="div" className="relative hidden text-left md:inline-block">

@@ -3,16 +3,6 @@ import { Thread } from "../utils/types/comments"
 import { User } from "../utils/types/users"
 import { recoilPersist } from "recoil-persist"
 
-export const sidebarIsOpenState = atom({
-  key: "sidebarIsOpenState",
-  default: false,
-})
-
-export const selectedCategoryState = atom({
-  key: "selectedCategoryState",
-  default: "",
-})
-
 export const ArticleState = atom({
   key: "articleState",
   default: "",

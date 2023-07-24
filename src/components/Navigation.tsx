@@ -1,13 +1,14 @@
 import { useState, useEffect, Key, FC } from "react"
 import { getCategories } from "../services/global"
 import { useQuery } from "react-query"
-import { useRecoilState } from "recoil"
-import { selectedCategoryState } from "../state/old-state"
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { Category } from "../utils/types/global"
 import Menu, { link } from "./sub-components/Menu"
 import dynamic from "next/dynamic"
+import { RootState } from "../state/store"
+import { useDispatch, useSelector } from "react-redux"
+import { setSelectedCategory } from "../state/global"
 
 const classes = "md:transition md:hover:text-primary outline-none cursor-pointer"
 
@@ -21,7 +22,8 @@ const Navigation: FC<Props> = ({ isMobile }) => {
   const { error, isLoading, data } = useQuery("categories", getCategories)
   const [menuData, setMenuData] = useState<link[]>()
 
-  const [category, setCategory] = useRecoilState(selectedCategoryState)
+  const category = useSelector((state: RootState) => state.global.selectedCategory)
+  const dispatch = useDispatch()
 
   const categories: Category[] = data?.categories
 
@@ -43,7 +45,7 @@ const Navigation: FC<Props> = ({ isMobile }) => {
   }, [data])
 
   useEffect(() => {
-    setCategory(router.query.category as string)
+    dispatch(setSelectedCategory(router.query.category as string))
   }, [router?.query?.category])
 
   return (
