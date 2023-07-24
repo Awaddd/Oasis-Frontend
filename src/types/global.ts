@@ -31,29 +31,6 @@ export type Category = {
   pluralName: string
 }
 
-export type SocialLink = {
-  brand: string
-  link: string
-}
-
-export type AuthorBio = {
-  firstName: string
-  lastName: string
-  bio: string
-  email?: string
-  picture?: {
-    url: string
-  }
-  socialLinks?: SocialLink[]
-}
-
-export type ArticleAuthor = {
-  firstName: string
-  lastName: string
-  socialLinks: SocialLink[]
-  email?: string
-}
-
 export type ImageType = {
   src: string
   type: string

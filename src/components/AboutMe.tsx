@@ -1,7 +1,8 @@
 import Image from "next/image"
 import { FC } from "react"
-import { AuthorBio, ImageType } from "../types/global"
+import { ImageType } from "../types/global"
 import SocialIconBar from "./SocialIconBar"
+import { AuthorBio } from "../types/article"
 
 type Props = {
   data?: AuthorBio

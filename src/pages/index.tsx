@@ -6,12 +6,12 @@ import { getAuthorBio, getHero, getNewsletter } from "../services/global"
 import HeroImage from "../components/HeroImage"
 import FeaturedArticle from "../components/FeaturedArticle"
 import ArticleCardWithLink from "../components/ArticleCardWithLink"
-import { AuthorBio, ImageType, Newsletter as NewsletterType } from "../types/global"
+import { ImageType, Newsletter as NewsletterType } from "../types/global"
 import AboutMe from "../components/AboutMe"
 import Newsletter from "../components/Newsletter"
 import { blurImage } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
-import { Article } from "../types/article"
+import { Article, AuthorBio } from "../types/article"
 
 const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
 

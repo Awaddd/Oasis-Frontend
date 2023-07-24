@@ -2,12 +2,12 @@ import { Meta } from "../../layout/Meta"
 import { Main } from "../../templates/Main"
 import { getBook, getBooksOnlySlug } from "../../services/books"
 import { getArticleAuthor } from "../../services/global"
-import { ArticleAuthor, ImageType, SSGParams } from "../../types/global"
+import { ImageType, SSGParams } from "../../types/global"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
 import ArticleFooter from "../../components/ArticleFooter"
 import Post from "../../components/Post"
 import { blurImage } from "../../utils/helpers"
-import { Article } from "../../types/article"
+import { Article, ArticleAuthor } from "../../types/article"
 
 const Book = ({
   book,
