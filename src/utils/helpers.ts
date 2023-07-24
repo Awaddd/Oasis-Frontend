@@ -1,4 +1,4 @@
-import { PlaceholderCallback, ValidateResponse } from "./types/global"
+import { PlaceholderCallback, ValidateResponse } from "../types/global"
 
 export const capitaliseFirstLetter = (string?: string) => {
   if (!string) return ""

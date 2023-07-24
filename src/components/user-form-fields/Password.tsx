@@ -1,6 +1,6 @@
 import { FC } from "react"
 import { ValidationRule } from "react-hook-form"
-import { UserFormField } from "../../utils/types/users"
+import { UserFormField } from "../../types/users"
 import ErrorMessage from "../sub-components/ErrorMessage"
 
 const Password: FC<UserFormField & { minLength?: ValidationRule<number> }> = ({ register, error, minLength }) => (

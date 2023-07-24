@@ -1,5 +1,5 @@
 import { validate } from "./../utils/helpers"
-import { NewUser } from "../utils/types/users"
+import { NewUser } from "../types/users"
 import { pb } from "./api"
 import type { Record } from "pocketbase"
 import { store } from "../state/store"

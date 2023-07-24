@@ -1,4 +1,4 @@
-import type { SocialLink } from "../utils/types/global"
+import type { SocialLink } from "../types/global"
 
 const SocialIconBar = ({ links, email, dark }: { links?: SocialLink[]; email?: string; dark?: boolean }) => {
   if (!links) return null

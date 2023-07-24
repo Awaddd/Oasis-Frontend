@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { Thread } from "../utils/types/comments"
+import { Thread } from "../types/comments"
 
 export interface CommentsState {
   comments: Thread[]

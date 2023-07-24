@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Thread, Comment as CommentType } from "../../utils/types/comments"
+import { Thread, Comment as CommentType } from "../../types/comments"
 import AddComment from "./AddComment"
 import Comment from "./Comment"
 import { useSelector } from "react-redux"

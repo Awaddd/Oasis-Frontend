@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { FC } from "react"
-import { HeroImage, ImageType } from "../utils/types/global"
+import { HeroImage, ImageType } from "../types/global"
 
 type Props = {
   data: HeroImage

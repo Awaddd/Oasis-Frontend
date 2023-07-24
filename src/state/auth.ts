@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { User } from "../utils/types/users"
+import { User } from "../types/users"
 import { Admin, Record } from "pocketbase"
 import { userMapper } from "../network/user-mapper"
 

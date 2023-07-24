@@ -1,5 +1,5 @@
-import { Comment } from "../utils/types/comments"
-import { Thread } from "../utils/types/comments"
+import { Comment } from "../types/comments"
+import { Thread } from "../types/comments"
 
 export async function getComments(article: string) {
   // const query = `

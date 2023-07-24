@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Newsletter as NewsletterType } from "../utils/types/global"
+import { Newsletter as NewsletterType } from "../types/global"
 
 type Props = {
   data: NewsletterType

@@ -1,5 +1,5 @@
 import type { Record } from "pocketbase"
-import { User } from "../utils/types/users"
+import { User } from "../types/users"
 
 export const userMapper = function (record: Record): User {
   return {

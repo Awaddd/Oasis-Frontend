@@ -1,5 +1,5 @@
 import { AppConfig } from "../utils/AppConfig"
-import { FooterProps } from "../utils/types/global"
+import { FooterProps } from "../types/global"
 
 const Footer = ({ classes, children }: FooterProps) => {
   if (children) return <>{children}</>

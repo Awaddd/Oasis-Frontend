@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { FC } from "react"
-import { AuthorBio, ImageType } from "../utils/types/global"
+import { AuthorBio, ImageType } from "../types/global"
 import SocialIconBar from "./SocialIconBar"
 
 type Props = {

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react"
 import Link from "next/link"
-import { Article, ArticleAuthor, ImageType } from "../utils/types/global"
+import { Article, ArticleAuthor, ImageType } from "../types/global"
 import parse from "html-react-parser"
 import dayjs from "dayjs"
 import advancedFormat from "dayjs/plugin/advancedFormat"

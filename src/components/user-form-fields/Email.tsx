@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { UserFormField } from "../../utils/types/users"
+import { UserFormField } from "../../types/users"
 import ErrorMessage from "../sub-components/ErrorMessage"
 
 const Email: FC<UserFormField> = ({ register, error }) => (

@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { SocialLink } from "../utils/types/global"
+import { SocialLink } from "../types/global"
 import SocialIconBar from "./SocialIconBar"
 
 type Props = {

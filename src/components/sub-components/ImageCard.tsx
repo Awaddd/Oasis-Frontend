@@ -1,7 +1,7 @@
 import React, { FC, Fragment } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ImageType } from "../../utils/types/global"
+import { ImageType } from "../../types/global"
 import classNames from "clsx"
 
 type Props = {
