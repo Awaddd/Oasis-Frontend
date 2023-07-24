@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { Comment as CommentType } from "../../utils/types/Comments"
+import { Comment as CommentType } from "../../utils/types/comments"
 import ReplyIcon from "../../assets/icons/ReplyIcon"
 import AddComment from "./AddComment"
 import { useRecoilState } from "recoil"

@@ -1,5 +1,5 @@
 import { validate } from "./../utils/helpers"
-import { NewUser } from "../utils/types/Users"
+import { NewUser } from "../utils/types/users"
 import { pb } from "./api"
 import { userMapper } from "../network/user-mapper"
 import type { Record } from "pocketbase"

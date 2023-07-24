@@ -1,7 +1,6 @@
 import { atom } from "recoil"
-import { Thread } from "../utils/types/Comments"
-import { Notification } from "../utils/types/global"
-import { Session, User } from "../utils/types/Users"
+import { Thread } from "../utils/types/comments"
+import { Session, User } from "../utils/types/users"
 import { recoilPersist } from "recoil-persist"
 
 export const sidebarIsOpenState = atom({
@@ -27,13 +26,6 @@ export const activeCommentState = atom({
 export const CommentsState = atom<Thread[]>({
   key: "commentsState",
   default: [],
-})
-
-export const NotificationState = atom<Notification>({
-  key: "notificationState",
-  default: {
-    message: "",
-  },
 })
 
 const { persistAtom } = recoilPersist()

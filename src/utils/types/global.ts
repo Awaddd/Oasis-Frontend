@@ -98,12 +98,6 @@ export type HeroImage = {
 
 export type PlaceholderCallback = (url: string, options: { [key: string]: any }) => any
 
-export type Notification = {
-  message: string
-  variant?: "success" | "info" | "warning" | "danger"
-  duration?: number
-}
-
 export interface ValidateResponse {
   valid: boolean
   errorMessage?: string

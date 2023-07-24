@@ -1,7 +1,7 @@
 import { FC } from "react"
 import { useRecoilValue } from "recoil"
 import { userSessionState } from "../../state/state"
-import { Thread, Comment as CommentType } from "../../utils/types/Comments"
+import { Thread, Comment as CommentType } from "../../utils/types/comments"
 import AddComment from "./AddComment"
 import Comment from "./Comment"
 
