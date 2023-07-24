@@ -8,6 +8,7 @@ import Password from "../../components/user-form-fields/Password"
 import { useRouter } from "next/router"
 import ErrorMessage from "../../components/sub-components/ErrorMessage"
 import Link from "next/link"
+import { login } from "../../services/users"
 
 const META = <Meta title="Omar Dini | Login" description="Omar Dini's personal blog" />
 
@@ -24,17 +25,20 @@ const Login: FC = () => {
   const onSubmit: SubmitHandler<RegisterUserFormFields> = async (data, e) => {
     e?.preventDefault()
 
-    console.log('data', data)
+    const dev = {
+      email: "admin@mail.com",
+      password: "password123"
+    }
 
-    // const error = await login(data)
+    const error = await login(dev)
 
-    // if (error) {
-    //   setError(error.message)
-    //   console.log("error", error)
-    //   return
-    // }
+    if (error) {
+      setError(error)
+      console.log("error", error)
+      return
+    }
 
-    // push("/")
+    push("/")
   }
 
   return (

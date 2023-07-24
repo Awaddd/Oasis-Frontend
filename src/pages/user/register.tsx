@@ -30,17 +30,15 @@ const Register: FC = () => {
   const onSubmit: SubmitHandler<RegisterUserFormFields> = async (data, e) => {
     e?.preventDefault()
 
-    console.log('data', data)
+    const error = await createUser(data)
 
-    // const error = await createUser(data)
+    if (error) {
+      setError(error)
+      console.log("error", error)
+      return
+    }
 
-    // if (error) {
-    //   setError(error.message)
-    //   console.log("error", error)
-    //   return
-    // }
-
-    // push("/")
+    push("/")
   }
 
   const password = watch("password")

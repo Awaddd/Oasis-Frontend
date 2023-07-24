@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react"
+import { FC } from "react"
 import { Meta } from "../layout/Meta"
 import { Main } from "../templates/Main"
 import { getArticles, getFeaturedArticle } from "../services/articles"
@@ -11,7 +11,6 @@ import AboutMe from "../components/AboutMe"
 import Newsletter from "../components/Newsletter"
 import { blurImage } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
-import { registerListener } from "../services/users"
 
 const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
 
@@ -38,10 +37,6 @@ const Index: FC<IndexProps> = ({
   authorImageProps,
   type,
 }) => {
-  useEffect(() => {
-    registerListener();
-  }, [])
-
   return (
     <Main meta={META} footerProps={{ classes: "bg-dark text-gray-200" }}>
       <HeroImage data={hero} imageProps={heroImageProps} />

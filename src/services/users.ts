@@ -1,17 +1,15 @@
 import { validate } from "./../utils/helpers"
 import { NewUser } from "../utils/types/users"
 import { pb } from "./api"
-import { userMapper } from "../network/user-mapper"
 import type { Record } from "pocketbase"
+import { store } from "../state/store"
+import { setCurrentUser, logout } from "../state/auth"
 
-export async function createUser(newUser: NewUser) {
-  // email = "admin@mail.com"
-  // password = "password123"
-
-  const isValid = validate(newUser)
+export async function createUser(user: NewUser) {
+  const isValid = validate(user)
   if (!isValid.valid) return isValid.errorMessage
 
-  const { email, password, username, confirmPassword } = newUser
+  const { email, password, username, confirmPassword } = user
 
   const data = {
     email,
@@ -22,43 +20,34 @@ export async function createUser(newUser: NewUser) {
 
   try {
     await pb.collection("users").create(data)
-    login(email, password)
+    login({ email, password })
   } catch (error) {
-    return (isValid.errorMessage = "Failed to authenticate")
+    return "Failed to authenticate"
   }
 }
 
-export async function login(email: string, password: string) {
-  email = "admin@mail.com"
-  password = "password123"
-
+export async function login({ email, password }: { email: string; password: string }) {
   const isValid = validate([email, password])
   if (!isValid.valid) return isValid.errorMessage
 
   try {
     await pb.collection("users").authWithPassword(email, password)
   } catch (error) {
-    return (isValid.errorMessage = "Failed to authenticate")
+    return "Failed to authenticate"
   }
 }
 
 export async function loginWithProvider(provider: "google" | "twitter" | "facebook") {}
 
-export async function logout() {
-  // set currentuser state property to null
+export async function signOut() {
+  store.dispatch(logout())
   return pb.authStore.clear()
 }
 
-export function registerListener() {
+export function registerAuthListener() {
   pb.authStore.onChange(() => {
     if (pb.authStore.model == null) return
-    const user = userMapper(pb.authStore.model as Record)
-
-    // update state
-
-    // currentUser.set({
-    //   user,
-    //   auth: pb.authStore.model,
-    // })
+    console.log("we have a user", pb.authStore.model)
+    store.dispatch(setCurrentUser(pb.authStore.model as Record))
   })
 }
