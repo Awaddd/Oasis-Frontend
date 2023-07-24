@@ -11,8 +11,6 @@ import AboutMe from "../components/AboutMe"
 import Newsletter from "../components/Newsletter"
 import { blurImage } from "../utils/helpers"
 import { getPlaiceholder as getPlaceholder } from "plaiceholder"
-import { useSetRecoilState } from "recoil"
-import { userSessionState } from "../state/state"
 import { registerListener } from "../services/users"
 
 const META = <Meta title="Omar Dini" description="Omar Dini's personal blog" />
@@ -40,11 +38,8 @@ const Index: FC<IndexProps> = ({
   authorImageProps,
   type,
 }) => {
-  const setSession = useSetRecoilState(userSessionState)
-
   useEffect(() => {
-    const session = registerListener();
-    setSession(session);
+    registerListener();
   }, [])
 
   return (

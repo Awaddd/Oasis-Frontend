@@ -1,6 +1,5 @@
 import { FC } from "react"
 import { useRecoilValue } from "recoil"
-import { userSessionState } from "../../state/state"
 import { Thread, Comment as CommentType } from "../../utils/types/comments"
 import AddComment from "./AddComment"
 import Comment from "./Comment"
@@ -11,7 +10,9 @@ type Props = {
 }
 
 const Comments: FC<Props> = ({ className, threads }) => {
-  const session = useRecoilValue(userSessionState)
+
+  // temp, replace with user state check if null
+  const session = false;
 
   return (
     <section className={className}>

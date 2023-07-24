@@ -1,7 +1,5 @@
-import { userSessionState } from "./../state/state"
 import { useRecoilValue, useSetRecoilState } from "recoil"
 import { useState } from "react"
-import { addComment } from "../services/comments"
 import { ArticleState, CommentsState } from "../state/state"
 import { cloneDeep } from "lodash"
 
@@ -11,73 +9,75 @@ type UseAddCommentArgs = {
   onComplete?: () => void
 }
 
-export const useAddComment = ({
-  thread,
-  replyTo,
-  onComplete,
-}: UseAddCommentArgs): {
-  comment: string | undefined
-  handleOnChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  handleOnClick: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>
-} => {
-  const [comment, setComment] = useState<string | undefined>()
-  const setComments = useSetRecoilState(CommentsState)
-  const article = useRecoilValue(ArticleState)
-  const session = useRecoilValue(userSessionState)
+// export const useAddComment = ({
+//   thread,
+//   replyTo,
+//   onComplete,
+// }: UseAddCommentArgs): {
+//   comment: string | undefined
+//   handleOnChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+//   handleOnClick: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>
+// } => {
+//   const [comment, setComment] = useState<string | undefined>()
+//   const setComments = useSetRecoilState(CommentsState)
+//   const article = useRecoilValue(ArticleState)
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value)
-  }
+//   // get session from state
+//   const session = null
 
-  const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+//   const handleOnChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+//     setComment(e.target.value)
+//   }
 
-    if (!comment || !session) return
+//   const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+//     e.preventDefault()
 
-    const { data, error } = await addComment(comment, article, session.user?.username, thread, replyTo)
+//     if (!comment || !session) return
 
-    if (error) {
-      console.log(error.message)
-      // show error notification here with a generic message
-      return
-    }
+//     // const { data, error } = await addComment(comment, article, session.user?.username, thread, replyTo)
 
-    const newComment = data[0]
+//     if (error) {
+//       console.log(error.message)
+//       // show error notification here with a generic message
+//       return
+//     }
 
-    setComments((threads) => {
-      const arr = cloneDeep(threads)
+//     const newComment = data[0]
 
-      let updated = false
+//     setComments((threads) => {
+//       const arr = cloneDeep(threads)
 
-      arr?.forEach((thread) => {
-        if (thread.id === newComment.thread) {
-          thread.Comments.push(newComment)
-          updated = true
-        }
-      })
+//       let updated = false
 
-      if (!updated) {
-        arr.unshift({
-          Comments: [newComment],
-          id: newComment.thread,
-          article: "",
-          created_at: "",
-        })
-      }
+//       arr?.forEach((thread) => {
+//         if (thread.id === newComment.thread) {
+//           thread.Comments.push(newComment)
+//           updated = true
+//         }
+//       })
 
-      return arr
-    })
+//       if (!updated) {
+//         arr.unshift({
+//           Comments: [newComment],
+//           id: newComment.thread,
+//           article: "",
+//           created_at: "",
+//         })
+//       }
 
-    // show notification "Comment has been posted"
+//       return arr
+//     })
 
-    setComment("")
+//     // show notification "Comment has been posted"
 
-    if (onComplete) onComplete()
-  }
+//     setComment("")
 
-  return {
-    comment,
-    handleOnChange,
-    handleOnClick,
-  }
-}
+//     if (onComplete) onComplete()
+//   }
+
+//   return {
+//     comment,
+//     handleOnChange,
+//     handleOnClick,
+//   }
+// }
