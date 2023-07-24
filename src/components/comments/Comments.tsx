@@ -1,8 +1,9 @@
 import { FC } from "react"
-import { useRecoilValue } from "recoil"
 import { Thread, Comment as CommentType } from "../../utils/types/comments"
 import AddComment from "./AddComment"
 import Comment from "./Comment"
+import { useSelector } from "react-redux"
+import { RootState } from "../../state/store"
 
 type Props = {
   className?: string
@@ -11,8 +12,7 @@ type Props = {
 
 const Comments: FC<Props> = ({ className, threads }) => {
 
-  // temp, replace with user state check if null
-  const session = false;
+  const session = useSelector((state: RootState) => state.auth.user);
 
   return (
     <section className={className}>

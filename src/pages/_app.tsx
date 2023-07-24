@@ -2,7 +2,6 @@ import { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import { QueryClient, QueryClientProvider } from "react-query"
-import { RecoilRoot } from "recoil"
 import { Provider, useDispatch } from 'react-redux'
 
 import "../styles/main.css"
@@ -13,7 +12,6 @@ import { setSidebarIsOpen } from "../state/global"
 
 const App = ({ component }: { component: JSX.Element }) => {
   const dispatch = useDispatch()
-
 
   const router = useRouter()
 
@@ -36,13 +34,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <PersistGate persistor={persistor}>
-          <Provider store={store}>
-            <App component={component} />
-          </Provider>
-        </PersistGate>
-      </RecoilRoot>
+      <PersistGate persistor={persistor}>
+        <Provider store={store}>
+          <App component={component} />
+        </Provider>
+      </PersistGate>
     </QueryClientProvider>
   )
 }
