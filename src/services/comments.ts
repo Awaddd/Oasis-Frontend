@@ -3,6 +3,7 @@ import { commentMapper, tempMapper } from "../network/comment-mapper"
 import { setComments, saveComment } from "../state/comments"
 import { store } from "../state/store"
 import { ClientResponseError } from "pocketbase"
+import { Thread } from "../types/comments"
 
 export function registerCommentsListener() {
   pb.collection("comments").subscribe("*", async (e) => {
@@ -24,13 +25,17 @@ export async function getComments(articleID: string) {
       filter: `article="${articleID}"`,
     })
 
-    const comments = []
+    const threads: Thread = {}
 
-    for (const comment of data.items) {
-      comments.push(commentMapper(comment))
+    for (const c of data.items) {
+      const comment = commentMapper(c)
+      if (typeof threads[comment.thread] === "undefined") {
+        threads[comment.thread] = []
+      }
+      threads[comment.thread]?.push(comment)
     }
 
-    store.dispatch(setComments(comments || []))
+    store.dispatch(setComments(threads || []))
   } catch (error) {
     console.log("error", error)
     if (!(error instanceof ClientResponseError)) return
@@ -58,8 +63,6 @@ export async function addComment(
       }
 
       const record = await pb.collection("threads").create(data)
-      console.log("thread", record)
-      console.log("thread id", record.id)
       thread = record.id
     }
 

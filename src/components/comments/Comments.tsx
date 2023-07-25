@@ -1,18 +1,23 @@
-import { FC } from "react"
-import { Comment as CommentType } from "../../types/comments"
+import { FC, useEffect } from "react"
 import AddComment from "./AddComment"
 import Comment from "./Comment"
 import { useSelector } from "react-redux"
 import { RootState } from "../../state/store"
+import { registerCommentsListener, removeCommentsListener } from "../../services/comments"
 
 type Props = {
   className?: string
-  comments: CommentType[] | null
 }
 
-const Comments: FC<Props> = ({ className, comments }) => {
+const Comments: FC<Props> = ({ className }) => {
 
   const session = useSelector((state: RootState) => state.auth.user);
+  const threads = useSelector((state: RootState) => state.comments.comments)
+
+  useEffect(() => {
+    registerCommentsListener()
+    return () => removeCommentsListener()
+  }, [])
 
   return (
     <section className={className}>
@@ -25,17 +30,15 @@ const Comments: FC<Props> = ({ className, comments }) => {
         </div>
       </header>
 
-      {!comments || comments.length === 0 && (
+      {Object.keys(threads).length === 0 && threads.constructor === Object && (
         <>
           <h4 className="mt-lg">There are no comments yet</h4>
         </>
       )}
 
-      {comments && (
+      {threads && (
         <main className="flex flex-col md:gap-1 mt-md">
-          {comments.map((comment) =>
-            <Comment comment={comment} key={comment.id} />,
-          )}
+          {Object.keys(threads).map((key) => threads[key]?.map((comment) => <Comment comment={comment} key={comment.id} />))}
         </main>
       )}
     </section>

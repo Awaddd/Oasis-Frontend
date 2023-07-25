@@ -7,9 +7,6 @@ export type Comment = {
   replyTo?: string
 }
 
-export interface Thread {
-  id: string
-  article: string
-  Comments: Comment[]
-  created: string
+export type Thread = {
+  [key: string]: Comment[]
 }

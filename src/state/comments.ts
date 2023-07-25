@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { Comment } from "../types/comments"
+import { Comment, Thread } from "../types/comments"
 
 export interface CommentsState {
-  comments: Comment[]
+  comments: Thread
 }
 
 const initialState: CommentsState = {
-  comments: [],
+  comments: {},
 }
 
 export const commentSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {
-    setComments: (state, action: PayloadAction<Comment[]>) => {
+    setComments: (state, action: PayloadAction<Thread>) => {
       state.comments = action.payload
     },
     saveComment: (state, action: PayloadAction<Comment>) => {
-      const exists = state.comments.includes(action.payload)
-      if (exists) return
-      state.comments = [...state.comments, action.payload]
+      // const exists = state.comments[action.payload.thread].includes(action.payload)
+      // if (exists) return
+      // state.comments = [...state.comments, action.payload]
     },
   },
 })
