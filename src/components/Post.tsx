@@ -27,15 +27,11 @@ const Post: FC<Props> = ({ type, data, author, imageProps, video }) => {
   const updatedAt = dayjs(updated_at)
 
   const [showComments, setShowComments] = useState<boolean>(false)
-  const comments = useSelector((state: RootState) => state.comments.comments)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    registerCommentsListener()
     dispatch(setCurrentArticle(id))
-
-    return () => removeCommentsListener()
   }, [])
 
   const fetchComments = async () => {
@@ -88,7 +84,7 @@ const Post: FC<Props> = ({ type, data, author, imageProps, video }) => {
       )}
 
       {showComments ? (
-        <Comments comments={comments} className="2xl:mt-[45px] mt-lg mb-xl" />
+        <Comments className="2xl:mt-[45px] mt-lg mb-xl" />
       ) : (
         <div className="flex justify-center mt-8 md:mt-12">
           <button className="btn-flex md:self-end min-h-8 px-8 py-[0.4rem] font-medium" onClick={fetchComments}>
