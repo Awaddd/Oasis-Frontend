@@ -52,8 +52,6 @@ export async function addComment(
     if (!user) return
 
     if (!thread) {
-      console.log("article", article)
-
       const data = {
         article,
         user: user.id,
@@ -63,17 +61,13 @@ export async function addComment(
       console.log("thread", record)
       console.log("thread id", record.id)
       thread = record.id
-      // create thread
-      // get id
     }
-
-    console.log("thread id", thread)
 
     const data = {
       text: comment,
       author: author,
       replyTo: replyTo,
-      thread_id: thread,
+      thread: thread,
     }
 
     await pb.collection("comments").create(data)
