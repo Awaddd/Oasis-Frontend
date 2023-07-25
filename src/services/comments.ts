@@ -21,7 +21,7 @@ export async function getComments(articleID: string) {
   try {
     const data = await pb.collection("threads_and_comments").getList(1, 50, {
       sort: "created",
-      filter: `article_id="${articleID}"`,
+      filter: `article="${articleID}"`,
     })
 
     const comments = []
