@@ -55,6 +55,7 @@ export const FIRST_THREE_ARTICLES = gql`
 export const BOOK = gql`
   query GetBookBySlug($slug: String!) {
     books(where: { slug: $slug }) {
+      id
       title
       subtitle
       updated_at
@@ -82,6 +83,7 @@ export const BOOKS_ONLY_SLUG = gql`
 export const BOOKS = gql`
   query GetBooks {
     books {
+      id
       title
       slug
       subtitle
@@ -111,6 +113,7 @@ export const FEATURED_ARTICLE = gql`
   query GetFeaturedArticleID {
     featuredArticle {
       book {
+        id
         title
         subtitle
         slug
@@ -120,6 +123,7 @@ export const FEATURED_ARTICLE = gql`
         }
       }
       article {
+        id
         title
         subtitle
         slug

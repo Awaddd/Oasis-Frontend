@@ -18,27 +18,26 @@ dayjs.extend(advancedFormat)
 type Props = {
   type?: "article" | "book"
   data: Article
-  slug: string
   author: ArticleAuthor
   imageProps?: ImageType
   video?: string
 }
 
-const Post: FC<Props> = ({ type, data, slug, author, imageProps, video }) => {
+const Post: FC<Props> = ({ type, data, author, imageProps, video }) => {
   const [showComments, setShowComments] = useState<boolean>(false)
   const comments = useSelector((state: RootState) => state.comments.comments)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(setCurrentArticle(slug))
+    dispatch(setCurrentArticle(id))
   }, [])
 
-  const { title, updated_at, content, category } = data
+  const { id, title, updated_at, content, category } = data
   const updatedAt = dayjs(updated_at)
 
   const fetchComments = async () => {
-    const comments = await getComments(slug)
+    const comments = await getComments(id)
     dispatch(setComments(comments || []))
     setShowComments(true)
   }

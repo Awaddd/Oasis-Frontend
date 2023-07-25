@@ -1,7 +1,7 @@
 import { ImageType } from "./global"
 
 export type Article = {
-  id?: number
+  id: string
   title: string
   slug?: string
   subtitle?: string

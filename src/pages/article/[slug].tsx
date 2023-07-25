@@ -47,7 +47,7 @@ const Article = ({
       classes="pb-lg"
       footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />}
     >
-      <Post type="article" data={article} slug={slug} author={author} imageProps={imageProps} video={video} />
+      <Post type="article" data={article} author={author} imageProps={imageProps} video={video} />
     </Main>
   )
 }

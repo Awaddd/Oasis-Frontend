@@ -47,7 +47,7 @@ const Book = ({
       classes="pb-lg"
       footer={<ArticleFooter color="bg-slate-50" socialLinks={author?.socialLinks} email={author?.email} />}
     >
-      <Post type="book" data={book} slug={slug} author={author} imageProps={imageProps} video={video} />
+      <Post type="book" data={book} author={author} imageProps={imageProps} video={video} />
     </Main>
   )
 }

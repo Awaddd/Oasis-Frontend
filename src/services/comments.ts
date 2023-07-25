@@ -1,21 +1,19 @@
 import { pb } from "./api"
 import { commentMapper } from "../network/comment-mapper"
 
-export async function getComments(article: string) {
+export async function getComments(articleID: string) {
   const data = await pb.collection("threads_and_comments").getList(1, 50, {
     sort: "created",
-    filter: `article_id="1"`,
+    filter: `article_id="${articleID}"`,
   })
 
-  const arr = []
+  const comments = []
 
-  for (const c of data.items) {
-    const comment = commentMapper(c)
-    console.log("comment", comment)
-    arr.push(comment)
+  for (const comment of data.items) {
+    comments.push(commentMapper(comment))
   }
 
-  return arr
+  return comments
 }
 
 export async function addComment(
