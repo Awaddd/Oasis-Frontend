@@ -18,9 +18,22 @@ export const commentSlice = createSlice({
       state.comments = action.payload
     },
     saveComment: (state, action: PayloadAction<Comment>) => {
-      // const exists = state.comments[action.payload.thread].includes(action.payload)
-      // if (exists) return
-      // state.comments = [...state.comments, action.payload]
+      const thread = action.payload.thread
+
+      // check if comment exists
+      const exists = state.comments[thread]?.includes(action.payload)
+      if (exists) return
+
+      // check if thread exists
+      if (typeof state.comments[thread] === "undefined") {
+        state.comments[thread] = [action.payload]
+        return
+      }
+
+      const arr = state.comments[thread]
+      if (!arr) return
+
+      state.comments[thread] = [...arr, action.payload]
     },
   },
 })
