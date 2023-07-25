@@ -7,7 +7,9 @@ export const commentThreadViewMapper = function (record: Record): Comment {
     thread: record.id,
     text: record.text,
     author: record.author,
-    replyTo: record.replyTo,
+    authorName: record.author_name,
+    replyTo: record.reply_to,
+    replyToName: record.reply_to_name,
     created: record.created,
   }
 }
@@ -18,7 +20,9 @@ export const commentMapper = function (record: Record): Comment {
     thread: record.thread,
     text: record.text,
     author: record.author,
-    replyTo: record.replyTo,
+    authorName: record.author_name,
+    replyTo: record.reply_to,
+    replyToName: record.reply_to_name,
     created: record.created,
   }
 }

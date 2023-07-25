@@ -20,12 +20,12 @@ const Comment: FC<Props> = ({ comment }) => {
   const dispatch = useDispatch()
 
   if (!comment) return null
-  const { id, thread, text, author, created, replyTo } = comment
+  const { id, thread, text, author, authorName, created, replyTo, replyToName } = comment
 
   return (
     <div className={`py-2 ${replyTo && "ml-8"}`}>
       <header className="flex items-center gap-[0.4rem] text-sm">
-        <span className="font-semibold">{author}</span>
+        <span className="font-semibold">{authorName}</span>
         <span className="">({dayjs(created).fromNow()})</span>
 
         {id === activeComment ? (
@@ -36,7 +36,7 @@ const Comment: FC<Props> = ({ comment }) => {
       </header>
 
       <p className="mt-[0.25rem]">
-        {replyTo && <span className="text-primary">@{replyTo}&nbsp;</span>}
+        {replyToName && <span className="text-primary">@{replyToName}&nbsp;</span>}
         {text}
       </p>
 

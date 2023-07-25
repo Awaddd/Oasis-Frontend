@@ -69,7 +69,7 @@ export async function addComment(
     const data = {
       text: comment,
       author: author,
-      replyTo: replyTo,
+      reply_to: replyTo,
       thread: thread,
     }
 
