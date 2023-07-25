@@ -46,10 +46,17 @@ export async function addComment(
   replyTo?: string,
 ): Promise<any> {
   try {
+    // get this from outside via author prop...
+    const user = store.getState().auth.user
+
+    if (!user) return
+
     if (!thread) {
       console.log("article", article)
+
       const data = {
-        article_id: article,
+        article,
+        user: user.id,
       }
 
       const record = await pb.collection("threads").create(data)
