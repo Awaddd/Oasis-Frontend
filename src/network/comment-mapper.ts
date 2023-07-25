@@ -15,7 +15,7 @@ export const commentMapper = function (record: Record): Comment {
 export const tempMapper = function (record: Record): Comment {
   return {
     id: record.id,
-    thread: record.thread_id,
+    thread: record.thread,
     text: record.text,
     author: record.author,
     replyTo: record.replyTo,
