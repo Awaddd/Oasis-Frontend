@@ -4,6 +4,7 @@ import { pb } from "./api"
 import { ClientResponseError, Record } from "pocketbase"
 import { store } from "../state/store"
 import { setCurrentUser, logout } from "../state/auth"
+import { userMapper } from "../network/user-mapper"
 
 export async function createUser(user: NewUser) {
   const isValid = validate(user)
@@ -47,7 +48,7 @@ export async function login({ email, password }: { email: string; password: stri
 
 export async function loginWithProvider(provider: "google" | "twitter" | "facebook") {}
 
-export async function signOut() {
+export function signOut() {
   store.dispatch(logout())
   return pb.authStore.clear()
 }
@@ -55,6 +56,7 @@ export async function signOut() {
 export function registerAuthListener() {
   pb.authStore.onChange(() => {
     if (pb.authStore.model == null) return
-    store.dispatch(setCurrentUser(pb.authStore.model as Record))
+    const user = userMapper(pb.authStore.model as Record)
+    store.dispatch(setCurrentUser(user))
   })
 }
