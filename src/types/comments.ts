@@ -3,7 +3,7 @@ export type Comment = {
   thread: string
   text: string
   author: string
-  created_at: string
+  created: string
   replyTo?: string
 }
 
@@ -11,5 +11,5 @@ export interface Thread {
   id: string
   article: string
   Comments: Comment[]
-  created_at: string
+  created: string
 }

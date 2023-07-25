@@ -20,13 +20,13 @@ const Comment: FC<Props> = ({ comment }) => {
   const dispatch = useDispatch()
 
   if (!comment) return null
-  const { id, thread, text, author, created_at, replyTo } = comment
+  const { id, thread, text, author, created, replyTo } = comment
 
   return (
     <div className={`py-2 ${replyTo && "ml-8"}`}>
       <header className="flex items-center gap-[0.4rem] text-sm">
         <span className="font-semibold">{author}</span>
-        <span className="">({dayjs(created_at).fromNow()})</span>
+        <span className="">({dayjs(created).fromNow()})</span>
 
         {id === activeComment ? (
           <CloseIcon classes="primary ml-2 cursor-pointer" size={14} onClick={() => dispatch(setActiveComment(""))} />

@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { Thread } from "../types/comments"
+import { Comment } from "../types/comments"
 
 export interface CommentsState {
-  comments: Thread[]
+  comments: Comment[]
 }
 
 const initialState: CommentsState = {
@@ -14,7 +14,7 @@ export const commentSlice = createSlice({
   name: "comments",
   initialState,
   reducers: {
-    setComments: (state, action: PayloadAction<Thread[]>) => {
+    setComments: (state, action: PayloadAction<Comment[]>) => {
       state.comments = action.payload
     },
   },

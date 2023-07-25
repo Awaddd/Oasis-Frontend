@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { Thread, Comment as CommentType } from "../../types/comments"
+import { Comment as CommentType } from "../../types/comments"
 import AddComment from "./AddComment"
 import Comment from "./Comment"
 import { useSelector } from "react-redux"
@@ -7,10 +7,10 @@ import { RootState } from "../../state/store"
 
 type Props = {
   className?: string
-  threads: Thread[] | null
+  comments: CommentType[] | null
 }
 
-const Comments: FC<Props> = ({ className, threads }) => {
+const Comments: FC<Props> = ({ className, comments }) => {
 
   const session = useSelector((state: RootState) => state.auth.user);
 
@@ -25,16 +25,16 @@ const Comments: FC<Props> = ({ className, threads }) => {
         </div>
       </header>
 
-      {!threads || threads.length === 0 && (
+      {!comments || comments.length === 0 && (
         <>
           <h4 className="mt-lg">There are no comments yet</h4>
         </>
       )}
 
-      {threads && (
+      {comments && (
         <main className="flex flex-col md:gap-1 mt-md">
-          {threads.map(({ Comments }) =>
-            Comments.map((comment: CommentType) => <Comment comment={comment} key={comment.id} />),
+          {comments.map((comment) =>
+            <Comment comment={comment} key={comment.id} />,
           )}
         </main>
       )}

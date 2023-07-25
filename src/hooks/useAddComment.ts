@@ -62,7 +62,7 @@ type UseAddCommentArgs = {
 //       Comments: [newComment],
 //       id: newComment.thread,
 //       article: "",
-//       created_at: "",
+//       created: "",
 //     })
 //   }
 

@@ -38,9 +38,9 @@ const Post: FC<Props> = ({ type, data, slug, author, imageProps, video }) => {
   const updatedAt = dayjs(updated_at)
 
   const fetchComments = async () => {
-    // const comments = await getComments(slug)
-    // dispatch(setComments(comments || []))
-    // setShowComments(true)
+    const comments = await getComments(slug)
+    dispatch(setComments(comments || []))
+    setShowComments(true)
   }
 
   return (
@@ -87,15 +87,15 @@ const Post: FC<Props> = ({ type, data, slug, author, imageProps, video }) => {
         </video>
       )}
 
-      {/* {showComments ? (
-        <Comments threads={comments} className="2xl:mt-[45px] mt-lg mb-xl" />
+      {showComments ? (
+        <Comments comments={comments} className="2xl:mt-[45px] mt-lg mb-xl" />
       ) : (
         <div className="flex justify-center mt-8 md:mt-12">
           <button className="btn-flex md:self-end min-h-8 px-8 py-[0.4rem] font-medium" onClick={fetchComments}>
             Show Comments
           </button>
         </div>
-      )} */}
+      )}
     </div>
   )
 }
