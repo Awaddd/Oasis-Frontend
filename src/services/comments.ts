@@ -4,7 +4,7 @@ import { setComments, saveComment } from "../state/comments"
 import { store } from "../state/store"
 import { ClientResponseError } from "pocketbase"
 
-export function registerCommentsListener(id: string) {
+export function registerCommentsListener() {
   pb.collection("comments").subscribe("*", async (e) => {
     if (e.action == "create") {
       const comment = tempMapper(e.record)

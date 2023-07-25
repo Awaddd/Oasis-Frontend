@@ -10,7 +10,6 @@ import { getComments, registerCommentsListener, removeCommentsListener } from ".
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrentArticle } from "../state/global"
 import { RootState } from "../state/store"
-import { setComments } from "../state/comments"
 import { Article, ArticleAuthor } from "../types/article"
 
 dayjs.extend(advancedFormat)
@@ -33,7 +32,7 @@ const Post: FC<Props> = ({ type, data, author, imageProps, video }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    registerCommentsListener(id)
+    registerCommentsListener()
     dispatch(setCurrentArticle(id))
 
     return () => removeCommentsListener()
