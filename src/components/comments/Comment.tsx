@@ -40,7 +40,7 @@ const Comment: FC<Props> = ({ comment }) => {
         {text}
       </p>
 
-      {id === activeComment && <AddComment thread={thread} replyTo={author} onComplete={() => dispatch(setActiveComment(""))} />}
+      {id === activeComment && <AddComment thread={thread} replyTo={author} />}
     </div>
   )
 }

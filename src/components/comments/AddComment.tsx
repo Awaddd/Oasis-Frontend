@@ -5,7 +5,6 @@ import Link from "next/link"
 type Props = {
   thread?: string
   replyTo?: string
-  onComplete?: () => void,
   disabled?: boolean;
 }
 
