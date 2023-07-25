@@ -56,6 +56,8 @@ export function signOut() {
 export function registerAuthListener() {
   pb.authStore.onChange(() => {
     if (pb.authStore.model == null) return
+    if (store.getState().auth.user != null) return
+
     const user = userMapper(pb.authStore.model as Record)
     store.dispatch(setCurrentUser(user))
   })
