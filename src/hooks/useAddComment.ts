@@ -31,7 +31,7 @@ export const useAddComment = ({
     if (!comment || !session) return
 
     try {
-      await addComment(comment, article, session.username, thread, replyTo)
+      await addComment(comment, article, session.id, thread, replyTo)
       store.dispatch(setActiveComment(""))
       setComment("")
     } catch (error) {
