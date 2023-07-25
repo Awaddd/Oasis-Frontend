@@ -6,7 +6,7 @@ import dayjs from "dayjs"
 import advancedFormat from "dayjs/plugin/advancedFormat"
 import ImageCard from "./sub-components/ImageCard"
 import Comments from "./comments/Comments"
-import { getComments } from "../services/comments"
+import { getComments, registerCommentsListener, removeCommentsListener } from "../services/comments"
 import { useDispatch, useSelector } from "react-redux"
 import { setCurrentArticle } from "../state/global"
 import { RootState } from "../state/store"
@@ -24,21 +24,23 @@ type Props = {
 }
 
 const Post: FC<Props> = ({ type, data, author, imageProps, video }) => {
+  const { id, title, updated_at, content, category } = data
+  const updatedAt = dayjs(updated_at)
+
   const [showComments, setShowComments] = useState<boolean>(false)
   const comments = useSelector((state: RootState) => state.comments.comments)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
+    registerCommentsListener(id)
     dispatch(setCurrentArticle(id))
+
+    return () => removeCommentsListener()
   }, [])
 
-  const { id, title, updated_at, content, category } = data
-  const updatedAt = dayjs(updated_at)
-
   const fetchComments = async () => {
-    const comments = await getComments(id)
-    dispatch(setComments(comments || []))
+    await getComments(id)
     setShowComments(true)
   }
 

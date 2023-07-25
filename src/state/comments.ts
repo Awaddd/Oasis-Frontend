@@ -17,8 +17,13 @@ export const commentSlice = createSlice({
     setComments: (state, action: PayloadAction<Comment[]>) => {
       state.comments = action.payload
     },
+    saveComment: (state, action: PayloadAction<Comment>) => {
+      const exists = state.comments.includes(action.payload)
+      if (exists) return
+      state.comments = [...state.comments, action.payload]
+    },
   },
 })
 
-export const { setComments } = commentSlice.actions
+export const { setComments, saveComment } = commentSlice.actions
 export default commentSlice.reducer
