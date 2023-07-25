@@ -45,18 +45,34 @@ export async function addComment(
   thread?: string,
   replyTo?: string,
 ): Promise<any> {
-  // if (!thread) {
-  //   const { data } = await supabase.from<Thread>("Threads").insert({
-  //     article,
-  //   })
-  //   if (data) thread = data[0]?.id
-  // }
-  // return await supabase.from<Comment>("Comments").insert([
-  //   {
-  //     thread,
-  //     text: comment,
-  //     author,
-  //     replyTo,
-  //   },
-  // ])
+  try {
+    if (!thread) {
+      console.log("article", article)
+      const data = {
+        article_id: article,
+      }
+
+      const record = await pb.collection("threads").create(data)
+      console.log("thread", record)
+      console.log("thread id", record.id)
+      thread = record.id
+      // create thread
+      // get id
+    }
+
+    console.log("thread id", thread)
+
+    const data = {
+      text: comment,
+      author: author,
+      replyTo: replyTo,
+      thread_id: thread,
+    }
+
+    await pb.collection("comments").create(data)
+  } catch (error) {
+    console.log("error", error)
+    if (!(error instanceof ClientResponseError)) return
+    console.log(error.data.message)
+  }
 }

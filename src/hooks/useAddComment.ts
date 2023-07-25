@@ -1,9 +1,8 @@
 import { useState } from "react"
-import { cloneDeep } from "lodash"
-import { useDispatch, useSelector } from "react-redux"
-import { setComments } from "../state/comments"
-import { RootState } from "../state/store"
+import { useSelector } from "react-redux"
+import { RootState, store } from "../state/store"
 import { addComment } from "../services/comments"
+import { setActiveComment } from "../state/global"
 
 type UseAddCommentArgs = {
   thread?: string
@@ -32,7 +31,7 @@ export const useAddComment = ({
 
     try {
       await addComment(comment, article, session.username, thread, replyTo)
-      // set active comment to "" here or on realtime listener event
+      store.dispatch(setActiveComment(""))
     } catch (error) {
       console.log("error", error)
       // show error notification
