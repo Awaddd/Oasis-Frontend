@@ -9,7 +9,7 @@ type Props = {
 }
 
 const AddComment: FC<Props> = ({ disabled, ...props }) => {
-  const { handleOnChange, handleOnClick } = useAddComment(props)
+  const { comment, handleOnChange, handleOnClick } = useAddComment(props)
 
   return (
     <form className="flex flex-col gap-[0.4rem] my-4 md:my-3 relative">
@@ -17,6 +17,7 @@ const AddComment: FC<Props> = ({ disabled, ...props }) => {
         disabled={disabled}
         className="w-full p-2 border border-gray-300 rounded"
         rows={3}
+        value={comment}
         onChange={handleOnChange}
       />
 

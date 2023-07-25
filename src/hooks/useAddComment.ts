@@ -13,6 +13,7 @@ export const useAddComment = ({
   thread,
   replyTo,
 }: UseAddCommentArgs): {
+  comment: string | undefined
   handleOnChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   handleOnClick: (e: React.MouseEvent<HTMLButtonElement>) => Promise<void>
 } => {
@@ -32,6 +33,7 @@ export const useAddComment = ({
     try {
       await addComment(comment, article, session.username, thread, replyTo)
       store.dispatch(setActiveComment(""))
+      setComment("")
     } catch (error) {
       console.log("error", error)
       // show error notification
@@ -39,6 +41,7 @@ export const useAddComment = ({
   }
 
   return {
+    comment,
     handleOnChange,
     handleOnClick,
   }
