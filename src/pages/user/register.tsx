@@ -33,9 +33,7 @@ const Register: FC = () => {
     const error = await createUser(data)
 
     if (error) {
-      setError(error)
-      console.log("error", error)
-      return
+      return setError(error)
     }
 
     push("/")

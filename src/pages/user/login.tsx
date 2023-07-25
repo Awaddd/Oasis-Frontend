@@ -25,17 +25,10 @@ const Login: FC = () => {
   const onSubmit: SubmitHandler<RegisterUserFormFields> = async (data, e) => {
     e?.preventDefault()
 
-    const dev = {
-      email: "admin@mail.com",
-      password: "password123"
-    }
-
-    const error = await login(dev)
+    const error = await login(data)
 
     if (error) {
-      setError(error)
-      console.log("error", error)
-      return
+      return setError(error)
     }
 
     push("/")

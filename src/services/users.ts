@@ -1,7 +1,7 @@
 import { validate } from "./../utils/helpers"
 import { NewUser } from "../types/users"
 import { pb } from "./api"
-import type { Record } from "pocketbase"
+import { ClientResponseError, Record } from "pocketbase"
 import { store } from "../state/store"
 import { setCurrentUser, logout } from "../state/auth"
 
@@ -22,7 +22,13 @@ export async function createUser(user: NewUser) {
     await pb.collection("users").create(data)
     login({ email, password })
   } catch (error) {
-    return "Failed to authenticate"
+    if (!(error instanceof ClientResponseError)) return
+
+    if (error?.data?.data?.email?.message) {
+      return error?.data?.data?.email?.message
+    }
+
+    return error.data.message
   }
 }
 
@@ -33,7 +39,9 @@ export async function login({ email, password }: { email: string; password: stri
   try {
     await pb.collection("users").authWithPassword(email, password)
   } catch (error) {
-    return "Failed to authenticate"
+    if (!(error instanceof ClientResponseError)) return
+
+    return error.data.message
   }
 }
 
