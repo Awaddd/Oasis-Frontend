@@ -1,5 +1,5 @@
 import { pb } from "./api"
-import { commentMapper, tempMapper } from "../network/comment-mapper"
+import { commentMapper, commentThreadViewMapper } from "../network/comment-mapper"
 import { setComments, saveComment } from "../state/comments"
 import { store } from "../state/store"
 import { ClientResponseError } from "pocketbase"
@@ -8,7 +8,7 @@ import { Thread } from "../types/comments"
 export function registerCommentsListener() {
   pb.collection("comments").subscribe("*", async (e) => {
     if (e.action == "create") {
-      const comment = tempMapper(e.record)
+      const comment = commentMapper(e.record)
       store.dispatch(saveComment(comment))
     }
   })
@@ -28,7 +28,7 @@ export async function getComments(articleID: string) {
     const threads: Thread = {}
 
     for (const c of data.items) {
-      const comment = commentMapper(c)
+      const comment = commentThreadViewMapper(c)
       if (typeof threads[comment.thread] === "undefined") {
         threads[comment.thread] = []
       }

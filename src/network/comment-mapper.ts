@@ -1,7 +1,7 @@
 import type { Record } from "pocketbase"
 import { Comment } from "../types/comments"
 
-export const commentMapper = function (record: Record): Comment {
+export const commentThreadViewMapper = function (record: Record): Comment {
   return {
     id: record.comment_id,
     thread: record.id,
@@ -12,7 +12,7 @@ export const commentMapper = function (record: Record): Comment {
   }
 }
 
-export const tempMapper = function (record: Record): Comment {
+export const commentMapper = function (record: Record): Comment {
   return {
     id: record.id,
     thread: record.thread,
