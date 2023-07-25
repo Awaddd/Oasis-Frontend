@@ -15,14 +15,23 @@ export const commentThreadViewMapper = function (record: Record): Comment {
 }
 
 export const commentMapper = function (record: Record): Comment {
+  const users = record.expand.users as Record[]
+  let authorName = ""
+  let replyToName = ""
+
+  for (const user of users) {
+    if (user.id === record.author) authorName = user.name
+    if (user.id === record.reply_to) replyToName = user.name
+  }
+
   return {
     id: record.id,
     thread: record.thread,
     text: record.text,
     author: record.author,
-    authorName: record.author_name,
+    authorName: authorName,
     replyTo: record.reply_to,
-    replyToName: record.reply_to_name,
+    replyToName: replyToName,
     created: record.created,
   }
 }

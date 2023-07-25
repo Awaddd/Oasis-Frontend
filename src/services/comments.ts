@@ -8,6 +8,11 @@ import { Thread } from "../types/comments"
 export function registerCommentsListener() {
   pb.collection("comments").subscribe("*", async (e) => {
     if (e.action == "create") {
+      const filter = `id="${e.record.author}" || id="${e.record.reply_to}"`
+
+      const users = await pb.collection("users").getFullList({ filter })
+
+      e.record.expand = { users }
       const comment = commentMapper(e.record)
       store.dispatch(saveComment(comment))
     }
