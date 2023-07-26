@@ -26,7 +26,7 @@ export function removeCommentsListener() {
 export async function getComments(articleID: string) {
   try {
     const data = await pb.collection("threads_and_comments").getList(1, 50, {
-      sort: "created",
+      sort: "-created",
       filter: `article="${articleID}"`,
     })
 
@@ -37,7 +37,8 @@ export async function getComments(articleID: string) {
       if (typeof threads[comment.thread] === "undefined") {
         threads[comment.thread] = []
       }
-      threads[comment.thread]?.push(comment)
+
+      threads[comment.thread]?.unshift(comment)
     }
 
     store.dispatch(setComments(threads || []))
