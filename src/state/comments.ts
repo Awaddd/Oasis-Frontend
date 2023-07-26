@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, current } from "@reduxjs/toolkit"
 import type { PayloadAction } from "@reduxjs/toolkit"
 import { Comment, Thread } from "../types/comments"
 
@@ -18,21 +18,28 @@ export const commentSlice = createSlice({
       state.comments = action.payload
     },
     saveComment: (state, action: PayloadAction<Comment>) => {
+      const commentsState = current(state)
+
       const thread = action.payload.thread
 
       // check if comment exists
       const exists = state.comments[thread]?.includes(action.payload)
       if (exists) return
 
-      // check if thread exists
+      // create new thread if it doesn't exist
       if (typeof state.comments[thread] === "undefined") {
-        state.comments[thread] = [action.payload]
+        const comments: Thread = {}
+        comments[thread] = [action.payload]
+        // ensure new thread is the first property in state.comments
+        // this ensures the new thread is shown at the top
+        state.comments = { ...comments, ...commentsState.comments }
         return
       }
 
       const arr = state.comments[thread]
       if (!arr) return
 
+      // assign to existing thread
       state.comments[thread] = [...arr, action.payload]
     },
   },
