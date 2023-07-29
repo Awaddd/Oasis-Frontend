@@ -79,7 +79,7 @@ export async function getStaticProps({ }) {
   const featuredArticle = featuredArticleData?.featuredArticle
 
   let type = "article"
-  let featuredPost = featuredArticle.article
+  let featuredPost = featuredArticle?.article
 
   if (!!featuredArticle?.book) {
     type = "book"
@@ -100,7 +100,7 @@ export async function getStaticProps({ }) {
       hero: heroData?.heroImage || null,
       authorBio: authorBioData?.author || null,
       newsletter: newsletterData?.newsletter || null,
-      featuredArticle: featuredPost,
+      featuredArticle: featuredPost || null,
       featuredArticleImageProps,
       heroImageProps,
       authorImageProps,
